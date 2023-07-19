@@ -26,12 +26,12 @@ namespace GoodGameDatabase.Data.Model
         public bool pinned { get; set; }
 
         //Creator ---------->
-        [ForeignKey(nameof(Creator))]
+        [ForeignKey(nameof(Author))]
         [Required]
-        public int CreatorId { get; set; }
+        public Guid AuthorId { get; set; }
 
         [Required]
-        public Creator Creator { get; set; } = null!;
+        public ApplicationUser Author { get; set; } = null!;
         //Creator ---------->
 
         public ICollection<Review> Reviews { get; set; }

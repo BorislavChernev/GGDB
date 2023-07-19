@@ -20,12 +20,12 @@ namespace GoodGameDatabase.Data.Model
         public double? Rating { get; set; }
 
         //Creator ---------->
-        [ForeignKey(nameof(Creator))]
+        [ForeignKey(nameof(Author))]
         [Required]
-        public int CreatorId { get; set; }
+        public Guid AuthorId { get; set; }
 
         [Required]
-        public Creator Creator { get; set; } = null!;
+        public ApplicationUser Author { get; set; } = null!;
         //Creator ---------->
 
         [Required]
