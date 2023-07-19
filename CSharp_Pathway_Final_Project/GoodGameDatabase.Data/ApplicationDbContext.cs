@@ -23,6 +23,7 @@ namespace GoodGameDatabase.Data
         public DbSet<Review> Reviews { get; set; }
         public DbSet<IdentityUserGame> IdentityUserGames { get; set; }
         public DbSet<IdentityUserGuide> IdentityUserGuides { get; set; }
+        public DbSet<IdentityUserDiscussion> IdentityUserDiscussions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -37,6 +38,9 @@ namespace GoodGameDatabase.Data
 
             builder.Entity<IdentityUserGuide>()
                 .HasKey(ug => new { ug.UserId, ug.GuideId });
+            
+            builder.Entity<IdentityUserDiscussion>()
+                .HasKey(ug => new { ug.UserId, ug.DiscussionId});
 
             base.OnModelCreating(builder);
         }

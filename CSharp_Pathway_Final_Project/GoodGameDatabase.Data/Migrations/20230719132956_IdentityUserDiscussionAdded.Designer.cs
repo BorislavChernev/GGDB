@@ -4,6 +4,7 @@ using GoodGameDatabase.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoodGameDatabase.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230719132956_IdentityUserDiscussionAdded")]
+    partial class IdentityUserDiscussionAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,6 +67,9 @@ namespace GoodGameDatabase.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("DiscussionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -107,6 +112,8 @@ namespace GoodGameDatabase.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DiscussionId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -146,6 +153,9 @@ namespace GoodGameDatabase.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("DatePosted")
                         .HasColumnType("datetime2");
 
@@ -161,6 +171,8 @@ namespace GoodGameDatabase.Data.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Discussions");
                 });
@@ -245,8 +257,7 @@ namespace GoodGameDatabase.Data.Migrations
 
                     b.HasKey("UserId", "DiscussionId");
 
-                    b.HasIndex("DiscussionId")
-                        .IsUnique();
+                    b.HasIndex("DiscussionId");
 
                     b.ToTable("IdentityUserDiscussions");
                 });
@@ -500,6 +511,24 @@ namespace GoodGameDatabase.Data.Migrations
                     b.Navigation("Game");
                 });
 
+            modelBuilder.Entity("GoodGameDatabase.Data.Model.ApplicationUser", b =>
+                {
+                    b.HasOne("GoodGameDatabase.Data.Model.Discussion", null)
+                        .WithMany("Participants")
+                        .HasForeignKey("DiscussionId");
+                });
+
+            modelBuilder.Entity("GoodGameDatabase.Data.Model.Discussion", b =>
+                {
+                    b.HasOne("GoodGameDatabase.Data.Model.ApplicationUser", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+                });
+
             modelBuilder.Entity("GoodGameDatabase.Data.Model.Game", b =>
                 {
                     b.HasOne("GoodGameDatabase.Data.Model.Creator", "Creator")
@@ -514,8 +543,8 @@ namespace GoodGameDatabase.Data.Migrations
             modelBuilder.Entity("GoodGameDatabase.Data.Model.IdentityUserDiscussion", b =>
                 {
                     b.HasOne("GoodGameDatabase.Data.Model.Discussion", "Discussion")
-                        .WithOne("IdentityUserDiscussions")
-                        .HasForeignKey("GoodGameDatabase.Data.Model.IdentityUserDiscussion", "DiscussionId")
+                        .WithMany()
+                        .HasForeignKey("DiscussionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -652,8 +681,7 @@ namespace GoodGameDatabase.Data.Migrations
 
             modelBuilder.Entity("GoodGameDatabase.Data.Model.Discussion", b =>
                 {
-                    b.Navigation("IdentityUserDiscussions")
-                        .IsRequired();
+                    b.Navigation("Participants");
 
                     b.Navigation("Reviews");
                 });
