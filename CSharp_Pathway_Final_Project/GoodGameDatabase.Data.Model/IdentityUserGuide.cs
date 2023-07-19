@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GoodGameDatabase.Data.Model
 {
-    public class IdentityUserGuides
+    public class IdentityUserGuide
     {
         [ForeignKey(nameof(Guide))]
-        public Guide? GuideId { get; set; }
+        public int GuideId { get; set; }
 
         [Required]
         public Guide? Guide { get; set; } = null!;

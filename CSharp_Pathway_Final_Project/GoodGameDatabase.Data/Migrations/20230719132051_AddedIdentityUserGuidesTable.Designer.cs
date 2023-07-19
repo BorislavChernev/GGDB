@@ -4,6 +4,7 @@ using GoodGameDatabase.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoodGameDatabase.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230719132051_AddedIdentityUserGuidesTable")]
+    partial class AddedIdentityUserGuidesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,6 +77,9 @@ namespace GoodGameDatabase.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("GuideId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -111,6 +116,8 @@ namespace GoodGameDatabase.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DiscussionId");
+
+                    b.HasIndex("GuideId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -227,6 +234,9 @@ namespace GoodGameDatabase.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Category")
                         .HasColumnType("int");
 
@@ -241,6 +251,8 @@ namespace GoodGameDatabase.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Guides");
                 });
@@ -270,8 +282,7 @@ namespace GoodGameDatabase.Data.Migrations
 
                     b.HasKey("UserId", "GuideId");
 
-                    b.HasIndex("GuideId")
-                        .IsUnique();
+                    b.HasIndex("GuideId");
 
                     b.ToTable("IdentityUserGuides");
                 });
@@ -499,6 +510,10 @@ namespace GoodGameDatabase.Data.Migrations
                     b.HasOne("GoodGameDatabase.Data.Model.Discussion", null)
                         .WithMany("Participants")
                         .HasForeignKey("DiscussionId");
+
+                    b.HasOne("GoodGameDatabase.Data.Model.Guide", null)
+                        .WithMany("Participants")
+                        .HasForeignKey("GuideId");
                 });
 
             modelBuilder.Entity("GoodGameDatabase.Data.Model.Discussion", b =>
@@ -523,6 +538,17 @@ namespace GoodGameDatabase.Data.Migrations
                     b.Navigation("Creator");
                 });
 
+            modelBuilder.Entity("GoodGameDatabase.Data.Model.Guide", b =>
+                {
+                    b.HasOne("GoodGameDatabase.Data.Model.ApplicationUser", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+                });
+
             modelBuilder.Entity("GoodGameDatabase.Data.Model.IdentityUserGame", b =>
                 {
                     b.HasOne("GoodGameDatabase.Data.Model.Game", "Game")
@@ -545,8 +571,8 @@ namespace GoodGameDatabase.Data.Migrations
             modelBuilder.Entity("GoodGameDatabase.Data.Model.IdentityUserGuide", b =>
                 {
                     b.HasOne("GoodGameDatabase.Data.Model.Guide", "Guide")
-                        .WithOne("IdentityUserGuide")
-                        .HasForeignKey("GoodGameDatabase.Data.Model.IdentityUserGuide", "GuideId")
+                        .WithMany()
+                        .HasForeignKey("GuideId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -657,8 +683,7 @@ namespace GoodGameDatabase.Data.Migrations
 
             modelBuilder.Entity("GoodGameDatabase.Data.Model.Guide", b =>
                 {
-                    b.Navigation("IdentityUserGuide")
-                        .IsRequired();
+                    b.Navigation("Participants");
                 });
 #pragma warning restore 612, 618
         }
