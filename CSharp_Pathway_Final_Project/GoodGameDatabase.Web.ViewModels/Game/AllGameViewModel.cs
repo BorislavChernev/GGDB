@@ -9,7 +9,7 @@ namespace GoodGameDatabase.Web.Models.Game
 
         public string Name { get; set; } = null!;
 
-        public string ReleaseDate { get; set; }
+        public string? ReleaseDate { get; set; }
 
         public string AgeRestriction { get; set; }
 

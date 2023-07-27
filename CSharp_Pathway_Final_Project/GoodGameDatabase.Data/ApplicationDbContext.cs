@@ -1,4 +1,5 @@
 ﻿using GoodGameDatabase.Data.Model;
+using HouseRentingSystem.Data.Configurations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,7 @@ namespace GoodGameDatabase.Data
             builder.Entity<IdentityUserDiscussion>()
                 .HasKey(ug => new { ug.UserId, ug.DiscussionId});
 
+            builder.ApplyConfiguration(new GameEntityConfiguration());
             base.OnModelCreating(builder);
         }
     }
