@@ -1,4 +1,4 @@
-namespace GoodGameDatabase.Models
+﻿namespace GoodGameDatabase.Web.Views
 {
     public class ErrorViewModel
     {

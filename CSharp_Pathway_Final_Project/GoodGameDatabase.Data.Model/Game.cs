@@ -34,6 +34,15 @@ namespace GoodGameDatabase.Data.Model
         public ReleaseStatusType Status { get; set; }
 
         [Required]
+        public bool SupportsWindows { get; set; }
+
+        [Required]
+        public bool SupportsLinux { get; set; }
+
+        [Required]
+        public bool SupportsMacOs { get; set; }
+
+        [Required]
         public string ImageUrl { get; set; } = null!;
 
         public ICollection<Review> Reviews { get; set; }

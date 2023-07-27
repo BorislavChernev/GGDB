@@ -1,10 +1,10 @@
-﻿using GoodGameDatabase.Models;
+﻿using Library.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace GoodGameDatabase.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -21,12 +21,6 @@ namespace GoodGameDatabase.Controllers
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

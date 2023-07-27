@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Contracts\" />
+    <ProjectReference Include="..\GoodGameDatabase.Data\GoodGameDatabase.Data.csproj" />
+    <ProjectReference Include="..\GoodGameDatabase.Web.ViewModels\GoodGameDatabase.Web.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

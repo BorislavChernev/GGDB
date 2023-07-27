@@ -16,7 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GoodGameDatabase.Data\GoodGameDatabase.Data.csproj" />
+    <ProjectReference Include="..\GoodGameDatabase.Services.Data\GoodGameDatabase.Services.Data.csproj" />
+    <ProjectReference Include="..\GoodGameDatabase.Web.ViewModels\GoodGameDatabase.Web.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

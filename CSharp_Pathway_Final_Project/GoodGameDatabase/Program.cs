@@ -1,6 +1,5 @@
 using GoodGameDatabase.Data;
 using GoodGameDatabase.Data.Model;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace GoodGameDatabase
