@@ -39,12 +39,15 @@ namespace GoodGameDatabase.Data
 
             builder.Entity<IdentityUserGuide>()
                 .HasKey(ug => new { ug.UserId, ug.GuideId });
-            
+
             builder.Entity<IdentityUserDiscussion>()
-                .HasKey(ug => new { ug.UserId, ug.DiscussionId});
+                .HasKey(ug => new { ug.UserId, ug.DiscussionId });
 
             builder.ApplyConfiguration(new GameEntityConfiguration());
+            builder.ApplyConfiguration(new CreatorEntityConfiguration());
             base.OnModelCreating(builder);
+            DbContextOptionsBuilder opts = new DbContextOptionsBuilder();
+            opts.EnableSensitiveDataLogging();
         }
     }
 }
