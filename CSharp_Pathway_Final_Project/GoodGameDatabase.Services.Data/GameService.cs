@@ -29,5 +29,22 @@ namespace GoodGameDatabase.Services.Data
                 SupportsMacOs = g.SupportsMacOs,
             }).ToArrayAsync();
         }
+
+        public async Task<GameDetailsViewModel> GetDetailsByIdAsync(int id)
+        {
+            return await this.dbContext.Games
+                .Where(g => g.Id == id)
+                .Select(g => new GameDetailsViewModel()
+                {
+                    Id = g.Id,
+                    Name = g.Name,
+                    ReleaseDate = g.ReleaseDate.ToString(),
+                    ImageUrl = g.ImageUrl,
+                    Rating = g.Rating,
+                    SupportsWindows = g.SupportsWindows,
+                    SupportsLinux = g.SupportsLinux,
+                    SupportsMacOs = g.SupportsMacOs,
+                }).FirstAsync();
+        }
     }
 }

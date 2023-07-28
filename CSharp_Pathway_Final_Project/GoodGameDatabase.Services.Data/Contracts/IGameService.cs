@@ -5,5 +5,6 @@ namespace GoodGameDatabase.Services.Data.Contracts
     public interface IGameService
     {
         Task<ICollection<AllGameViewModel>> GetAllAsync();
+        Task<GameDetailsViewModel> GetDetailsByIdAsync(int id);
     }
 }

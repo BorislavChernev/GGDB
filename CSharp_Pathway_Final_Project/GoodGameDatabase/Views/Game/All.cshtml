@@ -34,6 +34,10 @@
                             <p class="card-text">Average Rating: @entity.SupportsLinux</p>
 
                             <p class="card-text">Average Rating: @entity.SupportsMacOs</p>
+
+                                <a asp-controller="Game" asp-action="Details" asp-route-id="@entity.Id"
+                                   class="btn btn-success">Details</a>
+
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 ﻿using GoodGameDatabase.Services.Data.Contracts;
 using GoodGameDatabase.Web.ViewModels.Game;
 using Library.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoodGameDatabase.Web.Controllers
@@ -27,6 +28,16 @@ namespace GoodGameDatabase.Web.Controllers
             }
 
             return View(allGames);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+        {
+            GameDetailsViewModel viewModel = await gameService
+                .GetDetailsByIdAsync(id);
+
+            return View(viewModel);
         }
     }
 }
