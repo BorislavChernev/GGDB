@@ -17,23 +17,23 @@
     @if (Model.Any())
     {
         <div class="row">
-            @foreach (var game in Model)
+            @foreach (var entity in Model)
             {
                 <div class="col-md-6">
                     <div class="card mb-4">
-                        <img src="@game.ImageUrl" class="card-img-top" alt="Book Cover" width="200" height="650">
+                        <img src="@entity.ImageUrl" class="card-img-top" alt="Book Cover" width="200" height="650">
                         <div class="card-body">
-                            <h5 class="card-title">@game.Name</h5>
+                            <h5 class="card-title">@entity.Name</h5>
 
-                            <p class="card-text">ReleaseDate: @game.ReleaseDate</p>
+                            <p class="card-text">ReleaseDate: @entity.ReleaseDate</p>
 
-                            <p class="card-text">Rating: @game.Rating</p>
+                            <p class="card-text">Rating: @entity.Rating</p>
 
-                            <p class="card-text">Average Rating: @game.SupportsWindows</p>
+                            <p class="card-text">Average Rating: @entity.SupportsWindows</p>
                             
-                            <p class="card-text">Average Rating: @game.SupportsLinux</p>
+                            <p class="card-text">Average Rating: @entity.SupportsLinux</p>
 
-                            <p class="card-text">Average Rating: @game.SupportsMacOs</p>
+                            <p class="card-text">Average Rating: @entity.SupportsMacOs</p>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,45 @@
+﻿@using GoodGameDatabase.Web.ViewModels.Guide;
+@model IEnumerable<AllGuideViewModel>
+
+@{
+    ViewData["Title"] = "All guides";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="container">
+        @if (Model.Any())
+        {
+            <div class="row">
+                @foreach (var entity in Model)
+                {
+                    <div class="col-md-6">
+                        <div class="card mb-4">
+                            <img src="" class="card-img-top" alt="Book Cover" width="200" height="650">
+                            <div class="card-body">
+                                <h5 class="card-title">@entity.Title</h5>
+
+                                <p class="card-text">ReleaseDate: @entity.Rating</p>
+
+                                <p class="card-text">Rating: @entity.Language</p>
+
+                                <p class="card-text">Average Rating: @entity.Category</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p>There are no games available.</p>
+        }
+    </div>
+</body>
+</html>

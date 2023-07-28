@@ -33,6 +33,7 @@ namespace GoodGameDatabase
 
             builder.Services.AddScoped<IGameService, GameService>();
             builder.Services.AddScoped<IDiscussionService, DiscussionService>();
+            builder.Services.AddScoped<IGuideService, GuideService>();
 
             builder.Services.AddControllersWithViews();
 
