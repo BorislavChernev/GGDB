@@ -45,6 +45,8 @@ namespace GoodGameDatabase.Data
 
             builder.ApplyConfiguration(new GameEntityConfiguration());
             builder.ApplyConfiguration(new CreatorEntityConfiguration());
+            builder.ApplyConfiguration(new DiscussionEntityConfiguration());
+
             base.OnModelCreating(builder);
         }
     }

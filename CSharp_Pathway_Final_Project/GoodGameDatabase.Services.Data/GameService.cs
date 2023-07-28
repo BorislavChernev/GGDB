@@ -16,9 +16,7 @@ namespace GoodGameDatabase.Services.Data
 
         public async Task<ICollection<AllGameViewModel>> GetAllAsync()
         {
-            var games11 = this.dbContext.Games;
-
-            var games = await this.dbContext.Games
+            return await this.dbContext.Games
             .Select(g => new AllGameViewModel()
             {
                 Id = g.Id,
@@ -30,8 +28,6 @@ namespace GoodGameDatabase.Services.Data
                 SupportsLinux = g.SupportsLinux,
                 SupportsMacOs = g.SupportsMacOs,
             }).ToArrayAsync();
-
-            return games;
         }
     }
 }
