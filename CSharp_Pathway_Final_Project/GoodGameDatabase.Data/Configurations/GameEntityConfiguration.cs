@@ -34,13 +34,6 @@
                 ImageUrl = "https://cdn.discordapp.com/attachments/856238725162729525/1134206890872688700/the-forest-banner.jpg",
                 Reviews = new HashSet<Review>(),
                 CreatorId = 1,
-                Creator = new Creator()
-                {
-                    Id = 1,
-                    Name = "Endnight Games Ltd",
-                    DateEstablished = new DateTime(2013, 1, 1),
-                },
-
             };
             games.Add(game);
 
@@ -59,13 +52,6 @@
                 ImageUrl = "https://cdn.discordapp.com/attachments/856238725162729525/1134208308429991996/6552b32dea82b16326bbc34931dae2f4.png",
                 Reviews = new HashSet<Review>(),
                 CreatorId = 2,
-                Creator = new Creator()
-            {
-                Id = 2,
-                Name = "Ghost Games",
-                DateEstablished = new DateTime(2011, 1, 1),
-            },
-
             };
             games.Add(game);
 
@@ -84,13 +70,6 @@
                 ImageUrl = "https://cdn.discordapp.com/attachments/856238725162729525/1134209239955538071/capsule_467x181.jpg",
                 Reviews = new HashSet<Review>(),
                 CreatorId = 3,
-                Creator = new Creator()
-                {
-                    Id = 3,
-                    Name = "System Era Softworks",
-                    DateEstablished = new DateTime(2014, 1, 1),
-                }
-
             };
             games.Add(game);
 
