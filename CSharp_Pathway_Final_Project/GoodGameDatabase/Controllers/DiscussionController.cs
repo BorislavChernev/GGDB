@@ -1,6 +1,9 @@
-﻿using GoodGameDatabase.Services.Data.Contracts;
+﻿using GoodGameDatabase.Services.Data;
+using GoodGameDatabase.Services.Data.Contracts;
 using GoodGameDatabase.Web.ViewModels.Discussion;
+using GoodGameDatabase.Web.ViewModels.Game;
 using Library.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoodGameDatabase.Web.Controllers
@@ -13,6 +16,7 @@ namespace GoodGameDatabase.Web.Controllers
             this.discussionService = discussionService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> All()
         {
             ICollection<AllDiscussionViewModel> allDiscussions;
@@ -26,6 +30,16 @@ namespace GoodGameDatabase.Web.Controllers
             }
 
             return View(allDiscussions);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+        {
+            DiscussionDetailsViewModel viewModel = await discussionService
+                .GetDetailsByIdAsync(id);
+
+            return View(viewModel);
         }
     }
 }

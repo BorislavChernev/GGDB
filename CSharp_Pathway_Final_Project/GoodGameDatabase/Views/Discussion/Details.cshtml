@@ -1,0 +1,47 @@
+﻿@using GoodGameDatabase.Web.ViewModels.Discussion;
+@model DiscussionDetailsViewModel
+
+@{
+    ViewData["Title"] = "All discussions";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="container">
+        @if (Model != null)
+        {
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <img src="" class="card-img-top" alt="Book Cover" width="200" height="650">
+                        <div class="card-body">
+                            <h5 class="card-title">@Model.Topic</h5>
+
+                            <p class="card-text">ReleaseDate: @Model.Description</p>
+
+                            <p class="card-text">Rating: @Model.DatePosted</p>
+
+                            <p class="card-text">Average Rating: @Model.pinned</p>
+
+                            <p class="card-text">Average Rating: @Model.ReviewsCount</p>
+
+                            <a asp-controller="Discussion" asp-action="Details" asp-route-id="@Model.Id"
+                               class="btn btn-success">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <p>There are no books available.</p>
+        }
+    </div>
+</body>
+</html>

@@ -32,6 +32,9 @@
                                 <p class="card-text">Average Rating: @entity.pinned</p>
 
                                 <p class="card-text">Average Rating: @entity.ReviewsCount</p>
+
+                                <a asp-controller="Discussion" asp-action="Details" asp-route-id="@entity.Id"
+                                   class="btn btn-success">Details</a>
                         </div>
                     </div>
                 </div>
