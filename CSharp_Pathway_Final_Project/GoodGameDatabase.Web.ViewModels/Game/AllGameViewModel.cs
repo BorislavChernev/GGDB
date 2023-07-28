@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace GoodGameDatabase.Web.Models.Game
+﻿namespace GoodGameDatabase.Web.ViewModels.Game
 {
     public class AllGameViewModel
     {
@@ -11,8 +8,14 @@ namespace GoodGameDatabase.Web.Models.Game
 
         public string? ReleaseDate { get; set; }
 
-        public string AgeRestriction { get; set; }
-
         public string ImageUrl { get; set; } = null!;
+
+        public int Rating { get; set; }
+
+        public bool SupportsWindows { get; set; }
+       
+        public bool SupportsLinux { get; set; }
+
+        public bool SupportsMacOs { get; set; }
     }
 }

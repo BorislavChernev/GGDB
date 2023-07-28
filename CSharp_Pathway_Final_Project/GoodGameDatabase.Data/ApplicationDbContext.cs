@@ -46,8 +46,6 @@ namespace GoodGameDatabase.Data
             builder.ApplyConfiguration(new GameEntityConfiguration());
             builder.ApplyConfiguration(new CreatorEntityConfiguration());
             base.OnModelCreating(builder);
-            DbContextOptionsBuilder opts = new DbContextOptionsBuilder();
-            opts.EnableSensitiveDataLogging();
         }
     }
 }

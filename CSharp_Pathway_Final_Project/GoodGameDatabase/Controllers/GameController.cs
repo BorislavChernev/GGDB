@@ -1,5 +1,5 @@
 ﻿using GoodGameDatabase.Services.Data.Contracts;
-using GoodGameDatabase.Web.Models.Game;
+using GoodGameDatabase.Web.ViewModels.Game;
 using Library.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +12,7 @@ namespace GoodGameDatabase.Web.Controllers
         {
             this.gameService = gameService;
         }
+
         [HttpGet]
         public async Task<IActionResult> All()
         {

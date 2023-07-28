@@ -1,0 +1,49 @@
+﻿@using GoodGameDatabase.Web.ViewModels.Game;
+@model IEnumerable<AllGameViewModel>
+
+@{
+    ViewData["Title"] = "All games";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="container">
+    @if (Model.Any())
+    {
+        <div class="row">
+            @foreach (var game in Model)
+            {
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <img src="@game.ImageUrl" class="card-img-top" alt="Book Cover" width="200" height="650">
+                        <div class="card-body">
+                            <h5 class="card-title">@game.Name</h5>
+
+                            <p class="card-text">ReleaseDate: @game.ReleaseDate</p>
+
+                            <p class="card-text">Rating: @game.Rating</p>
+
+                            <p class="card-text">Average Rating: @game.SupportsWindows</p>
+                            
+                            <p class="card-text">Average Rating: @game.SupportsLinux</p>
+
+                            <p class="card-text">Average Rating: @game.SupportsMacOs</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>There are no books available.</p>
+    }
+    </div>
+</body>
+</html>

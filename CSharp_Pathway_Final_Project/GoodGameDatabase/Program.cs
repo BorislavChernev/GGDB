@@ -1,5 +1,7 @@
 using GoodGameDatabase.Data;
 using GoodGameDatabase.Data.Model;
+using GoodGameDatabase.Services.Data;
+using GoodGameDatabase.Services.Data.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace GoodGameDatabase
@@ -28,6 +30,8 @@ namespace GoodGameDatabase
                 options.SignIn.RequireConfirmedAccount = false;
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            builder.Services.AddScoped<IGameService, GameService>();
 
             builder.Services.AddControllersWithViews();
 

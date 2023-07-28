@@ -1,6 +1,5 @@
 ﻿using Library.Controllers;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace GoodGameDatabase.Controllers
 {

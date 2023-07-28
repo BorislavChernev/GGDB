@@ -1,6 +1,7 @@
 ﻿using GoodGameDatabase.Services.Data.Contracts;
 using GoodGameDatabase.Data;
-using GoodGameDatabase.Web.Models.Game;
+using GoodGameDatabase.Web.ViewModels.Game;
+using Microsoft.EntityFrameworkCore;
 
 namespace GoodGameDatabase.Services.Data
 {
@@ -13,9 +14,24 @@ namespace GoodGameDatabase.Services.Data
             this.dbContext = dbContext;
         }
 
-        public Task<ICollection<AllGameViewModel>> GetAllAsync()
+        public async Task<ICollection<AllGameViewModel>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var games11 = this.dbContext.Games;
+
+            var games = await this.dbContext.Games
+            .Select(g => new AllGameViewModel()
+            {
+                Id = g.Id,
+                Name = g.Name,
+                ReleaseDate = g.ReleaseDate.ToString(),
+                ImageUrl = g.ImageUrl,
+                Rating = g.Rating,
+                SupportsWindows = g.SupportsWindows,
+                SupportsLinux = g.SupportsLinux,
+                SupportsMacOs = g.SupportsMacOs,
+            }).ToArrayAsync();
+
+            return games;
         }
     }
 }
