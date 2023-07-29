@@ -1,7 +1,5 @@
-﻿using GoodGameDatabase.Services.Data;
-using GoodGameDatabase.Services.Data.Contracts;
+﻿using GoodGameDatabase.Services.Data.Contracts;
 using GoodGameDatabase.Web.ViewModels.Discussion;
-using GoodGameDatabase.Web.ViewModels.Game;
 using Library.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

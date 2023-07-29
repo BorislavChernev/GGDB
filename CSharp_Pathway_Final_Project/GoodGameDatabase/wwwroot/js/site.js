@@ -1,4 +1,14 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿const withMT = require("@material-tailwind/html/utils/withMT");
 
-// Write your JavaScript code.
+module.exports = withMT({
+    content: ["./index.html"],
+    theme: {
+        extend: {},
+    },
+    plugins: [],
+});
+
+<script src="node_modules/@material-tailwind/html@latest/scripts/ripple.js"></script>
+ 
+<!--from cdn-- >
+    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>

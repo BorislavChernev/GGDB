@@ -18,6 +18,7 @@ namespace GoodGameDatabase.Data.Model
         [Required]
         public DateTime DateEstablished { get; set; }
 
+        [Required]
         public ICollection<Game> DevelopedGames { get; set; }
     }
 }

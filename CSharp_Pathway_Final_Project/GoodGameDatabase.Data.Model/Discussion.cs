@@ -18,6 +18,7 @@ namespace GoodGameDatabase.Data.Model
         [Required]
         public string Description { get; set; } = null!;
 
+        [Required]
         public DateTime DatePosted { get; set; }
 
         [Required]

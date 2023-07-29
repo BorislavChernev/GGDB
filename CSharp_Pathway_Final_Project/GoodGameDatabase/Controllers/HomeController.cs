@@ -1,6 +1,8 @@
 ﻿using Library.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
+using static GoodGameDatabase.Web.Areas.Admin.AdminConstants;
+
 namespace GoodGameDatabase.Controllers
 {
     public class HomeController : BaseController
@@ -14,6 +16,10 @@ namespace GoodGameDatabase.Controllers
 
         public IActionResult Index()
         {
+            if (this.User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
+            }
             return View();
         }
 

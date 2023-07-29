@@ -16,7 +16,7 @@ namespace GoodGameDatabase
             var connectionString =
                 builder.Configuration.GetConnectionString("DefaultConnection")
                 ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-           
+
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
@@ -63,6 +63,13 @@ namespace GoodGameDatabase
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "Area",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+            });
 
             app.Run();
         }

@@ -15,8 +15,10 @@ namespace GoodGameDatabase.Data.Model
         [Required]
         public string Subtitle { get; set; } = null!;
 
+        [Required]
         public NewType Type { get; set; }
 
+        [Required]
         public DateTime DatePosted { get; set; }
 
         [Required]

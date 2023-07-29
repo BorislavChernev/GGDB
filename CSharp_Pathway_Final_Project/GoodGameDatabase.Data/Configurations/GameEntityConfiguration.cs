@@ -32,7 +32,7 @@
                 SupportsWindows = true,
                 SupportsLinux = false,
                 SupportsMacOs = false,
-                ImageUrl = "https://cdn.discordapp.com/attachments/856238725162729525/1134206890872688700/the-forest-banner.jpg",
+                ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/242760/capsule_616x353.jpg?t=1666811027",
                 Reviews = new HashSet<Review>(),
                 CreatorId = 1,
             };
@@ -51,7 +51,7 @@
                 SupportsWindows = true,
                 SupportsLinux = false,
                 SupportsMacOs = false,
-                ImageUrl = "https://cdn.discordapp.com/attachments/856238725162729525/1134208308429991996/6552b32dea82b16326bbc34931dae2f4.png",
+                ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1222680/capsule_616x353.jpg?t=1690398297",
                 Reviews = new HashSet<Review>(),
                 CreatorId = 2,
             };
@@ -70,7 +70,7 @@
                 SupportsWindows = true,
                 SupportsLinux = false,
                 SupportsMacOs = false,
-                ImageUrl = "https://cdn.discordapp.com/attachments/856238725162729525/1134209239955538071/capsule_467x181.jpg",
+                ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/361420/capsule_616x353.jpg?t=1689355883",
                 Reviews = new HashSet<Review>(),
                 CreatorId = 3,
             };
