@@ -17,31 +17,46 @@
             <div class="fixed">
                 <div class="flex flex-col justify-between flex-1 mt-4">
                     <nav class="z-10">
-                        <a class="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-md dark:bg-gray-800 dark:text-gray-200" href="#">
+                        <a class="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-md dark:bg-gray-800 dark:text-gray-200"
+                            asp-controller="Game"
+                            asp-action="All"
+                        >
                             <i class="fa-solid fa-gamepad"></i>
 
                             <span class="mx-4 font-medium">Games</span>
                         </a>
 
-                        <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                        <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                            asp-controller="Category"
+                            asp-action="All"
+                        >
                             <i class="fa-solid fa-rectangle-list"></i>
 
                             <span class="mx-4 font-medium">Categories</span>
                         </a>
 
-                        <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                        <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                           asp-controller="Discussion"
+                           asp-action="All"
+                        >
                             <i class="fa-solid fa-comments"></i>
 
                             <span class="mx-4 font-medium">Discussions</span>
                         </a>
 
-                        <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                        <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                           asp-controller="Guide"
+                           asp-action="All"
+                        >
                             <i class="fa-solid fa-circle-question"></i>
 
                             <span class="mx-4 font-medium">Guides</span>
                         </a>
 
-                        <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                        <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                           asp-controller="New"
+                           asp-action="All"
+                        >
                             <i class="fa-solid fa-newspaper"></i>
 
                             <span class="mx-4 font-medium">News</span>
@@ -62,20 +77,6 @@
                         </a>
 
                         <partial name="_LoginPartial" />
-
-@*                        <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                            asp-controller="Home"
-                            asp-action=""
-                        >
-                            <i class="fa-solid fa-right-from-bracket"></i>
-
-                            <span class="mx-4 font-medium">Logout</span>
-                        </a>
-
-                        <a href="#" class="flex items-center px-4 mt-20 mb-4 -mx-2">
-                            <img class="object-cover mx-2 rounded-full h-9 w-9" src="https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg" alt="avatar" />
-                            <span class="mx-2 font-medium text-gray-800 dark:text-gray-200">John Doe</span>
-                        </a>*@
                     </nav>
                 </div>
             </div>
@@ -203,7 +204,3 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-
-@*<li class="nav-item">
-    <a class="nav-link text-purple-900" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-</li>*@
