@@ -6,14 +6,20 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
+    <form class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+              asp-area="Identity"
+              asp-page="/Account/Logout"
+              asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        <i class="fa-solid fa-right-from-bracket"></i>
+
+            <button type="submit" class="mx-4 font-medium">Logout</button>
+    </form>
+
+    <a href="#" class="flex items-center px-4 mt-20 mb-4 -mx-2">
+        <img class="object-cover mx-2 rounded-full h-9 w-9" src="https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg" alt="avatar" />
+            <span class="mx-2 font-medium text-gray-800 dark:text-gray-200">@User.Identity?.Name</span>
+    </a>
+
 }
 else
 {
