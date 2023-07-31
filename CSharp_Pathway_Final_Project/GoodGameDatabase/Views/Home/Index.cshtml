@@ -1,4 +1,7 @@
-﻿@{
+﻿@using GoodGameDatabase.Web.ViewModels.Game;
+@model IEnumerable<BestFiveGameViewModel>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -32,36 +35,14 @@
     <div class="w-full h-4/6 border-5 border-green-700">
 
         @*FOREACH BEST GAME --- PINK*@
-        <div class="flex h-1/4 flex-row border-5 border-pink-500">
-
-            @*LEFT PART (IMAGE)*@
-            <div class="w-4/12 border-5 border-yellow-500">
-                <img class="w-full" src="https://cdn.cloudflare.steamstatic.com/steam/apps/367520/capsule_616x353.jpg?t=1667006028" />
-            </div>
 
 
-            @*RIGHT PART (INFO)*@
-            <div class="flex flex-col w-8/12">
-                <div class="border-5 h-1/3 border-black">Edition</div>
-                <div class="border-5 h-1/3 border-black">Sale</div>
-                <div class="border-5 h-1/3 border-black">Name of the game</div>
-            </div>
-        </div>
-        <div class="flex h-1/4 flex-row border-5 border-pink-500">
 
-            @*LEFT PART (IMAGE)*@
-            <div class="w-4/12 border-5 border-yellow-500">
-                <img class="w-full" src="https://cdn.cloudflare.steamstatic.com/steam/apps/367520/capsule_616x353.jpg?t=1667006028" />
-            </div>
+        @foreach (BestFiveGameViewModel game in Model)
+        {
+            <partial name="_BestFivePartial" model="game"/>
+        }
 
-
-            @*RIGHT PART (INFO)*@
-            <div class="flex flex-col w-8/12">
-                <div class="border-5 h-1/3 border-black">Edition</div>
-                <div class="border-5 h-1/3 border-black">Sale</div>
-                <div class="border-5 h-1/3 border-black">Name of the game</div>
-            </div>
-        </div>
         <div class="flex h-1/4 flex-row border-5 border-pink-500">
 
             @*LEFT PART (IMAGE)*@

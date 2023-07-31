@@ -1,0 +1,79 @@
+﻿@using GoodGameDatabase.Web.ViewModels.Game;
+@model GameDetailsViewModel
+
+
+<div class="relative flex justify-center">
+    <button onclick="openModal()" class="px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+        Open Modal
+    </button>
+
+    <div id="modal"
+         class="fixed inset-0 z-10 overflow-y-auto"
+         style="display: none;"
+         aria-labelledby="modal-title" role="dialog" aria-modal="true">
+
+
+        <div class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <span class="hidden sm:inline-block sm:h-screen sm:align-middle" aria-hidden="true">&#8203;</span>
+
+            <div class="relative inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl dark:bg-gray-900 sm:my-8 sm:w-full sm:max-w-sm sm:p-6 sm:align-middle">
+                <h3 class="text-lg font-medium leading-6 text-gray-800 capitalize dark:text-white" id="modal-title">
+                    Invite your team
+                </h3>
+                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                    Your new project has been created. Invite your
+                    team to collaborate on this project.
+                </p>
+
+                <form class="mt-4" action="#">
+                    <div>
+                        <label for="Name" class="block text-sm text-gray-500 dark:text-gray-300">Name</label>
+
+                        <input name="Name" type="text" value="@Model.Name" placeholder="ex. The Binding of Isaac" class="mt-2 block w-full placeholder-gray-400/70 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" />
+                    </div>
+
+                    <div>
+                        <label for="ImageUrl" class="block text-sm text-gray-500 dark:text-gray-300">ImageUrl</label>
+
+                        <input name="ImageUrl" type="email" value="@Model.ImageUrl" placeholder="imageUrl" class="mt-2 block w-full placeholder-gray-400/70 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" />
+                    </div>
+
+                    <div>
+                        <label for="Description" class="block text-sm text-gray-500 dark:text-gray-300">Description</label>
+
+                        <textarea placeholder="..." value="@Model.Description" class="block resize-none mt-2 w-full  placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-4 h-32 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="Status" class="block text-sm text-gray-500 dark:text-gray-300">Status</label>
+
+                        <input name="Status" type="checkbox" value="@Model.Status" placeholder="Supports windows" class="mt-2 block w-full placeholder-gray-400/70 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" />
+                    </div>
+
+                    <div class="mt-4 sm:flex sm:items-center sm:-mx-2">
+                        <button type="button" onclick="closeModal()" class="w-full px-4 py-2 text-sm font-medium tracking-wide text-gray-700 capitalize transition-colors duration-300 transform border border-gray-200 rounded-md sm:w-1/2 sm:mx-2 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-40">
+                            Cancel
+                        </button>
+
+
+                        <button type="button" class="w-full px-4 py-2 mt-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md sm:mt-0 sm:w-1/2 sm:mx-2 hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40">
+                            Edit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openModal() {
+        const modal = document.getElementById('modal');
+        modal.style.display = 'block';
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('modal');
+        modal.style.display = 'none';
+    }
+</script>

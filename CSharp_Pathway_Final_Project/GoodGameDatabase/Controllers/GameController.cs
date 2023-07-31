@@ -15,6 +15,7 @@ namespace GoodGameDatabase.Web.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> All()
         {
             ICollection<AllGameViewModel> allGames;
@@ -37,6 +38,34 @@ namespace GoodGameDatabase.Web.Controllers
             GameDetailsViewModel viewModel = await gameService
                 .GetDetailsByIdAsync(id);
 
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> BestFive()
+        {
+            ICollection<BestFiveGameViewModel> bestFiveGames;
+            try
+            {
+                bestFiveGames = await gameService.GetBestFiveAsync();
+            }
+            catch (Exception)
+            {
+                return this.BadRequest("Something went wrong try again later!");
+            }
+
+            return View(bestFiveGames);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Edit(int id)
+        {
+
+            EditGameViewModel viewModel = await gameService
+                .Edit(id);
+            
             return View(viewModel);
         }
     }

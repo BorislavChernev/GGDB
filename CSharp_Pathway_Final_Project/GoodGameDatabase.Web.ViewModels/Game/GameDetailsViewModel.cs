@@ -12,6 +12,10 @@
 
         public int Rating { get; set; }
 
+        public string Status { get; set; }
+
+        public string Description { get; set; }
+
         public bool SupportsWindows { get; set; }
 
         public bool SupportsLinux { get; set; }

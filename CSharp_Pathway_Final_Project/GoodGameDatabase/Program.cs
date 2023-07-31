@@ -31,6 +31,7 @@ namespace GoodGameDatabase
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            builder.Services.AddScoped<IHomeService, HomeService>();
             builder.Services.AddScoped<IGameService, GameService>();
             builder.Services.AddScoped<IDiscussionService, DiscussionService>();
             builder.Services.AddScoped<IGuideService, GuideService>();
