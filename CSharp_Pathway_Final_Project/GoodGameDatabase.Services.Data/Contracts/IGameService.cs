@@ -7,6 +7,6 @@ namespace GoodGameDatabase.Services.Data.Contracts
         Task<ICollection<AllGameViewModel>> GetAllAsync();
         Task<GameDetailsViewModel> GetDetailsByIdAsync(int id);
         Task<ICollection<BestFiveGameViewModel>> GetBestFiveAsync();
-        Task<EditGameViewModel> Edit(int id);
+        Task<EditGameViewModel> Edit(int id, EditGameViewModel viewModel);
     }
 }

@@ -16,41 +16,22 @@ namespace GoodGameDatabase.Services.Data
         {
             this.dbContext = dbContext;
         }
-
-        public async Task<EditGameViewModel> Edit(int id)
+        public async Task<EditGameViewModel> Edit(int id, EditGameViewModel viewModel)
         {
             Game game = await this.dbContext.Games
                 .FirstOrDefaultAsync(g => g.Id == id);
 
-            EditGameViewModel viewModel = new EditGameViewModel()
-            {
-                Name = game.Name,
-                Description = game.Description,
-                Status = game.Status.ToString(),
-                SupportsWindows = game.SupportsWindows,
-                SupportsLinux = game.SupportsLinux,
-                SupportsMacOs = game.SupportsMacOs,
-                ImageUrl = game.ImageUrl
-            };
+            game.Name = viewModel.Name;
+            game.Description = viewModel.Description;
+            game.Status = Enum.Parse<ReleaseStatusType>(viewModel.Status);
+            game.SupportsWindows = viewModel.SupportsWindows;
+            game.SupportsMacOs = viewModel.SupportsMacOs;
+            game.SupportsLinux = viewModel.SupportsLinux;
+            game.ImageUrl = viewModel.ImageUrl;
 
+            await dbContext.SaveChangesAsync();
             return viewModel;
         }
-
-        //public async Task<EditGameViewModel> Edit(int id)
-        //{
-        //    Game game = await this.dbContext.Games
-        //        .FirstOrDefaultAsync(g => g.Id == id);
-
-        //    game.Name = editGameViewModel.Name;
-        //    game.Description = editGameViewModel.Description;
-        //    game.Status = Enum.Parse<ReleaseStatusType>(editGameViewModel.Status);
-        //    game.SupportsWindows = editGameViewModel.SupportsWindows;
-        //    game.SupportsMacOs = editGameViewModel.SupportsMacOs;
-        //    game.SupportsLinux = editGameViewModel.SupportsLinux;
-        //    game.ImageUrl = editGameViewModel.ImageUrl;
-
-        //    dbContext.SaveChangesAsync();
-        //}
 
         public async Task<ICollection<BestFiveGameViewModel>> GetBestFiveAsync()
         {
@@ -72,7 +53,7 @@ namespace GoodGameDatabase.Services.Data
         }
 
         public async Task<GameDetailsViewModel> GetDetailsByIdAsync(int id)
-        {
+         {
             return await this.dbContext.Games
                 .Where(g => g.Id == id)
                 .Select(g => new GameDetailsViewModel()
@@ -82,6 +63,7 @@ namespace GoodGameDatabase.Services.Data
                     ReleaseDate = g.ReleaseDate.ToString(),
                     ImageUrl = g.ImageUrl,
                     Rating = g.Rating,
+                    Description = g.Description,
                     SupportsWindows = g.SupportsWindows,
                     SupportsLinux = g.SupportsLinux,
                     SupportsMacOs = g.SupportsMacOs,

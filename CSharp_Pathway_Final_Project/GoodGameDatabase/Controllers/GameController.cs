@@ -60,13 +60,13 @@ namespace GoodGameDatabase.Web.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int id, EditGameViewModel viewModel)
         {
 
-            EditGameViewModel viewModel = await gameService
-                .Edit(id);
-            
-            return View(viewModel);
+            await gameService.Edit(id, viewModel);
+
+            return RedirectToAction("Details", new {id = id});
+            //return View(viewModel);
         }
     }
 }
