@@ -85,6 +85,7 @@ namespace GoodGameDatabase.Services.Data
                 ReleaseDate = g.ReleaseDate.ToString(),
                 ImageUrl = g.ImageUrl,
                 Rating = g.Rating,
+                Description = g.Description,
                 SupportsPC = g.SupportsPC,
                 SupportsPS = g.SupportsPS,
                 SupportsXbox = g.SupportsXbox,

@@ -14,6 +14,8 @@ namespace GoodGameDatabase.Web.ViewModels.Game
 
         public int Rating { get; set; }
 
+        public string Description { get; set; }
+
         public bool SupportsPC { get; set; }
 
         public bool SupportsPS { get; set; }

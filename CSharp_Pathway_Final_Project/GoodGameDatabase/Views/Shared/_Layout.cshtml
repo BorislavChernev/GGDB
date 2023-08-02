@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-
-<div class="flex flex-row w-full">
-        <aside class="w-3/12 z-10 flex flex-col h-screen overflow-y-auto border-5 border-red-600">
+    
+    <div class="flex flex-row w-full space-x-6">
+        <aside class="w-2/12 z-10 flex flex-col h-screen overflow-y-auto">
             <nav class="border-5 border-black fixed flex flex-col justify-between flex-1 mt-4 z-10">
                 <a class="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-md dark:bg-gray-800 dark:text-gray-200"
                     asp-controller="Home"
@@ -86,7 +86,7 @@
             </nav>
         </aside>
 
-        <div class="w-9/12 h-screen flex flex-col border-5 border-blue-600">
+        <div class="w-10/12 h-full flex flex-col border-5 border-blue-600">
             <nav class="border-5 border-green-600 block bg-white bg-opacity-80 py-2 px-4 text-white shadow-md backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
                 <div>
                     <div class="container mx-auto flex items-center justify-between text-gray-900">
@@ -168,7 +168,7 @@
                 </div>
             </nav>
 
-            <main class="h-screen flex flex-row border-5 border-orange-600 w-full">
+            <main class="h-full flex flex-row border-5 border-orange-600 w-full">
                 @RenderBody()
                 
                 @*<partial name="_FooterPartial" />*@

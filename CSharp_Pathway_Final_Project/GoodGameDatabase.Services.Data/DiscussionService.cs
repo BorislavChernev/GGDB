@@ -25,7 +25,6 @@ namespace GoodGameDatabase.Services.Data
                 Description = d.Description,
                 DatePosted = d.DatePosted.ToString(),
                 pinned = d.pinned,
-                ReviewsCount = d.Reviews.Count(),
             }).ToArrayAsync();
         }
 
@@ -40,7 +39,6 @@ namespace GoodGameDatabase.Services.Data
                 Description = d.Description,
                 DatePosted = d.DatePosted.ToString(),
                 pinned = d.pinned,
-                ReviewsCount = d.Reviews.Count(),
             }).FirstAsync();
         }
     }

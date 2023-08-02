@@ -5,111 +5,82 @@
     ViewData["Title"] = "Home Page";
 }
 
-@*MAIN CENTER*@
-<div class="flex w-8/12 flex-col border-5 border-black">
+<div class="flex space-x-6 h-full">
+    @*MAIN CENTER*@
+    <div class="flex h-full w-8/12 flex-col">
 
-    @*MAIN INSIDE*@
-    <div class="w-full h-full border-5 border-yellow-600">
+        @*MAIN INSIDE*@
+        <div class="w-full h-full">
 
-        @*BEST GAME FAR CRY 6*@
-        <div class="w-full h-4/6 border-5 border-green-600">
+            @*BEST GAME FAR CRY 6*@
+            <div class="w-full h-4/6">
 
 
-                
-            <img class="flex object-cover object-center w-full h-full rounded-3xl" src="https://cdn.cloudflare.steamstatic.com/steam/apps/2369390/capsule_616x353.jpg?t=1690498134"
-                 alt="ui/ux review check" />
+
+                <img class="flex object-cover object-center w-full h-full rounded-3xl" src="https://cdn.cloudflare.steamstatic.com/steam/apps/2369390/capsule_616x353.jpg?t=1690498134"
+                     alt="ui/ux review check" />
+            </div>
+
+            @*UNDER BEST GAME*@
+            <div class="w-full h-2/6">
+            </div>
         </div>
 
-        @*UNDER BEST GAME*@
-        <div class="w-full h-2/6 border-5 border-pink-700">
-        </div>
+
     </div>
 
+    @*RIGHT SIDE*@
+    <div class="flex flex-col w-4/12 h-full border-5 border-pink-500">
 
-</div>
+        @*BEST GAMES BOX --- GREEN*@
+        <div class="w-full h-1/6 border-5 border-black">
 
-@*RIGHT SIDE*@
-<div class="flex flex-col w-4/12 border-5 border-black">
-    
-    @*BEST GAMES BOX --- GREEN*@
-    <div class="w-full h-4/6 border-5 border-green-700">
-
-        @*FOREACH BEST GAME --- PINK*@
-        @foreach (BestFiveGameViewModel game in Model)
-        {
-            <partial name="_BestFivePartial" model="game"/>
-        }
-
-        <div class="flex h-1/4 flex-row border-5 border-pink-500">
-
-            @*LEFT PART (IMAGE)*@
-            <div class="w-4/12 border-5 border-yellow-500">
-                <img class="w-full" src="https://cdn.cloudflare.steamstatic.com/steam/apps/367520/capsule_616x353.jpg?t=1667006028" />
-            </div>
-
-
-            @*RIGHT PART (INFO)*@
-            <div class="flex flex-col w-8/12">
-                <div class="border-5 h-1/3 border-black">Edition</div>
-                <div class="border-5 h-1/3 border-black">Sale</div>
-                <div class="border-5 h-1/3 border-black">Name of the game</div>
-            </div>
+            @*FOREACH BEST GAME --- PINK*@
+            @foreach (BestFiveGameViewModel game in Model)
+            {
+                 <partial name="_BestFivePartial" model="game" />
+            }
         </div>
-        <div class="flex h-1/4 flex-row border-5 border-pink-500">
 
-            @*LEFT PART (IMAGE)*@
-            <div class="w-4/12 border-5 border-yellow-500">
-                <img class="w-full" src="https://cdn.cloudflare.steamstatic.com/steam/apps/367520/capsule_616x353.jpg?t=1667006028" />
+        @*BEST DEVS*@
+        <div class="w-full h-2/6 flex flex-col">
+
+            @*FOREACH BEST DEV --- PINK*@
+            <div class="flex flex-row h-1/3">
+
+                @*IMAGE --- YELLOW*@
+                <div class="w-4/12 border-5 border-yellow-500">
+                    @*<img class="object-cover w-full h-full" src="https://images-eds-ssl.xboxlive.com/image?url=Q_rwcVSTCIytJ0KOzcjWTYl.n38D8jlKWXJx7NRJmQKBAEDCgtTAQ0JS02UoaiwRj.VcHXTwP3Gcq532nGGgSKf4ferNm21lnFyesDcwO1IjkFhrnS4yfNTRIVWYDpbzZkQlW1wufJ_rzu.AgnvejQ--&format=source" />*@
+                </div>
+
+                @*Button --- yellow*@
+                <div class="w-8/12 border-5 border-yellow-500">
+                    <button class="w-full h-full border-5 border-red-500">Follow button</button>
+                </div>
             </div>
+            <div class="flex flex-row h-1/3">
 
+                @*IMAGE --- YELLOW*@
+                <div class="w-4/12 border-5 border-yellow-500">
+                    @*<img class="object-cover w-full h-full" src="https://images-eds-ssl.xboxlive.com/image?url=Q_rwcVSTCIytJ0KOzcjWTYl.n38D8jlKWXJx7NRJmQKBAEDCgtTAQ0JS02UoaiwRj.VcHXTwP3Gcq532nGGgSKf4ferNm21lnFyesDcwO1IjkFhrnS4yfNTRIVWYDpbzZkQlW1wufJ_rzu.AgnvejQ--&format=source" />*@
+                </div>
 
-            @*RIGHT PART (INFO)*@
-            <div class="flex flex-col w-8/12">
-                <div class="border-5 h-1/3 border-black">Edition</div>
-                <div class="border-5 h-1/3 border-black">Sale</div>
-                <div class="border-5 h-1/3 border-black">Name of the game</div>
+                @*Button --- yellow*@
+                <div class="w-8/12 border-5 border-yellow-500">
+                    <button class="w-full h-full border-5 border-red-500">Follow button</button>
+                </div>
             </div>
-        </div>
-    </div>
+            <div class="flex flex-row h-1/3">
 
-    @*BEST DEVS*@
-    <div class="w-full h-4/6 flex flex-col">
+                @*IMAGE --- YELLOW*@
+                <div class="w-4/12 border-5 border-yellow-500">
+                    @*<img class="object-cover w-full h-full" src="https://images-eds-ssl.xboxlive.com/image?url=Q_rwcVSTCIytJ0KOzcjWTYl.n38D8jlKWXJx7NRJmQKBAEDCgtTAQ0JS02UoaiwRj.VcHXTwP3Gcq532nGGgSKf4ferNm21lnFyesDcwO1IjkFhrnS4yfNTRIVWYDpbzZkQlW1wufJ_rzu.AgnvejQ--&format=source" />*@
+                </div>
 
-        @*FOREACH BEST DEV --- PINK*@
-        <div class="flex flex-row h-1/3 border-5 border-pink-500">
-
-            @*IMAGE --- YELLOW*@
-            <div class="w-4/12 border-5 border-yellow-500">
-                @*<img class="object-cover w-full h-full" src="https://images-eds-ssl.xboxlive.com/image?url=Q_rwcVSTCIytJ0KOzcjWTYl.n38D8jlKWXJx7NRJmQKBAEDCgtTAQ0JS02UoaiwRj.VcHXTwP3Gcq532nGGgSKf4ferNm21lnFyesDcwO1IjkFhrnS4yfNTRIVWYDpbzZkQlW1wufJ_rzu.AgnvejQ--&format=source" />*@
-            </div>
-
-            @*Button --- yellow*@
-            <div class="w-8/12 border-5 border-yellow-500">
-                <button class="w-full h-full border-5 border-red-500">Follow button</button>
-            </div>
-        </div>
-        <div class="flex flex-row h-1/3 border-5 border-pink-500">
-
-            @*IMAGE --- YELLOW*@
-            <div class="w-4/12 border-5 border-yellow-500">
-                @*<img class="object-cover w-full h-full" src="https://images-eds-ssl.xboxlive.com/image?url=Q_rwcVSTCIytJ0KOzcjWTYl.n38D8jlKWXJx7NRJmQKBAEDCgtTAQ0JS02UoaiwRj.VcHXTwP3Gcq532nGGgSKf4ferNm21lnFyesDcwO1IjkFhrnS4yfNTRIVWYDpbzZkQlW1wufJ_rzu.AgnvejQ--&format=source" />*@
-            </div>
-
-            @*Button --- yellow*@
-            <div class="w-8/12 border-5 border-yellow-500">
-                <button class="w-full h-full border-5 border-red-500">Follow button</button>
-            </div>
-        </div>
-        <div class="flex flex-row h-1/3 border-5 border-pink-500">
-
-            @*IMAGE --- YELLOW*@
-            <div class="w-4/12 border-5 border-yellow-500">
-                @*<img class="object-cover w-full h-full" src="https://images-eds-ssl.xboxlive.com/image?url=Q_rwcVSTCIytJ0KOzcjWTYl.n38D8jlKWXJx7NRJmQKBAEDCgtTAQ0JS02UoaiwRj.VcHXTwP3Gcq532nGGgSKf4ferNm21lnFyesDcwO1IjkFhrnS4yfNTRIVWYDpbzZkQlW1wufJ_rzu.AgnvejQ--&format=source" />*@
-            </div>
-
-            @*Button --- yellow*@
-            <div class="w-8/12 border-5 border-yellow-500">
-                <button class="w-full h-full border-5 border-red-500">Follow button</button>
+                @*Button --- yellow*@
+                <div class="w-8/12 border-5 border-yellow-500">
+                    <button class="w-full h-full border-5 border-red-500">Follow button</button>
+                </div>
             </div>
         </div>
     </div>

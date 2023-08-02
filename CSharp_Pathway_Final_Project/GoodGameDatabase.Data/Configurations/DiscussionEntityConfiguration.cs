@@ -24,7 +24,6 @@
                 Description = "This discussion is about cheating in singleplayer games",
                 DatePosted = new DateTime(2023, 4, 17),
                 pinned = true,
-                Reviews = new HashSet<Review>(),
             };
             discussions.Add(discussion);
 
@@ -35,7 +34,6 @@
                 Description = "This discussion is about surviving in The Forest",
                 DatePosted = new DateTime(2023, 5, 1),
                 pinned = false,
-                Reviews = new HashSet<Review>(),
             };
             discussions.Add(discussion);
 
@@ -46,7 +44,6 @@
                 Description = "This discussion is about dust storms in Astroneer",
                 DatePosted = new DateTime(2023, 3, 12),
                 pinned = false,
-                Reviews = new HashSet<Review>(),
             };
             discussions.Add(discussion);
 
