@@ -1,8 +1,10 @@
-﻿using GoodGameDatabase.Services.Data.Contracts;
+﻿using GoodGameDatabase.Data.Model;
+using GoodGameDatabase.Services.Data.Contracts;
 using GoodGameDatabase.Web.ViewModels.Game;
 using Library.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.WebSockets;
 
 namespace GoodGameDatabase.Web.Controllers
 {
@@ -58,7 +60,7 @@ namespace GoodGameDatabase.Web.Controllers
             return View(bestFiveGames);
         }
 
-        [HttpGet]
+        [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Edit(int id, EditGameViewModel viewModel)
         {
@@ -67,6 +69,21 @@ namespace GoodGameDatabase.Web.Controllers
 
             return RedirectToAction("Details", new {id = id});
             //return View(viewModel);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> CreateNew()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> Create(Game game)
+        {
+            await gameService.Create(game);
+
+            return RedirectToAction("Details", new { id = game.Id });
         }
     }
 }

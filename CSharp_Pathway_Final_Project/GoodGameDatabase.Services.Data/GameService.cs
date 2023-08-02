@@ -87,5 +87,16 @@ namespace GoodGameDatabase.Services.Data
             })
             .ToArrayAsync();
         }
+
+        public async Task Create(Game game)
+        {
+            game.ReleaseDate = DateTime.UtcNow;
+            game.CreatorId = 3;
+
+            await dbContext.Games.AddAsync(game);
+            await dbContext.SaveChangesAsync();
+
+            var asd = 0;
+        }
     }
 }

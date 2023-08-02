@@ -35,7 +35,7 @@
                     <div>
                         <label for="ImageUrl" class="block text-sm text-gray-500">ImageUrl</label>
 
-                        <input name="ImageUrl" type="url"  value="@Model.ImageUrl" placeholder="imageUrl" class="mt-2 block w-full placeholder-gray-400/70 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-black focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" />
+                        <input name="ImageUrl" type="url" value="@Model.ImageUrl" placeholder="imageUrl" class="mt-2 block w-full placeholder-gray-400/70 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-black focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" />
                     </div>
 
                     <div>
@@ -56,9 +56,20 @@
                     <div>
                         <label for="Status" class="block text-sm text-gray-500">Supported devices</label>
 
-                        <input type="checkbox" name="SupportsWindows" value="@Model.SupportsWindows"></input>
-                        <input type="checkbox" name="SupportsLinux" value="@Model.SupportsLinux"></input>
-                        <input type="checkbox" name="SupportsMacOS" value="@Model.SupportsMacOs"></input>
+                        <ul class="flex flex-col">
+                            <li>
+                                <input type="checkbox" name="SupportsWindows" @(Model.SupportsWindows ? "checked" : "")>
+                                <label for="SupportsWindows">Windows</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="SupportsMacOs" @(Model.SupportsMacOs ? "checked" : "")>
+                                <label for="SupportsMacOs">MacOS</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="SupportsLinux" @(Model.SupportsLinux ? "checked" : "")>
+                                <label for="SupportsLinux">Linux</label>
+                            </li>
+                        </ul>
                     </div>
 
                     <div class="mt-4 sm:flex sm:items-center sm:-mx-2">
@@ -67,10 +78,10 @@
                         </button>
 
                         <button type="submit" class="w-full px-4 py-2 mt-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md sm:mt-0 sm:w-1/2 sm:mx-2 hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
-                            asp-controller="Game"
-                            asp-action="Edit"
-                            asp-route-id="@Model.Id">
-                        >
+                                asp-controller="Game"
+                                asp-action="Edit"
+                                asp-route-id="@Model.Id">
+                            >
                             Edit
                         </button>
                     </div>
@@ -81,9 +92,19 @@
 </div>
 
 <script>
+    function updateValue(checkbox) {
+        checkbox.value = checkbox.checked ? "true" : "false";
+    }
+
     function openModal() {
         const modal = document.getElementById('modal');
         modal.style.display = 'block';
+
+        // Set initial checkbox values when the modal opens
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = checkbox.value === "true";
+        });
     }
 
     function closeModal() {

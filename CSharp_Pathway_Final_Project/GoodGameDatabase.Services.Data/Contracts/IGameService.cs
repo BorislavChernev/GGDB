@@ -1,4 +1,5 @@
-﻿using GoodGameDatabase.Web.ViewModels.Game;
+﻿using GoodGameDatabase.Data.Model;
+using GoodGameDatabase.Web.ViewModels.Game;
 
 namespace GoodGameDatabase.Services.Data.Contracts
 {
@@ -8,5 +9,6 @@ namespace GoodGameDatabase.Services.Data.Contracts
         Task<GameDetailsViewModel> GetDetailsByIdAsync(int id);
         Task<ICollection<BestFiveGameViewModel>> GetBestFiveAsync();
         Task<EditGameViewModel> Edit(int id, EditGameViewModel viewModel);
+        Task Create(Game game);
     }
 }
