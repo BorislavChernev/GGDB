@@ -58,16 +58,20 @@
 
                         <ul class="flex flex-col">
                             <li>
-                                <input type="checkbox" name="SupportsWindows" @(Model.SupportsWindows ? "checked" : "")>
-                                <label for="SupportsWindows">Windows</label>
+                                <input type="checkbox" name="SupportsPC" @(Model.SupportsPC ? "checked" : "")>
+                                <label for="SupportsPC">PC</label>
                             </li>
                             <li>
-                                <input type="checkbox" name="SupportsMacOs" @(Model.SupportsMacOs ? "checked" : "")>
-                                <label for="SupportsMacOs">MacOS</label>
+                                <input type="checkbox" name="SupportsPS" @(Model.SupportsPS ? "checked" : "")>
+                                <label for="SupportsPS">Playstation</label>
                             </li>
                             <li>
-                                <input type="checkbox" name="SupportsLinux" @(Model.SupportsLinux ? "checked" : "")>
-                                <label for="SupportsLinux">Linux</label>
+                                <input type="checkbox" name="SupportsXbox" @(Model.SupportsXbox ? "checked" : "")>
+                                <label for="SupportsXbox">Xbox</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="SupportsNintendo" @(Model.SupportsNintendo ? "checked" : "")>
+                                <label for="SupportsNintendo">Nintendo</label>
                             </li>
                         </ul>
                     </div>

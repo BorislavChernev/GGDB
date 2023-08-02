@@ -5,7 +5,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-@*asd MAIN CENTER*@
+@*MAIN CENTER*@
 <div class="flex w-8/12 flex-col border-5 border-black">
 
     @*MAIN INSIDE*@
@@ -28,16 +28,13 @@
 
 </div>
 
-@*asd RIGHT SIDE*@
+@*RIGHT SIDE*@
 <div class="flex flex-col w-4/12 border-5 border-black">
     
     @*BEST GAMES BOX --- GREEN*@
     <div class="w-full h-4/6 border-5 border-green-700">
 
         @*FOREACH BEST GAME --- PINK*@
-
-
-
         @foreach (BestFiveGameViewModel game in Model)
         {
             <partial name="_BestFivePartial" model="game"/>

@@ -12,10 +12,12 @@
 
         public int Rating { get; set; }
 
-        public bool SupportsWindows { get; set; }
+        public bool SupportsPC { get; set; }
 
-        public bool SupportsLinux { get; set; }
+        public bool SupportsPS { get; set; }
 
-        public bool SupportsMacOs { get; set; }
+        public bool SupportsXbox { get; set; }
+
+        public bool SupportsNintendo { get; set; }
     }
 }

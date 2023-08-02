@@ -24,9 +24,10 @@ namespace GoodGameDatabase.Services.Data
             game.Name = viewModel.Name;
             game.Description = viewModel.Description;
             game.Status = Enum.Parse<ReleaseStatusType>(viewModel.Status);
-            game.SupportsWindows = viewModel.SupportsWindows;
-            game.SupportsMacOs = viewModel.SupportsMacOs;
-            game.SupportsLinux = viewModel.SupportsLinux;
+            game.SupportsPC = viewModel.SupportsPC;
+            game.SupportsPS = viewModel.SupportsPS;
+            game.SupportsXbox = viewModel.SupportsXbox;
+            game.SupportsNintendo = viewModel.SupportsNintendo;
             game.ImageUrl = viewModel.ImageUrl;
 
             await dbContext.SaveChangesAsync();
@@ -44,9 +45,10 @@ namespace GoodGameDatabase.Services.Data
                 ReleaseDate = g.ReleaseDate.ToString(),
                 ImageUrl = g.ImageUrl,
                 Rating = g.Rating,
-                SupportsWindows = g.SupportsWindows,
-                SupportsLinux = g.SupportsLinux,
-                SupportsMacOs = g.SupportsMacOs,
+                SupportsPC = g.SupportsPC,
+                SupportsPS = g.SupportsPS,
+                SupportsXbox = g.SupportsXbox,
+                SupportsNintendo = g.SupportsNintendo,
             })
             .Take(5)
             .ToArrayAsync();
@@ -64,9 +66,11 @@ namespace GoodGameDatabase.Services.Data
                     ImageUrl = g.ImageUrl,
                     Rating = g.Rating,
                     Description = g.Description,
-                    SupportsWindows = g.SupportsWindows,
-                    SupportsLinux = g.SupportsLinux,
-                    SupportsMacOs = g.SupportsMacOs,
+                    SupportsPC = g.SupportsPC,
+                    SupportsPS = g.SupportsPS,
+                    SupportsXbox = g.SupportsXbox,
+                    SupportsNintendo = g.SupportsNintendo,
+
                 })
                 .FirstAsync();
         }
@@ -81,9 +85,10 @@ namespace GoodGameDatabase.Services.Data
                 ReleaseDate = g.ReleaseDate.ToString(),
                 ImageUrl = g.ImageUrl,
                 Rating = g.Rating,
-                SupportsWindows = g.SupportsWindows,
-                SupportsLinux = g.SupportsLinux,
-                SupportsMacOs = g.SupportsMacOs,
+                SupportsPC = g.SupportsPC,
+                SupportsPS = g.SupportsPS,
+                SupportsXbox = g.SupportsXbox,
+                SupportsNintendo = g.SupportsNintendo,
             })
             .ToArrayAsync();
         }
