@@ -19,7 +19,7 @@ namespace GoodGameDatabase.Services.Data
         public async Task Edit(int id, EditGameViewModel viewModel)
         {
             Game game = await this.dbContext.Games
-                .FirstAsync(g => g.Id == id);
+                .FirstOrDefaultAsync(g => g.Id == id);
 
             game.Name = viewModel.Name;
             game.Description = viewModel.Description;
@@ -64,6 +64,7 @@ namespace GoodGameDatabase.Services.Data
                     ReleaseDate = g.ReleaseDate.ToString(),
                     ImageUrl = g.ImageUrl,
                     Rating = g.Rating,
+                    Status = g.Status.ToString(),
                     Description = g.Description,
                     SupportsPC = g.SupportsPC,
                     SupportsPS = g.SupportsPS,
