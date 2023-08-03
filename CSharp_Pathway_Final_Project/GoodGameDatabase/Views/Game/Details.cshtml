@@ -1,6 +1,6 @@
 ﻿@using GoodGameDatabase.Web.ViewModels.Game;
-@model GameDetailsViewModel
-
+@using GoodGameDatabase.Web.ViewModels.Review;
+@model dynamic
 @{
     ViewData["Title"] = "All games";
 }
@@ -19,31 +19,44 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="card mb-4">
-                        <img src="@Model.ImageUrl" class="card-img-top" alt="Book Cover" width="200" height="650">
+                        <img src="@Model.Game.ImageUrl" class="card-img-top" alt="Book Cover" width="200" height="650">
                         <div class="card-body">
-                            <h5 class="card-title">@Model.Name</h5>
+                            <h5 class="card-title">@Model.Game.Name</h5>
 
-                            <p class="card-text">ReleaseDate: @Model.ReleaseDate</p>
+                            <p class="card-text">ReleaseDate: @Model.Game.ReleaseDate</p>
 
-                            <p class="card-text">Rating: @Model.Rating</p>
+                            <p class="card-text">Rating: @Model.Game.Rating</p>
 
-                            <p class="card-text">Rating: @Model.Description</p>
+                            <p class="card-text">Rating: @Model.Game.Description</p>
 
-                            <p class="card-text">SupportsPC: @Model.SupportsPC</p>
+                            <p class="card-text">SupportsPC: @Model.Game.SupportsPC</p>
 
-                            <p class="card-text">SupportsPS: @Model.SupportsPS</p>
+                            <p class="card-text">SupportsPS: @Model.Game.SupportsPS</p>
 
-                            <p class="card-text">SupportsXbox: @Model.SupportsXbox</p>
+                            <p class="card-text">SupportsXbox: @Model.Game.SupportsXbox</p>
 
-                            <p class="card-text">SupportsNintendo: @Model.SupportsNintendo</p>
+                            <p class="card-text">SupportsNintendo: @Model.Game.SupportsNintendo</p>
 
-                            <p class="card-text">SupportsNintendo: @Model.Status</p>
-                            <partial name="_EditGameModalPartial" model="Model" />
-
+                            <p class="card-text">Status: @Model.Game.Status</p>
+                            <partial name="_EditGameModalPartial" model="@Model.Game" />
                         </div>
                     </div>
                 </div>
             </div>
+            <p>something is wrong? or wut</p>
+            @foreach (GameReviewViewModel review in Model.Reviews)
+            {
+                <div>
+                    <textarea>@review.Description</textarea>
+                </div>
+                <p>@review.Type</p>
+                <p>@review.Author</p>
+            }
+
+            <partial name="_ReviewGamePartial" model="@Model.Game"/>                
+@*            @foreach (Review review in Model.Reviews)
+            {*@
+@*            }*@
         }
         else
         {

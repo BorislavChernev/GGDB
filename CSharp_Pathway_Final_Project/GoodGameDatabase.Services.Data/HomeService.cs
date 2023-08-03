@@ -1,6 +1,5 @@
 ﻿using GoodGameDatabase.Data;
 using GoodGameDatabase.Services.Data.Contracts;
-using Microsoft.EntityFrameworkCore;
 
 namespace GoodGameDatabase.Services.Data
 {

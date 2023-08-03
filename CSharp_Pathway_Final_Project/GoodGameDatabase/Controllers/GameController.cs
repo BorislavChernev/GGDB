@@ -1,19 +1,24 @@
 ﻿using GoodGameDatabase.Data.Model;
 using GoodGameDatabase.Services.Data.Contracts;
 using GoodGameDatabase.Web.ViewModels.Game;
-using Library.Controllers;
+using GoodGameDatabase.Web.ViewModels.Review;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.WebSockets;
+
+using Library.Controllers;
+using System.Dynamic;
 
 namespace GoodGameDatabase.Web.Controllers
 {
     public class GameController : BaseController
     {
         private readonly IGameService gameService;
-        public GameController(IGameService gameService)
+        private readonly IReviewService reviewService;
+        public GameController(IGameService gameService, IReviewService reviewService)
         {
             this.gameService = gameService;
+            this.reviewService = reviewService;
         }
 
         [HttpGet]
@@ -37,10 +42,17 @@ namespace GoodGameDatabase.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
-            GameDetailsViewModel viewModel = await gameService
+            dynamic model = new ExpandoObject();
+
+            GameDetailsViewModel game = await gameService
                 .GetDetailsByIdAsync(id);
 
-            return View(viewModel);
+            ICollection<GameReviewViewModel> reviews = await reviewService.GetAllGameReviews();
+
+            model.Game = game;
+            model.Reviews = reviews;
+
+            return View(model);
         }
 
         [HttpGet]

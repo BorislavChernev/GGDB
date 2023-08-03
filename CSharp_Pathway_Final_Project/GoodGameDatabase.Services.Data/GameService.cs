@@ -1,10 +1,10 @@
 ﻿using GoodGameDatabase.Services.Data.Contracts;
 using GoodGameDatabase.Data;
 using GoodGameDatabase.Web.ViewModels.Game;
-using Microsoft.EntityFrameworkCore;
 using GoodGameDatabase.Data.Model;
-using System;
 using GoodGameDatabase.Data.Model.Enums;
+
+using Microsoft.EntityFrameworkCore;
 
 namespace GoodGameDatabase.Services.Data
 {

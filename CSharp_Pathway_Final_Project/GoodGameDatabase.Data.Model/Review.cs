@@ -15,13 +15,16 @@ namespace GoodGameDatabase.Data.Model
         [Required]
         public ReviewType Type { get; set; }
 
-
         public int Likes { get; set; }
 
         public int Dislikes { get; set; }
 
         [Required]
-        public string AuthorId { get; set; } = null!;
+        public Guid AuthorId { get; set; }
+
+        [Required]
+        [ForeignKey(nameof(AuthorId))]
+        public ApplicationUser Author { get; set; } = null!;
 
         [ForeignKey(nameof(Game))]
         [Required]
