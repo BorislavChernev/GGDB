@@ -16,10 +16,10 @@ namespace GoodGameDatabase.Services.Data
         {
             this.dbContext = dbContext;
         }
-        public async Task<EditGameViewModel> Edit(int id, EditGameViewModel viewModel)
+        public async Task Edit(int id, EditGameViewModel viewModel)
         {
             Game game = await this.dbContext.Games
-                .FirstOrDefaultAsync(g => g.Id == id);
+                .FirstAsync(g => g.Id == id);
 
             game.Name = viewModel.Name;
             game.Description = viewModel.Description;
@@ -31,7 +31,6 @@ namespace GoodGameDatabase.Services.Data
             game.ImageUrl = viewModel.ImageUrl;
 
             await dbContext.SaveChangesAsync();
-            return viewModel;
         }
 
         public async Task<ICollection<BestFiveGameViewModel>> GetBestFiveAsync()
@@ -101,8 +100,6 @@ namespace GoodGameDatabase.Services.Data
 
             await dbContext.Games.AddAsync(game);
             await dbContext.SaveChangesAsync();
-
-            var asd = 0;
         }
     }
 }

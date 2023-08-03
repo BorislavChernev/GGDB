@@ -29,22 +29,15 @@
 
                             <p class="card-text">Rating: @Model.Description</p>
 
-                            <p class="card-text">Average Rating: @Model.SupportsPC</p>
+                            <p class="card-text">SupportsPC: @Model.SupportsPC</p>
 
-                            <p class="card-text">Average Rating: @Model.SupportsPS</p>
+                            <p class="card-text">SupportsPS: @Model.SupportsPS</p>
 
-                            <p class="card-text">Average Rating: @Model.SupportsXbox</p>
+                            <p class="card-text">SupportsXbox: @Model.SupportsXbox</p>
 
-                            <p class="card-text">Average Rating: @Model.SupportsNintendo</p>
-@*                            <a class="block w-full select-none rounded-lg bg-pink-500 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                               type="button"
-                               data-ripple-light="true"
-                               asp-controller="Game"
-                               asp-action="Edit"
-                               asp-route-id="@Model.Id">
-                                Edit
-                            </a>*@
+                            <p class="card-text">SupportsNintendo: @Model.SupportsNintendo</p>
 
+                            <p class="card-text">SupportsNintendo: @Model.Status</p>
                             <partial name="_EditGameModalPartial" model="Model" />
 
                         </div>

@@ -16,14 +16,12 @@
     <div class="container">
     @if (Model.Any())
     {
-            <div class="grid grid-cols-4 gap-4 ml-6">
-                @foreach (var game in Model)
-                {
-                        <partial name="_GamePartial" model="@game" />
-                }
-            </div>
-
-
+        <div class="grid grid-cols-4 gap-4 ml-6">
+            @foreach (var game in Model)
+            {
+                <partial name="_GamePartial" model="@game" />
+            }
+        </div>
     }
     else
     {

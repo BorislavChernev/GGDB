@@ -1,4 +1,5 @@
-﻿@using GoodGameDatabase.Web.ViewModels.Game;
+﻿@using System.Linq;
+@using GoodGameDatabase.Web.ViewModels.Game;
 @model GameDetailsViewModel
 
 
@@ -44,13 +45,13 @@
                         <textarea name="Description" placeholder="..." class="block resize-none mt-2 w-full  placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-4 h-32 py-2.5 text-black focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300">@Model.Description</textarea>
                     </div>
 
-                    <select name="Status">
-                        <option value="OfficialRelease">Official Release</option>
-                        <option value="EarlyAccess">Early Access</option>
-                        <option value="OpenBeta">Open Beta</option>
-                        <option value="ClosedBeta">Closed Beta</option>
-                        <option value="Alpha">Alpha</option>
-                        <option value="Unreleased">Unreleased</option>
+                    <select name="Status" onchange="function1(this)">
+                        <option name="OfficialRelease" value="OfficialRelease">Official Release</option>
+                        <option name="EarlyAccess" value="EarlyAccess">Early Access</option>
+                        <option name="OpenBeta" value="OpenBeta">Open Beta</option>
+                        <option name="ClosedBeta" value="ClosedBeta">Closed Beta</option>
+                        <option name="Alpha" value="Alpha">Alpha</option>
+                        <option name="Unreleased" value="Unreleased">Unreleased</option>
                     </select>
 
                     <div>
@@ -58,19 +59,19 @@
 
                         <ul class="flex flex-col">
                             <li>
-                                <input type="checkbox" name="SupportsPC" @(Model.SupportsPC ? "checked" : "")>
+                                <input id="SupportsPC" type="checkbox" name="SupportsPC" value="true" @(Model.SupportsPC.ToString().ToLower() == "true" ? "checked" : "") />
                                 <label for="SupportsPC">PC</label>
                             </li>
                             <li>
-                                <input type="checkbox" name="SupportsPS" @(Model.SupportsPS ? "checked" : "")>
+                                <input id="SupportsPS" type="checkbox" name="SupportsPS" value="true" @(Model.SupportsPS.ToString().ToLower() == "true" ? "checked" : "") />
                                 <label for="SupportsPS">Playstation</label>
                             </li>
                             <li>
-                                <input type="checkbox" name="SupportsXbox" @(Model.SupportsXbox ? "checked" : "")>
+                                <input id="SupportsXbox" type="checkbox" name="SupportsXbox" value="true" @(Model.SupportsXbox.ToString().ToLower() == "true" ? "checked" : "") />
                                 <label for="SupportsXbox">Xbox</label>
                             </li>
                             <li>
-                                <input type="checkbox" name="SupportsNintendo" @(Model.SupportsNintendo ? "checked" : "")>
+                                <input id="SupportsNintendo" type="checkbox" name="SupportsNintendo" value="true" @(Model.SupportsNintendo.ToString().ToLower() == "true" ? "checked" : "") />
                                 <label for="SupportsNintendo">Nintendo</label>
                             </li>
                         </ul>
@@ -96,19 +97,13 @@
 </div>
 
 <script>
-    function updateValue(checkbox) {
-        checkbox.value = checkbox.checked ? "true" : "false";
+    function function1() {
+        debugger;
     }
 
     function openModal() {
         const modal = document.getElementById('modal');
         modal.style.display = 'block';
-
-        // Set initial checkbox values when the modal opens
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        checkboxes.forEach((checkbox) => {
-            checkbox.checked = checkbox.value === "true";
-        });
     }
 
     function closeModal() {

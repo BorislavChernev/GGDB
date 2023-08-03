@@ -60,7 +60,6 @@ namespace GoodGameDatabase.Web.Controllers
             return View(bestFiveGames);
         }
 
-        [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Edit(int id, EditGameViewModel viewModel)
         {
