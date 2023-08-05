@@ -10,5 +10,7 @@ namespace GoodGameDatabase.Services.Data.Contracts
         Task<ICollection<BestFiveGameViewModel>> GetBestFiveAsync();
         Task Edit(int id, EditGameViewModel viewModel);
         Task Create(Game game);
+        Task Rate(int gameId, int rating, string userId);
+        Task<int> GetRating(int gameId);
     }
 }

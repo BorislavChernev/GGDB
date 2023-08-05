@@ -331,8 +331,15 @@ namespace GoodGameDatabase.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Category")
                         .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("GameId")
                         .HasColumnType("int");
@@ -343,11 +350,17 @@ namespace GoodGameDatabase.Data.Migrations
                     b.Property<int>("Rating")
                         .HasColumnType("int");
 
+                    b.Property<string>("Subtitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
 
                     b.HasIndex("GameId");
 
@@ -357,28 +370,37 @@ namespace GoodGameDatabase.Data.Migrations
                         new
                         {
                             Id = 1,
+                            AuthorId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Category = 0,
+                            Description = "Do not be afraid of canibals",
                             GameId = 1,
                             Language = 0,
                             Rating = 95,
+                            Subtitle = "Forest living tips",
                             Title = "How to stay alive in The Forest"
                         },
                         new
                         {
                             Id = 2,
+                            AuthorId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Category = 2,
+                            Description = "Play by the rules",
                             GameId = 3,
                             Language = 0,
                             Rating = 89,
+                            Subtitle = "Tips to complete Astroneer faster",
                             Title = "How to complete Astroneer"
                         },
                         new
                         {
                             Id = 3,
+                            AuthorId = new Guid("00000000-0000-0000-0000-000000000000"),
                             Category = 2,
+                            Description = "You need to buy the last car to beat the boss",
                             GameId = 2,
                             Language = 0,
                             Rating = 100,
+                            Subtitle = "some that you can buy",
                             Title = "What car do you need to outrace the final boss in NSFW Heat"
                         });
                 });
@@ -424,8 +446,7 @@ namespace GoodGameDatabase.Data.Migrations
 
                     b.HasKey("UserId", "GuideId");
 
-                    b.HasIndex("GuideId")
-                        .IsUnique();
+                    b.HasIndex("GuideId");
 
                     b.ToTable("IdentityUserGuides");
                 });
@@ -460,6 +481,32 @@ namespace GoodGameDatabase.Data.Migrations
                     b.HasIndex("GameId");
 
                     b.ToTable("News");
+                });
+
+            modelBuilder.Entity("GoodGameDatabase.Data.Model.Rating", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Points")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Ratings");
                 });
 
             modelBuilder.Entity("GoodGameDatabase.Data.Model.Review", b =>
@@ -657,11 +704,19 @@ namespace GoodGameDatabase.Data.Migrations
 
             modelBuilder.Entity("GoodGameDatabase.Data.Model.Guide", b =>
                 {
+                    b.HasOne("GoodGameDatabase.Data.Model.ApplicationUser", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("GoodGameDatabase.Data.Model.Game", "Game")
                         .WithMany()
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Author");
 
                     b.Navigation("Game");
                 });
@@ -707,8 +762,8 @@ namespace GoodGameDatabase.Data.Migrations
             modelBuilder.Entity("GoodGameDatabase.Data.Model.IdentityUserGuide", b =>
                 {
                     b.HasOne("GoodGameDatabase.Data.Model.Guide", "Guide")
-                        .WithOne("IdentityUserGuide")
-                        .HasForeignKey("GoodGameDatabase.Data.Model.IdentityUserGuide", "GuideId")
+                        .WithMany()
+                        .HasForeignKey("GuideId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -732,6 +787,25 @@ namespace GoodGameDatabase.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Game");
+                });
+
+            modelBuilder.Entity("GoodGameDatabase.Data.Model.Rating", b =>
+                {
+                    b.HasOne("GoodGameDatabase.Data.Model.Game", "Game")
+                        .WithMany()
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GoodGameDatabase.Data.Model.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("GoodGameDatabase.Data.Model.Review", b =>
@@ -818,12 +892,6 @@ namespace GoodGameDatabase.Data.Migrations
             modelBuilder.Entity("GoodGameDatabase.Data.Model.Game", b =>
                 {
                     b.Navigation("Reviews");
-                });
-
-            modelBuilder.Entity("GoodGameDatabase.Data.Model.Guide", b =>
-                {
-                    b.Navigation("IdentityUserGuide")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

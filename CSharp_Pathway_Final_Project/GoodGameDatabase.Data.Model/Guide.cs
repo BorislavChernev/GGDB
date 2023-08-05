@@ -12,6 +12,12 @@ namespace GoodGameDatabase.Data.Model
         [Required]
         public string Title { get; set; } = null!;
 
+        [Required]
+        public string Subtitle { get; set; } = null!;
+
+        [Required]
+        public string Description { get; set; } = null!;
+
         [Range(0, 100)]
         public int Rating { get; set; }
 
@@ -24,11 +30,15 @@ namespace GoodGameDatabase.Data.Model
         [Required]
         [ForeignKey(nameof(Game))]
         public int GameId { get; set; }
-        
-        [Required]
-        public Game Game { get; set; }
 
         [Required]
-        public IdentityUserGuide IdentityUserGuide { get; set; } = null!;
+        public Game Game { get; set; } = null!;
+
+        [Required]
+        [ForeignKey(nameof(Author))]
+        public Guid AuthorId { get; set; }
+
+        [Required]
+        public ApplicationUser Author { get; set; } = null!;
     }
 }

@@ -17,8 +17,9 @@ namespace GoodGameDatabase.Web.Controllers
         public async Task<IActionResult> CreateNew(Review review)
         {
             string id = GetUserId();
+            review.AuthorId = Guid.Parse(id);
 
-            await reviewService.Create(id, review);
+            await reviewService.Create(review);
 
             return RedirectToAction("Details", "Game", new {Id = review.GameId});
         }

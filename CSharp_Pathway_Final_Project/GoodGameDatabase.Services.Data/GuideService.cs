@@ -1,4 +1,5 @@
 ﻿using GoodGameDatabase.Data;
+using GoodGameDatabase.Data.Model;
 using GoodGameDatabase.Services.Data.Contracts;
 using GoodGameDatabase.Web.ViewModels.Guide;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,12 @@ namespace GoodGameDatabase.Services.Data
         public GuideService(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task CreateNew(Guide guide)
+        {
+            await this.dbContext.Guides.AddAsync(guide);
+            await this.dbContext.SaveChangesAsync();
         }
 
         public async Task<ICollection<AllGuideViewModel>> GetAllAsync()

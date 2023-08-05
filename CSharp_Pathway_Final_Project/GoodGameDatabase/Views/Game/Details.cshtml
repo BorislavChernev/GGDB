@@ -53,10 +53,10 @@
                 <p>@review.Author</p>
             }
 
-            <partial name="_ReviewGamePartial" model="@Model.Game"/>                
-@*            @foreach (Review review in Model.Reviews)
-            {*@
-@*            }*@
+            <partial name="_ReviewGamePartial" model="@Model.Game"/>
+
+            
+            <partial name="_RateGamePartial" model="@Model.Game"/>
         }
         else
         {

@@ -1,0 +1,20 @@
+﻿@using GoodGameDatabase.Web.ViewModels.Game;
+@model GameDetailsViewModel
+
+<form>
+    <h1>Like this game? Rate it.</h1>
+
+    <div>
+        <label for="rating">
+            <input name="rating" type="number" min="0" max="100"/>
+        </label>
+
+        <label class="hidden">
+            <input name="gameId" value="@Model.Id"/>
+        </label>
+    </div>
+
+    <button type="submit" asp-controller="Game" asp-action="Rate">
+        Rate this game
+    </button>
+</form>

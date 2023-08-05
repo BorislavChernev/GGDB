@@ -23,12 +23,11 @@ namespace GoodGameDatabase.Data.Model
         [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength, ErrorMessage = DescriptionErrorMessage)]
         public string Description { get; set; } = null!;
 
-        [Range(0, 100)]
-        public int Rating { get; set; }
-
         public string? Version { get; set; } = null!;
 
         public DateTime? ReleaseDate { get; set; }
+
+        public int Rating { get; set; }
 
         [Required]
         public AgeRestrictionType AgeRestriction { get; set; }

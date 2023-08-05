@@ -5,7 +5,8 @@ namespace GoodGameDatabase.Services.Data.Contracts
 {
     public interface IReviewService
     {
-        Task Create(string id, Review review);
+        Task Create(Review review);
         Task<ICollection<GameReviewViewModel>> GetAllGameReviews();
+        Task<ICollection<GameReviewViewModel>> GetGameReviews(int gameId);
     }
 }

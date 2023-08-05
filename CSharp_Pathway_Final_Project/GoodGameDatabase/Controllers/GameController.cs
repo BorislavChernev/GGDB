@@ -44,10 +44,10 @@ namespace GoodGameDatabase.Web.Controllers
         {
             dynamic model = new ExpandoObject();
 
-            GameDetailsViewModel game = await gameService
+            GameDetailsViewModel game = await this.gameService
                 .GetDetailsByIdAsync(id);
 
-            ICollection<GameReviewViewModel> reviews = await reviewService.GetAllGameReviews();
+            ICollection<GameReviewViewModel> reviews = await this.reviewService.GetGameReviews(game.Id);
 
             model.Game = game;
             model.Reviews = reviews;
@@ -62,7 +62,7 @@ namespace GoodGameDatabase.Web.Controllers
             ICollection<BestFiveGameViewModel> bestFiveGames;
             try
             {
-                bestFiveGames = await gameService.GetBestFiveAsync();
+                bestFiveGames = await this.gameService.GetBestFiveAsync();
             }
             catch (Exception)
             {
@@ -76,9 +76,9 @@ namespace GoodGameDatabase.Web.Controllers
         public async Task<IActionResult> Edit(int id, EditGameViewModel viewModel)
         {
 
-            await gameService.Edit(id, viewModel);
+            await this.gameService.Edit(id, viewModel);
 
-            return RedirectToAction("Details", new {id = id});
+            return RedirectToAction("Details", new {id});
             //return View(viewModel);
         }
 
@@ -92,9 +92,19 @@ namespace GoodGameDatabase.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Create(Game game)
         {
-            await gameService.Create(game);
+            await this.gameService.Create(game);
 
             return RedirectToAction("Details", new { id = game.Id });
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> Rate(int gameId, int rating)
+        {
+            string userId = this.GetUserId();
+
+            await this.gameService.Rate(gameId, rating, userId);
+
+            return RedirectToAction("Details", new { id = gameId });
         }
     }
 }

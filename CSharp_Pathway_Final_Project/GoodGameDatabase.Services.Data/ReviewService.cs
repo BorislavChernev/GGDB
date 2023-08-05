@@ -15,20 +15,10 @@ namespace GoodGameDatabase.Services.Data
             this.dbContext = dbContext;
         }
 
-        public async Task Create(string Id, Review review)
+        public async Task Create(Review review)
         {
-            review.AuthorId = Guid.Parse(Id);
             await this.dbContext.Reviews.AddAsync(review);
-         
             await this.dbContext.SaveChangesAsync();
-
-            GameReviewViewModel[] asd = await this.dbContext.Reviews
-                    .Select(r => new GameReviewViewModel()
-                    {
-                        Description = r.Description,
-                        Author = $"{r.Author}",
-                        Type = $"{r.Type}",
-                    }).ToArrayAsync();
         }
 
         public async Task Delete(int id)
@@ -51,6 +41,20 @@ namespace GoodGameDatabase.Services.Data
                     Dislikes = r.Dislikes,
                     Author = r.Author.NormalizedEmail
                     
+                }).ToArrayAsync();
+        }
+
+        public async Task<ICollection<GameReviewViewModel>> GetGameReviews(int gameId)
+        {
+            return await this.dbContext.Reviews
+                .Where(r => r.GameId == gameId)
+                .Select(r => new GameReviewViewModel()
+                {
+                    Description = r.Description,
+                    Type = r.Type.ToString(),
+                    Likes = r.Likes,
+                    Dislikes = r.Dislikes,
+                    Author = r.Author.NormalizedEmail
                 }).ToArrayAsync();
         }
     }
