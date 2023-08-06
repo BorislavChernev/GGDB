@@ -10,6 +10,7 @@ namespace GoodGameDatabase.Data.Model
         public Game()
         {
             this.Reviews = new HashSet<Review>();
+            this.Ratings = new HashSet<Rating>();
         }
 
         [Key]
@@ -27,8 +28,6 @@ namespace GoodGameDatabase.Data.Model
 
         public DateTime? ReleaseDate { get; set; }
 
-        public int Rating { get; set; }
-
         [Required]
         public AgeRestrictionType AgeRestriction { get; set; }
 
@@ -43,7 +42,7 @@ namespace GoodGameDatabase.Data.Model
 
         [Required]
         public bool SupportsXbox { get; set; }
-        
+
         [Required]
         public bool SupportsNintendo { get; set; }
 
@@ -51,7 +50,21 @@ namespace GoodGameDatabase.Data.Model
         public string ImageUrl { get; set; } = null!;
 
         public ICollection<Review> Reviews { get; set; }
-        
+
+        public double Rating
+        {
+            get
+            {
+                if (Ratings.Count != 0)
+                {
+                    return this.Ratings.Sum(r => r.Points) / this.Ratings.Count;
+                }
+                else return 0;
+            }
+        }
+
+        public ICollection<Rating> Ratings { get; set; }
+
         //Developer ---------->
         [Required]
         [ForeignKey(nameof(Creator))]

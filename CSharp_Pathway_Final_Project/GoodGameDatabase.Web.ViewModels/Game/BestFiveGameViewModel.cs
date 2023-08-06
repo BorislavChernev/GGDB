@@ -10,7 +10,7 @@
 
         public string ImageUrl { get; set; } = null!;
 
-        public int Rating { get; set; }
+        public double Rating { get; set; }
 
         public bool SupportsPC { get; set; }
 

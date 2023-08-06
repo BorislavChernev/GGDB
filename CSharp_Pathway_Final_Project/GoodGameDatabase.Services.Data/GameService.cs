@@ -36,12 +36,14 @@ namespace GoodGameDatabase.Services.Data
         public async Task<ICollection<BestFiveGameViewModel>> GetBestFiveAsync()
         {
             var games = await this.dbContext.Games
+                .Include(g => g.Ratings)
                 .Select(g => new BestFiveGameViewModel
                 {
                     Id = g.Id,
                     Name = g.Name,
                     ReleaseDate = g.ReleaseDate.ToString(),
                     ImageUrl = g.ImageUrl,
+                    Rating = g.Rating,
                     SupportsPC = g.SupportsPC,
                     SupportsPS = g.SupportsPS,
                     SupportsXbox = g.SupportsXbox,
@@ -49,24 +51,21 @@ namespace GoodGameDatabase.Services.Data
                 })
                 .ToArrayAsync();
 
-            var allBestFiveGameViewModels = new List<BestFiveGameViewModel>();
-
-            foreach (var game in games)
-            {
-                int rating = await this.GetRating(game.Id);
-                game.Rating = rating;
-                allBestFiveGameViewModels.Add(game);
-            }
-
-            return allBestFiveGameViewModels
+            BestFiveGameViewModel[] asd = games
                 .OrderByDescending(g => g.Rating)
                 .Take(5)
                 .ToArray();
+
+            return asd;
         }
 
         public async Task<GameDetailsViewModel> GetDetailsByIdAsync(int id)
         {
-            int rating = await this.GetRating(id);
+            var game = await this.dbContext.Games
+                .Include(g => g.Ratings)
+                .FirstOrDefaultAsync(g => g.Id == id);
+
+            var ratings = game.Ratings;
 
             return await this.dbContext.Games
                 .Where(g => g.Id == id)
@@ -76,8 +75,8 @@ namespace GoodGameDatabase.Services.Data
                     Name = g.Name,
                     ReleaseDate = g.ReleaseDate.ToString(),
                     ImageUrl = g.ImageUrl,
-                    Rating = rating,
                     Status = g.Status.ToString(),
+                    Rating = g.Rating,
                     Description = g.Description,
                     SupportsPC = g.SupportsPC,
                     SupportsPS = g.SupportsPS,
@@ -91,6 +90,7 @@ namespace GoodGameDatabase.Services.Data
         public async Task<ICollection<AllGameViewModel>> GetAllAsync()
         {
             var games = await this.dbContext.Games
+                .Include(g => g.Ratings)
                 .Select(g => new AllGameViewModel
                 {
                     Id = g.Id,
@@ -98,6 +98,7 @@ namespace GoodGameDatabase.Services.Data
                     ReleaseDate = g.ReleaseDate.ToString(),
                     ImageUrl = g.ImageUrl,
                     Description = g.Description,
+                    Rating = g.Rating,
                     SupportsPC = g.SupportsPC,
                     SupportsPS = g.SupportsPS,
                     SupportsXbox = g.SupportsXbox,
@@ -105,16 +106,7 @@ namespace GoodGameDatabase.Services.Data
                 })
                 .ToArrayAsync();
 
-            var allGameViewModels = new List<AllGameViewModel>();
-
-            foreach (var game in games)
-            {
-                int rating = await this.GetRating(game.Id);
-                game.Rating = rating;
-                allGameViewModels.Add(game);
-            }
-
-            return allGameViewModels;
+            return games;
         }
 
         public async Task Create(Game game)
@@ -128,30 +120,52 @@ namespace GoodGameDatabase.Services.Data
 
         public async Task Rate(int gameId, int points, string userId)
         {
-            Rating review = new Rating()
-            {
-                GameId = gameId,
-                UserId = Guid.Parse(userId),
-                Points = points
-            };
+            Game game = await this.dbContext.Games
+                .Include(g => g.Ratings) // Eager load the Ratings collection
+                .FirstAsync(g => g.Id == gameId);
 
-            await this.dbContext.Ratings.AddAsync(review);
+            Rating rating = game.Ratings
+            .FirstOrDefault(r => r.UserId == Guid.Parse(userId));
+
+            if (rating == null)
+            {
+                rating = new Rating()
+                {
+                    GameId = gameId,
+                    UserId = Guid.Parse(userId),
+                    Points = points
+                };
+
+                game.Ratings.Add(rating);
+            } else rating.Points = points;
+
+            await dbContext.SaveChangesAsync();
+
+            var ratings = await dbContext.Ratings.ToArrayAsync();
         }
 
-        public async Task<int> GetRating(int gameId)
+        public async Task<double> GetRating(int gameId)
         {
-            Rating rating = new Rating();
-            int points = 0;
-            try
-            {
-                rating = await this.dbContext.Ratings
-                .FirstAsync(r => r.GameId == gameId);
-                points = rating.Points;
-            }
-            catch (Exception)
-            {                
-            }
-            return points;
+            //Game game = await this.dbContext.Games
+            //    .FirstAsync(g => g.Id == gameId);
+
+            //Rating rating = new Rating();
+            //double points = 0;
+            //try
+            //{
+            //    rating = await this.dbContext.Ratings
+            //    .FirstAsync(r => r.GameId == gameId);
+            //    points = rating.Points;
+
+            //    points = game.Rating;
+            //}
+            //catch (Exception)
+            //{                
+            //}
+
+            //return points;
+
+            throw new NotImplementedException();
         }
     }
 }

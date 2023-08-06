@@ -239,9 +239,6 @@ namespace GoodGameDatabase.Data.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("ReleaseDate")
                         .HasColumnType("datetime2");
 
@@ -278,7 +275,6 @@ namespace GoodGameDatabase.Data.Migrations
                             Description = "As the lone survivor of a passenger jet crash, you find yourself in a mysterious forest battling to stay alive",
                             ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/242760/capsule_616x353.jpg?t=1666811027",
                             Name = "The Forest",
-                            Rating = 89,
                             ReleaseDate = new DateTime(2014, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 5,
                             SupportsNintendo = false,
@@ -295,7 +291,6 @@ namespace GoodGameDatabase.Data.Migrations
                             Description = "A thrilling race experience pits you against a city’s rogue police force.",
                             ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1222680/capsule_616x353.jpg?t=1690398297",
                             Name = "Need for Speed™ Heat",
-                            Rating = 76,
                             ReleaseDate = new DateTime(2019, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 5,
                             SupportsNintendo = false,
@@ -312,7 +307,6 @@ namespace GoodGameDatabase.Data.Migrations
                             Description = "Explore and reshape distant worlds!",
                             ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/361420/capsule_616x353.jpg?t=1689355883",
                             Name = "Astroneer",
-                            Rating = 92,
                             ReleaseDate = new DateTime(2016, 12, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = 5,
                             SupportsNintendo = false,
@@ -792,7 +786,7 @@ namespace GoodGameDatabase.Data.Migrations
             modelBuilder.Entity("GoodGameDatabase.Data.Model.Rating", b =>
                 {
                     b.HasOne("GoodGameDatabase.Data.Model.Game", "Game")
-                        .WithMany()
+                        .WithMany("Ratings")
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -891,6 +885,8 @@ namespace GoodGameDatabase.Data.Migrations
 
             modelBuilder.Entity("GoodGameDatabase.Data.Model.Game", b =>
                 {
+                    b.Navigation("Ratings");
+
                     b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
