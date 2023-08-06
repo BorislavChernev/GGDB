@@ -11,6 +11,7 @@ namespace GoodGameDatabase.Data.Model
         {
             this.Reviews = new HashSet<Review>();
             this.Ratings = new HashSet<Rating>();
+            this.Likes = new HashSet<Like>();
         }
 
         [Key]
@@ -62,6 +63,10 @@ namespace GoodGameDatabase.Data.Model
                 else return 0;
             }
         }
+
+        public int LikePoints => this.Likes.Count;
+
+        public ICollection<Like> Likes { get; set; }
 
         public ICollection<Rating> Ratings { get; set; }
 

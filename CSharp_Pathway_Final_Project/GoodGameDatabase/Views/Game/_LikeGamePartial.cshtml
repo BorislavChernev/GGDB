@@ -1,0 +1,18 @@
+﻿@using GoodGameDatabase.Web.ViewModels.Game;
+@model GameDetailsViewModel
+
+<form>
+    <h1>Like this game? Like it as well.</h1>
+
+    <div>
+        <label class="hidden">
+            <input name="gameId" value="@Model.Id" />
+        </label>
+    </div>
+
+    <button name="liked" value="true" type="submit"
+        asp-controller="Game"
+        asp-action="Like">
+        LIKE this game
+    </button>
+</form>

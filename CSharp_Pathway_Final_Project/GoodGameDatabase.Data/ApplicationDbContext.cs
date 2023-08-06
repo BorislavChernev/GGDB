@@ -23,6 +23,7 @@ namespace GoodGameDatabase.Data
         public DbSet<New> News { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Rating> Ratings { get; set; }
+        public DbSet<Like> Likes { get; set; }
         public DbSet<IdentityUserGame> IdentityUserGames { get; set; }
         public DbSet<IdentityUserGuide> IdentityUserGuides { get; set; }
         public DbSet<IdentityUserDiscussion> IdentityUserDiscussions { get; set; }

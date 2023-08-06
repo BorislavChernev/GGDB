@@ -12,6 +12,8 @@
 
         public double Rating { get; set; }
 
+        public int Likes { get; set; }
+
         public bool SupportsPC { get; set; }
 
         public bool SupportsPS { get; set; }

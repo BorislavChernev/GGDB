@@ -24,10 +24,13 @@
                             <h5 class="card-title">@Model.Game.Name</h5>
 
                             <p class="card-text">ReleaseDate: @Model.Game.ReleaseDate</p>
+                            
+                            <p class="card-text">Likes: @Model.Game.Likes</p>
 
                             <p class="card-text">Rating: @Model.Game.Rating</p>
 
-                            <p class="card-text">Rating: @Model.Game.Description</p>
+                            <p class="card-text">Description: @Model.Game.Description</p>
+                            
 
                             <p class="card-text">SupportsPC: @Model.Game.SupportsPC</p>
 
@@ -55,8 +58,9 @@
 
             <partial name="_ReviewGamePartial" model="@Model.Game"/>
 
-            
             <partial name="_RateGamePartial" model="@Model.Game"/>
+
+            <partial name="_LikeGamePartial" model="@Model.Game" />
         }
         else
         {

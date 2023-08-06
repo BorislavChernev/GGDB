@@ -106,5 +106,15 @@ namespace GoodGameDatabase.Web.Controllers
 
             return RedirectToAction("Details", new { id = gameId });
         }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> Like(int gameId)
+        {
+            string userId = this.GetUserId();
+
+            await this.gameService.Like(gameId, userId);
+
+            return RedirectToAction("Details", new { id = gameId });
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace GoodGameDatabase.Data.Model
     public class Rating
     {
         [Required]
+        [Key]
         public int Id { get; set; }
 
         [Required]

@@ -445,6 +445,29 @@ namespace GoodGameDatabase.Data.Migrations
                     b.ToTable("IdentityUserGuides");
                 });
 
+            modelBuilder.Entity("GoodGameDatabase.Data.Model.Like", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Likes");
+                });
+
             modelBuilder.Entity("GoodGameDatabase.Data.Model.New", b =>
                 {
                     b.Property<int>("Id")
@@ -772,6 +795,25 @@ namespace GoodGameDatabase.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("GoodGameDatabase.Data.Model.Like", b =>
+                {
+                    b.HasOne("GoodGameDatabase.Data.Model.Game", "Game")
+                        .WithMany("Likes")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GoodGameDatabase.Data.Model.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("GoodGameDatabase.Data.Model.New", b =>
                 {
                     b.HasOne("GoodGameDatabase.Data.Model.Game", "Game")
@@ -885,6 +927,8 @@ namespace GoodGameDatabase.Data.Migrations
 
             modelBuilder.Entity("GoodGameDatabase.Data.Model.Game", b =>
                 {
+                    b.Navigation("Likes");
+
                     b.Navigation("Ratings");
 
                     b.Navigation("Reviews");
