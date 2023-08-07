@@ -90,7 +90,7 @@ namespace GoodGameDatabase.Services.Data
 
         public async Task<ICollection<AllGameViewModel>> GetAllAsync()
         {
-            var games = await this.dbContext.Games
+            return await this.dbContext.Games
                 .Include(g => g.Ratings)
                 .Include(g => g.Likes)
                 .Select(g => new AllGameViewModel
@@ -108,14 +108,11 @@ namespace GoodGameDatabase.Services.Data
                     SupportsNintendo = g.SupportsNintendo,
                 })
                 .ToArrayAsync();
-
-            return games;
         }
 
         public async Task Create(Game game)
         {
             game.ReleaseDate = DateTime.UtcNow;
-            game.CreatorId = 3;
 
             await dbContext.Games.AddAsync(game);
             await dbContext.SaveChangesAsync();
@@ -145,51 +142,120 @@ namespace GoodGameDatabase.Services.Data
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task<double> GetRating(int gameId)
-        {
-            //Game game = await this.dbContext.Games
-            //    .FirstAsync(g => g.Id == gameId);
-
-            //Rating rating = new Rating();
-            //double points = 0;
-            //try
-            //{
-            //    rating = await this.dbContext.Ratings
-            //    .FirstAsync(r => r.GameId == gameId);
-            //    points = rating.Points;
-
-            //    points = game.Rating;
-            //}
-            //catch (Exception)
-            //{                
-            //}
-
-            //return points;
-
-            throw new NotImplementedException();
-        }
-
-        public async Task Like(int gameId, string userId)
+        public async Task Like(int gameId, Guid userId)
         {
             Game game = await this.dbContext.Games
             .Include(g => g.Likes)
             .FirstAsync(g => g.Id == gameId);
 
             Like like = game.Likes
-                .FirstOrDefault(l => l.UserId == Guid.Parse(userId));
+                .FirstOrDefault(l => l.UserId == userId);
 
             if (like == null)
             {
                 like = new Like()
                 {
                     GameId = gameId,
-                    UserId = Guid.Parse(userId),
+                    UserId = userId,
                 };
 
                 game.Likes.Add(like);
             } else game.Likes.Remove(like);
 
             await dbContext.SaveChangesAsync();
+        }
+
+        public async Task Wish(int gameId, Guid userId)
+        {
+            Game game = await this.dbContext.Games
+            .Include(g => g.Wishes)
+            .FirstAsync(g => g.Id == gameId);
+
+            Wish wish = game.Wishes
+                .FirstOrDefault(l => l.UserId == userId);
+
+            if (wish == null)
+            {
+                wish = new Wish()
+                {
+                    GameId = gameId,
+                    UserId = userId,
+                };
+
+                game.Wishes.Add(wish);
+            }
+            else game.Wishes.Remove(wish);
+
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<ICollection<AllGameViewModel>> GetAllLikedGamesByUserIdAsync(Guid userId)
+        {
+            return await this.dbContext.Games
+                .Where(g => g.Likes.Any(l => l.UserId == userId))
+                .Include(g => g.Ratings)
+                .Include(g => g.Likes)
+                .Select(g => new AllGameViewModel
+                {
+                    Id = g.Id,
+                    Name = g.Name,
+                    ReleaseDate = g.ReleaseDate.ToString(),
+                    ImageUrl = g.ImageUrl,
+                    Description = g.Description,
+                    Rating = g.Rating,
+                    Likes = g.LikePoints,
+                    SupportsPC = g.SupportsPC,
+                    SupportsPS = g.SupportsPS,
+                    SupportsXbox = g.SupportsXbox,
+                    SupportsNintendo = g.SupportsNintendo,
+                })
+                .ToArrayAsync();
+        }
+
+        public async Task<ICollection<AllGameViewModel>> GetAllRatedGamesByUserIdAsync(Guid userId)
+        {
+            return await this.dbContext.Games
+                .Where(g => g.Ratings.Any(l => l.UserId == userId))
+                .Include(g => g.Ratings)
+                .Include(g => g.Likes)
+                .Select(g => new AllGameViewModel
+                {
+                    Id = g.Id,
+                    Name = g.Name,
+                    ReleaseDate = g.ReleaseDate.ToString(),
+                    ImageUrl = g.ImageUrl,
+                    Description = g.Description,
+                    Rating = g.Rating,
+                    Likes = g.LikePoints,
+                    SupportsPC = g.SupportsPC,
+                    SupportsPS = g.SupportsPS,
+                    SupportsXbox = g.SupportsXbox,
+                    SupportsNintendo = g.SupportsNintendo,
+                })
+                .ToArrayAsync();
+        }
+
+        public async Task<ICollection<AllGameViewModel>> GetAllWishedGamesByUserIdAsync(Guid userId)
+        {
+            return await this.dbContext.Games
+                .Where(g => g.Wishes.Any(w => w.UserId == userId))
+                .Include(g => g.Ratings)
+                .Include(g => g.Likes)
+                .Select(g => new AllGameViewModel
+                {
+                    Id = g.Id,
+                    Name = g.Name,
+                    ReleaseDate = g.ReleaseDate.ToString(),
+                    ImageUrl = g.ImageUrl,
+                    Description = g.Description,
+                    Rating = g.Rating,
+                    Likes = g.LikePoints,
+                    SupportsPC = g.SupportsPC,
+                    SupportsPS = g.SupportsPS,
+                    SupportsXbox = g.SupportsXbox,
+                    SupportsNintendo = g.SupportsNintendo,
+                })
+                .ToArrayAsync();
         }
     }
 }

@@ -166,6 +166,9 @@ namespace GoodGameDatabase.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<Guid>("CreatorId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("DatePosted")
                         .HasColumnType("datetime2");
 
@@ -182,33 +185,24 @@ namespace GoodGameDatabase.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Discussions");
+                    b.HasIndex("CreatorId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DatePosted = new DateTime(2023, 4, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "This discussion is about cheating in singleplayer games",
-                            Topic = "Is Cheating in games bad",
-                            pinned = true
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DatePosted = new DateTime(2023, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "This discussion is about surviving in The Forest",
-                            Topic = "How to survive in The Forest",
-                            pinned = false
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DatePosted = new DateTime(2023, 3, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "This discussion is about dust storms in Astroneer",
-                            Topic = "Astroneer dust storms",
-                            pinned = false
-                        });
+                    b.ToTable("Discussions");
+                });
+
+            modelBuilder.Entity("GoodGameDatabase.Data.Model.DiscussionParticipant", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("DiscussionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "DiscussionId");
+
+                    b.HasIndex("DiscussionId");
+
+                    b.ToTable("DiscussionParticipants");
                 });
 
             modelBuilder.Entity("GoodGameDatabase.Data.Model.Game", b =>
@@ -222,7 +216,7 @@ namespace GoodGameDatabase.Data.Migrations
                     b.Property<int>("AgeRestriction")
                         .HasColumnType("int");
 
-                    b.Property<int>("CreatorId")
+                    b.Property<int?>("CreatorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -271,7 +265,6 @@ namespace GoodGameDatabase.Data.Migrations
                         {
                             Id = 1,
                             AgeRestriction = 4,
-                            CreatorId = 1,
                             Description = "As the lone survivor of a passenger jet crash, you find yourself in a mysterious forest battling to stay alive",
                             ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/242760/capsule_616x353.jpg?t=1666811027",
                             Name = "The Forest",
@@ -287,7 +280,6 @@ namespace GoodGameDatabase.Data.Migrations
                         {
                             Id = 2,
                             AgeRestriction = 3,
-                            CreatorId = 2,
                             Description = "A thrilling race experience pits you against a city’s rogue police force.",
                             ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1222680/capsule_616x353.jpg?t=1690398297",
                             Name = "Need for Speed™ Heat",
@@ -303,7 +295,6 @@ namespace GoodGameDatabase.Data.Migrations
                         {
                             Id = 3,
                             AgeRestriction = 1,
-                            CreatorId = 3,
                             Description = "Explore and reshape distant worlds!",
                             ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/361420/capsule_616x353.jpg?t=1689355883",
                             Name = "Astroneer",
@@ -325,9 +316,6 @@ namespace GoodGameDatabase.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<Guid>("AuthorId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Category")
                         .HasColumnType("int");
 
@@ -341,78 +329,20 @@ namespace GoodGameDatabase.Data.Migrations
                     b.Property<int>("Language")
                         .HasColumnType("int");
 
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Subtitle")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<Guid>("WriterId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("AuthorId");
+                    b.HasKey("Id");
 
                     b.HasIndex("GameId");
 
+                    b.HasIndex("WriterId");
+
                     b.ToTable("Guides");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AuthorId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Category = 0,
-                            Description = "Do not be afraid of canibals",
-                            GameId = 1,
-                            Language = 0,
-                            Rating = 95,
-                            Subtitle = "Forest living tips",
-                            Title = "How to stay alive in The Forest"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AuthorId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Category = 2,
-                            Description = "Play by the rules",
-                            GameId = 3,
-                            Language = 0,
-                            Rating = 89,
-                            Subtitle = "Tips to complete Astroneer faster",
-                            Title = "How to complete Astroneer"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AuthorId = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Category = 2,
-                            Description = "You need to buy the last car to beat the boss",
-                            GameId = 2,
-                            Language = 0,
-                            Rating = 100,
-                            Subtitle = "some that you can buy",
-                            Title = "What car do you need to outrace the final boss in NSFW Heat"
-                        });
-                });
-
-            modelBuilder.Entity("GoodGameDatabase.Data.Model.IdentityUserDiscussion", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("DiscussionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "DiscussionId");
-
-                    b.HasIndex("DiscussionId")
-                        .IsUnique();
-
-                    b.ToTable("IdentityUserDiscussions");
                 });
 
             modelBuilder.Entity("GoodGameDatabase.Data.Model.IdentityUserGame", b =>
@@ -428,21 +358,6 @@ namespace GoodGameDatabase.Data.Migrations
                     b.HasIndex("GameId");
 
                     b.ToTable("IdentityUserGames");
-                });
-
-            modelBuilder.Entity("GoodGameDatabase.Data.Model.IdentityUserGuide", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("GuideId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "GuideId");
-
-                    b.HasIndex("GuideId");
-
-                    b.ToTable("IdentityUserGuides");
                 });
 
             modelBuilder.Entity("GoodGameDatabase.Data.Model.Like", b =>
@@ -560,6 +475,29 @@ namespace GoodGameDatabase.Data.Migrations
                     b.HasIndex("GameId");
 
                     b.ToTable("Reviews");
+                });
+
+            modelBuilder.Entity("GoodGameDatabase.Data.Model.Wish", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Wishes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -708,10 +646,10 @@ namespace GoodGameDatabase.Data.Migrations
                     b.Navigation("Game");
                 });
 
-            modelBuilder.Entity("GoodGameDatabase.Data.Model.Game", b =>
+            modelBuilder.Entity("GoodGameDatabase.Data.Model.Discussion", b =>
                 {
-                    b.HasOne("GoodGameDatabase.Data.Model.Creator", "Creator")
-                        .WithMany("DevelopedGames")
+                    b.HasOne("GoodGameDatabase.Data.Model.ApplicationUser", "Creator")
+                        .WithMany()
                         .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -719,35 +657,16 @@ namespace GoodGameDatabase.Data.Migrations
                     b.Navigation("Creator");
                 });
 
-            modelBuilder.Entity("GoodGameDatabase.Data.Model.Guide", b =>
-                {
-                    b.HasOne("GoodGameDatabase.Data.Model.ApplicationUser", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GoodGameDatabase.Data.Model.Game", "Game")
-                        .WithMany()
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-
-                    b.Navigation("Game");
-                });
-
-            modelBuilder.Entity("GoodGameDatabase.Data.Model.IdentityUserDiscussion", b =>
+            modelBuilder.Entity("GoodGameDatabase.Data.Model.DiscussionParticipant", b =>
                 {
                     b.HasOne("GoodGameDatabase.Data.Model.Discussion", "Discussion")
-                        .WithOne("IdentityUserDiscussions")
-                        .HasForeignKey("GoodGameDatabase.Data.Model.IdentityUserDiscussion", "DiscussionId")
+                        .WithMany("Participants")
+                        .HasForeignKey("DiscussionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("GoodGameDatabase.Data.Model.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("Discussions")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -755,6 +674,32 @@ namespace GoodGameDatabase.Data.Migrations
                     b.Navigation("Discussion");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GoodGameDatabase.Data.Model.Game", b =>
+                {
+                    b.HasOne("GoodGameDatabase.Data.Model.Creator", null)
+                        .WithMany("DevelopedGames")
+                        .HasForeignKey("CreatorId");
+                });
+
+            modelBuilder.Entity("GoodGameDatabase.Data.Model.Guide", b =>
+                {
+                    b.HasOne("GoodGameDatabase.Data.Model.Game", "Game")
+                        .WithMany()
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GoodGameDatabase.Data.Model.ApplicationUser", "Writer")
+                        .WithMany()
+                        .HasForeignKey("WriterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+
+                    b.Navigation("Writer");
                 });
 
             modelBuilder.Entity("GoodGameDatabase.Data.Model.IdentityUserGame", b =>
@@ -772,25 +717,6 @@ namespace GoodGameDatabase.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Game");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("GoodGameDatabase.Data.Model.IdentityUserGuide", b =>
-                {
-                    b.HasOne("GoodGameDatabase.Data.Model.Guide", "Guide")
-                        .WithMany()
-                        .HasForeignKey("GuideId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GoodGameDatabase.Data.Model.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Guide");
 
                     b.Navigation("User");
                 });
@@ -863,6 +789,25 @@ namespace GoodGameDatabase.Data.Migrations
                     b.Navigation("Game");
                 });
 
+            modelBuilder.Entity("GoodGameDatabase.Data.Model.Wish", b =>
+                {
+                    b.HasOne("GoodGameDatabase.Data.Model.Game", "Game")
+                        .WithMany("Wishes")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GoodGameDatabase.Data.Model.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
@@ -914,6 +859,11 @@ namespace GoodGameDatabase.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("GoodGameDatabase.Data.Model.ApplicationUser", b =>
+                {
+                    b.Navigation("Discussions");
+                });
+
             modelBuilder.Entity("GoodGameDatabase.Data.Model.Creator", b =>
                 {
                     b.Navigation("DevelopedGames");
@@ -921,8 +871,7 @@ namespace GoodGameDatabase.Data.Migrations
 
             modelBuilder.Entity("GoodGameDatabase.Data.Model.Discussion", b =>
                 {
-                    b.Navigation("IdentityUserDiscussions")
-                        .IsRequired();
+                    b.Navigation("Participants");
                 });
 
             modelBuilder.Entity("GoodGameDatabase.Data.Model.Game", b =>
@@ -932,6 +881,8 @@ namespace GoodGameDatabase.Data.Migrations
                     b.Navigation("Ratings");
 
                     b.Navigation("Reviews");
+
+                    b.Navigation("Wishes");
                 });
 #pragma warning restore 612, 618
         }

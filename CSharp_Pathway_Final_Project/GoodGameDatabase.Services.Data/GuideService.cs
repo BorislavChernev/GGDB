@@ -15,22 +15,26 @@ namespace GoodGameDatabase.Services.Data
             this.dbContext = dbContext;
         }
 
-        public async Task CreateNew(Guide guide)
+        public async Task<int> CreateNewAsync(Guide guide)
         {
             await this.dbContext.Guides.AddAsync(guide);
             await this.dbContext.SaveChangesAsync();
+
+            return guide.Id;
         }
 
         public async Task<ICollection<AllGuideViewModel>> GetAllAsync()
         {
+            var guides = await this.dbContext.Guides.ToArrayAsync();
+
             return await this.dbContext.Guides
                 .Select(g => new AllGuideViewModel()
                 {
                     Id = g.Id,
                     Title = g.Title,
-                    Rating = g.Rating,
+                    Description = g.Description,
                     Language = g.Language.ToString(),
-                    Category = g.Category.ToString(),
+                    Category = g.Category.ToString()
                 }).ToArrayAsync();
         }
     }

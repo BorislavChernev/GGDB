@@ -24,9 +24,10 @@ namespace GoodGameDatabase.Data
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Like> Likes { get; set; }
+        public DbSet<Wish> Wishes { get; set; }
         public DbSet<IdentityUserGame> IdentityUserGames { get; set; }
-        public DbSet<IdentityUserGuide> IdentityUserGuides { get; set; }
-        public DbSet<IdentityUserDiscussion> IdentityUserDiscussions { get; set; }
+        //public DbSet<IdentityUserGuide> IdentityUserGuides { get; set; }
+        public DbSet<DiscussionParticipant> DiscussionParticipants { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -39,16 +40,16 @@ namespace GoodGameDatabase.Data
             builder.Entity<IdentityUserGame>()
                 .HasKey(ug => new { ug.UserId, ug.GameId });
 
-            builder.Entity<IdentityUserGuide>()
-                .HasKey(ug => new { ug.UserId, ug.GuideId });
+            //builder.Entity<IdentityUserGuide>()
+            //    .HasKey(ug => new { ug.UserId, ug.GuideId });
 
-            builder.Entity<IdentityUserDiscussion>()
+            builder.Entity<DiscussionParticipant>()
                 .HasKey(ug => new { ug.UserId, ug.DiscussionId });
 
             builder.ApplyConfiguration(new GameEntityConfiguration());
             builder.ApplyConfiguration(new CreatorEntityConfiguration());
-            builder.ApplyConfiguration(new DiscussionEntityConfiguration());
-            builder.ApplyConfiguration(new GuideEntityConfiguration());
+            //builder.ApplyConfiguration(new DiscussionEntityConfiguration());
+            //builder.ApplyConfiguration(new GuideEntityConfiguration());
 
             base.OnModelCreating(builder);
         }

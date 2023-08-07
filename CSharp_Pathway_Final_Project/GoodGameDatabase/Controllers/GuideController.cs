@@ -2,6 +2,7 @@
 using GoodGameDatabase.Services.Data.Contracts;
 using GoodGameDatabase.Web.ViewModels.Guide;
 using Library.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoodGameDatabase.Web.Controllers
@@ -30,12 +31,21 @@ namespace GoodGameDatabase.Web.Controllers
             return View(allGuides);
         }
 
-        public async Task<IActionResult> CreateNew(Guide guide)
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> CreateNew()
         {
-            string id = GetUserId();
-            guide.AuthorId = Guid.Parse(id);
+            return View();
+        }
 
-            await guideService.CreateNew(guide);
+        [AllowAnonymous]
+        public async Task<IActionResult> Create(Guide guide)
+        {
+            Guid userId = Guid.Parse(this.GetUserId());
+
+            guide.WriterId = userId;
+
+            int guideId = await this.guideService.CreateNewAsync(guide);
 
             return RedirectToAction("All", "Guide");
         }

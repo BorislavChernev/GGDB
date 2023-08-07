@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.15" />
+    <PackageReference Include="PagedList.Mvc" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,5 @@
-﻿using GoodGameDatabase.Services.Data.Contracts;
+﻿using GoodGameDatabase.Data.Model;
+using GoodGameDatabase.Services.Data.Contracts;
 using GoodGameDatabase.Web.ViewModels.Discussion;
 using Library.Controllers;
 using Microsoft.AspNetCore.Authorization;
@@ -30,14 +31,43 @@ namespace GoodGameDatabase.Web.Controllers
             return View(allDiscussions);
         }
 
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int discussionId)
+        {
+            DiscussionDetailsViewModel model
+                = await this.discussionService.GetDetailsByIdAsync(discussionId);
+
+            return View(model);
+        }
+
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Join(int discussionId)
         {
-            DiscussionDetailsViewModel viewModel = await discussionService
-                .GetDetailsByIdAsync(id);
+            Guid userId = Guid.Parse(this.GetUserId());
 
-            return View(viewModel);
+            await discussionService.JoinUserByIdAsync(discussionId, userId);
+
+            return RedirectToAction("Details", "Discussion", new { discussionId });
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> CreateNew()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> Create(Discussion discussion)
+        {
+            Guid userId = Guid.Parse(this.GetUserId());
+
+            discussion.CreatorId = userId;
+
+            int discussionId = await this.discussionService.CreateNewAsync(discussion);
+
+            return RedirectToAction("Details", "Discussion", new { discussionId });
         }
     }
 }

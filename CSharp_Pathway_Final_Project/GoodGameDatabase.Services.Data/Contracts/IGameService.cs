@@ -11,7 +11,10 @@ namespace GoodGameDatabase.Services.Data.Contracts
         Task Edit(int id, EditGameViewModel viewModel);
         Task Create(Game game);
         Task Rate(int gameId, int rating, string userId);
-        Task Like(int gameId, string userId);
-        Task<double> GetRating(int gameId);
+        Task Like(int gameId, Guid userId);
+        Task Wish(int gameId, Guid userId);
+        Task<ICollection<AllGameViewModel>> GetAllLikedGamesByUserIdAsync(Guid userId);
+        Task<ICollection<AllGameViewModel>> GetAllRatedGamesByUserIdAsync(Guid userId);
+        Task<ICollection<AllGameViewModel>> GetAllWishedGamesByUserIdAsync(Guid userId);
     }
 }

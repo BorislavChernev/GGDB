@@ -34,7 +34,6 @@
                 SupportsNintendo = false,
                 ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/242760/capsule_616x353.jpg?t=1666811027",
                 Reviews = new HashSet<Review>(),
-                CreatorId = 1,
             };
             games.Add(game);
 
@@ -53,7 +52,6 @@
                 SupportsNintendo = false,
                 ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1222680/capsule_616x353.jpg?t=1690398297",
                 Reviews = new HashSet<Review>(),
-                CreatorId = 2,
             };
             games.Add(game);
 
@@ -72,7 +70,6 @@
                 SupportsNintendo = false,
                 ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/361420/capsule_616x353.jpg?t=1689355883",
                 Reviews = new HashSet<Review>(),
-                CreatorId = 3,
             };
             games.Add(game);
 

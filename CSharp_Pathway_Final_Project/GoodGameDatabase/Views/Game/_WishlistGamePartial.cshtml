@@ -1,0 +1,16 @@
+﻿@using GoodGameDatabase.Web.ViewModels.Game;
+@model GameDetailsViewModel
+
+<form>
+    <h1>Wish this game? Wishlist it.</h1>
+
+    <div>
+        <label class="hidden">
+            <input name="gameId" value="@Model.Id" />
+        </label>
+    </div>
+
+    <button type="submit" asp-controller="Game" asp-action="Wish">
+        WISH THIS GAME
+    </button>
+</form>

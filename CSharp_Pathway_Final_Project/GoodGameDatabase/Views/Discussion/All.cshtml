@@ -16,34 +16,16 @@
     <div class="container">
     @if (Model.Any())
     {
-        <div class="row">
+            <div class="grid grid-cols-4 gap-4 ml-6">
             @foreach (var entity in Model)
             {
-                <div class="col-md-6">
-                    <div class="card mb-4">
-                        <img src="" class="card-img-top" alt="Book Cover" width="200" height="650">
-                        <div class="card-body">
-                                <h5 class="card-title">@entity.Topic</h5>
-
-                                <p class="card-text">ReleaseDate: @entity.Description</p>
-
-                                <p class="card-text">Rating: @entity.DatePosted</p>
-
-                                <p class="card-text">Average Rating: @entity.pinned</p>
-
-                                <p class="card-text">Average Rating: @entity.ReviewsCount</p>
-
-                                <a asp-controller="Discussion" asp-action="Details" asp-route-id="@entity.Id"
-                                   class="btn btn-success">Details</a>
-                        </div>
-                    </div>
-                </div>
+                <partial name="_DiscussionPartial" model="entity"/>
             }
         </div>
     }
     else
     {
-        <p>There are no books available.</p>
+        <p>There are no Discussions available.</p>
     }
     </div>
 </body>

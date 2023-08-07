@@ -7,6 +7,8 @@ namespace GoodGameDatabase.Data.Model
         public ApplicationUser()
         {
             this.Id = Guid.NewGuid();
+            this.Discussions = new HashSet<DiscussionParticipant>();
         }
+        public ICollection<DiscussionParticipant> Discussions { get; set; }
     }
 }

@@ -70,12 +70,36 @@
 
                 <hr class="my-6 border-gray-200 dark:border-gray-600" />
 
-                <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                   asp-controller="Game"
+                   asp-action="Wished">
+                    <i class="fa-solid fa-star"></i>
+
+                    <span class="mx-4 font-medium">Wishlist</span>
+                </a>
+
+                <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                   asp-controller="Game"
+                   asp-action="Liked">
+                    <i class="fa-solid fa-heart"></i>
+
+                    <span class="mx-4 font-medium">Liked Games</span>
+                </a>
+
+                <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                   asp-controller="Game"
+                   asp-action="Rated">
+                    <i class="fa-solid fa-face-smile"></i>
+
+                    <span class="mx-4 font-medium">Rated Games</span>
+                </a>
+
+@*              <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
                     <i class="fa-solid fa-swatchbook"></i>
 
                     <span class="mx-4 font-medium">Library</span>
                 </a>
-
+*@
                 <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
                     <i class="fa-solid fa-gear"></i>
 
@@ -175,7 +199,6 @@
             </main>
         </div>
 </div>
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

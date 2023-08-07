@@ -19,20 +19,7 @@
             <div class="row">
                 @foreach (var entity in Model)
                 {
-                    <div class="col-md-6">
-                        <div class="card mb-4">
-                            <img src="" class="card-img-top" alt="Book Cover" width="200" height="650">
-                            <div class="card-body">
-                                <h5 class="card-title">@entity.Title</h5>
-
-                                <p class="card-text">ReleaseDate: @entity.Rating</p>
-
-                                <p class="card-text">Rating: @entity.Language</p>
-
-                                <p class="card-text">Average Rating: @entity.Category</p>
-                            </div>
-                        </div>
-                    </div>
+                    <partial name="_GuidePartial" model="entity"/>
                 }
             </div>
         }

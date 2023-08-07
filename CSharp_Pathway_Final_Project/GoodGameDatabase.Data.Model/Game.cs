@@ -1,6 +1,5 @@
 ﻿using GoodGameDatabase.Data.Model.Enums;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using static GoodGameDatabase.Common.EntityValidationConstants.Game;
 
 namespace GoodGameDatabase.Data.Model
@@ -11,6 +10,7 @@ namespace GoodGameDatabase.Data.Model
         {
             this.Reviews = new HashSet<Review>();
             this.Ratings = new HashSet<Rating>();
+            this.Wishes = new HashSet<Wish>();
             this.Likes = new HashSet<Like>();
         }
 
@@ -68,15 +68,8 @@ namespace GoodGameDatabase.Data.Model
 
         public ICollection<Like> Likes { get; set; }
 
+        public ICollection<Wish> Wishes { get; set; }
+
         public ICollection<Rating> Ratings { get; set; }
-
-        //Developer ---------->
-        [Required]
-        [ForeignKey(nameof(Creator))]
-        public int CreatorId { get; set; }
-
-        [Required]
-        public Creator Creator { get; set; }
-        //Developer ---------->
     }
 }
