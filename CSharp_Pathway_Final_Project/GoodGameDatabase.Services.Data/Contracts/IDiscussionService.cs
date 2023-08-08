@@ -9,5 +9,6 @@ namespace GoodGameDatabase.Services.Data.Contracts
         Task JoinUserByIdAsync(int discussionId, Guid userId);
         Task<int> CreateNewAsync(Discussion discussion);
         Task<DiscussionDetailsViewModel> GetDetailsByIdAsync(int id);
+        Task<ICollection<AllDiscussionViewModel>> GetBestThreeDiscussionsAsync();
     }
 }

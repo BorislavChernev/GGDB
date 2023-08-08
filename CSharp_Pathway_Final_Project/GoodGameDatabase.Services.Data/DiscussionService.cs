@@ -38,17 +38,31 @@ namespace GoodGameDatabase.Services.Data
             }).ToArrayAsync();
         }
 
+        public async Task<ICollection<AllDiscussionViewModel>> GetBestThreeDiscussionsAsync()
+        {
+            return await this.dbContext.Discussions
+                .Select(d => new AllDiscussionViewModel()
+                {
+                    Id = d.Id,
+                    Topic = d.Topic,
+                    Description = d.Description,
+                    DatePosted = d.DatePosted.ToString(),
+                    pinned = d.pinned,
+                }).Take(3)
+                .ToArrayAsync();
+        }
+
         public async Task<DiscussionDetailsViewModel> GetDetailsByIdAsync(int id)
         {
             Discussion discussion = await this.dbContext.Discussions
                 .FirstOrDefaultAsync(d => d.Id == id);
-                
+
             return new DiscussionDetailsViewModel()
             {
                 Id = discussion.Id,
                 Topic = discussion.Topic,
-                Description= discussion.Description,
-                
+                Description = discussion.Description,
+
             };
         }
 

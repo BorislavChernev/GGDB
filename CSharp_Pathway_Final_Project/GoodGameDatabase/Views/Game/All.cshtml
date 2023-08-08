@@ -13,22 +13,23 @@
     <title>@ViewData["Title"]</title>
 </head>
 <body>
-    <div class="container">
+    <div class="flex flex-col">
         @if (Model.Games.Any())
-    {
-        <div class="grid grid-cols-4 gap-4 ml-6">
-            @foreach (var game in Model.Games)
-            {
-                <partial name="_GamePartial" model="@game" />
-            }
-        </div>
-
-        <partial name="_PaginationPartial" model="@Model"/>
-    }
-    else
-    {
-        <p>There are no books available.</p>
-    }
+        {
+            <div class="grid grid-cols-4 gap-4 ml-6">
+                @foreach (var game in Model.Games)
+                {
+                    <partial name="_GamePartial" model="@game" />
+                }
+            </div>
+            <div class="flex flex-col-reverse h-full">
+                <partial name="_PaginationPartial" model="@Model" />
+            </div>
+        }
+        else
+        {
+            <p>There are no books available.</p>
+        }
     </div>
 </body>
 </html>

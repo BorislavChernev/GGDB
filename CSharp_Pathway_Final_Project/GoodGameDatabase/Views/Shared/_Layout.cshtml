@@ -11,58 +11,53 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    
-    <div class="flex flex-row w-full space-x-6">
-        <aside class="w-2/12 z-10 flex flex-col h-screen overflow-y-auto">
-            <nav class="border-5 border-black fixed flex flex-col justify-between flex-1 mt-4 z-10">
+
+    <div class="h-screen flex flex-row w-full space-x-6">
+        <aside class="w-2/12 z-10 h-full max-h-full flex flex-col h-screen overflow-y-auto overflow-x-hidden rounded-lg shadow">
+            <nav class="flex flex-col justify-between flex-1 mx-4 mt-4 z-10">
                 <a class="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-md dark:bg-gray-800 dark:text-gray-200"
-                    asp-controller="Home"
-                    asp-action="Index"
-                >
+                   asp-controller="Home"
+                   asp-action="Index">
                     <i class="fa-solid fa-house"></i>
 
                     <span class="mx-4 font-medium">Home</span>
                 </a>
 
                 <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                    asp-controller="Game"
-                    asp-action="All">
+                   asp-controller="Game"
+                   asp-action="All">
                     <i class="fa-solid fa-gamepad"></i>
 
                     <span class="mx-4 font-medium">Games</span>
                 </a>
 
                 <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                    asp-controller="Category"
-                    asp-action="All"
-                >
+                   asp-controller="Category"
+                   asp-action="All">
                     <i class="fa-solid fa-rectangle-list"></i>
 
                     <span class="mx-4 font-medium">Categories</span>
                 </a>
 
                 <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                    asp-controller="Discussion"
-                    asp-action="All"
-                >
+                   asp-controller="Discussion"
+                   asp-action="All">
                     <i class="fa-solid fa-comments"></i>
 
                     <span class="mx-4 font-medium">Discussions</span>
                 </a>
 
                 <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                    asp-controller="Guide"
-                    asp-action="All"
-                >
+                   asp-controller="Guide"
+                   asp-action="All">
                     <i class="fa-solid fa-circle-question"></i>
 
                     <span class="mx-4 font-medium">Guides</span>
                 </a>
 
                 <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                    asp-controller="New"
-                    asp-action="All"
-                >
+                   asp-controller="New"
+                   asp-action="All">
                     <i class="fa-solid fa-newspaper"></i>
 
                     <span class="mx-4 font-medium">News</span>
@@ -94,12 +89,6 @@
                     <span class="mx-4 font-medium">Rated Games</span>
                 </a>
 
-@*              <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
-                    <i class="fa-solid fa-swatchbook"></i>
-
-                    <span class="mx-4 font-medium">Library</span>
-                </a>
-*@
                 <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
                     <i class="fa-solid fa-gear"></i>
 
@@ -110,8 +99,8 @@
             </nav>
         </aside>
 
-        <div class="w-10/12 h-full flex flex-col border-5 border-blue-600">
-            <nav class="border-5 border-green-600 block bg-white bg-opacity-80 py-2 px-4 text-white shadow-md backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
+        <div class="w-10/12 h-full max-h-full flex flex-col overflox-hidden rounded-lg shadow">
+            <nav class="block bg-white bg-opacity-80 py-2 px-4 text-white shadow-sm">
                 <div>
                     <div class="container mx-auto flex items-center justify-between text-gray-900">
                         <span class="mr-4 block cursor-pointer py-1.5 font-sans text-sm font-normal leading-normal text-inherit antialiased">GGDB</span>
@@ -146,19 +135,19 @@
                                 data-collapse-target="navbar">
                             <span class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 transform">
                                 <svg xmlns="http://www.w3.org/2000/svg"
-                                        class="h-6 w-6"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2">
+                                     class="h-6 w-6"
+                                     fill="none"
+                                     stroke="currentColor"
+                                     strokeWidth="2">
                                     <path strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            d="M4 6h16M4 12h16M4 18h16"></path>
+                                          strokeLinejoin="round"
+                                          d="M4 6h16M4 12h16M4 18h16"></path>
                                 </svg>
                             </span>
                         </button>
                     </div>
                     <div class="block h-0 w-full basis-full overflow-hidden text-pink-gray-900 transition-all duration-300 ease-in lg:hidden"
-                            data-collapse="navbar">
+                         data-collapse="navbar">
                         <div class="container mx-auto pb-2">
                             <ul class="mt-2 mb-4 flex flex-col gap-2">
                                 <li class="block p-1 font-sans text-sm font-normal leading-normal text-inherit antialiased">
@@ -192,13 +181,16 @@
                 </div>
             </nav>
 
-            <main class="h-full flex flex-row border-5 border-orange-600 w-full">
-                @RenderBody()
-                
-                @*<partial name="_FooterPartial" />*@
+            <main class="h-full max-h-full flex flex-col w-full overflox-hidden">
+                <div class="h-5/6">
+                    @RenderBody()
+                </div>
+                <div class="h-1/6 flex flex-col-reverse">
+                    <partial name="_FooterPartial" />
+                </div>
             </main>
         </div>
-</div>
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

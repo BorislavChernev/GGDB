@@ -33,12 +33,12 @@ namespace GoodGameDatabase.Services.Data
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task<ICollection<BestFiveGameViewModel>> GetBestFiveAsync()
+        public async Task<ICollection<BestSixGameViewModel>> GetBestSixGamesAsync()
         {
             var games = await this.dbContext.Games
                 .Include(g => g.Ratings)
                 .Include(g => g.Likes)
-                .Select(g => new BestFiveGameViewModel
+                .Select(g => new BestSixGameViewModel
                 {
                     Id = g.Id,
                     Name = g.Name,
@@ -53,9 +53,9 @@ namespace GoodGameDatabase.Services.Data
                 })
                 .ToArrayAsync();
 
-            BestFiveGameViewModel[] asd = games
+            BestSixGameViewModel[] asd = games
                 .OrderByDescending(g => g.Rating)
-                .Take(5)
+                .Take(6)
                 .ToArray();
 
             return asd;

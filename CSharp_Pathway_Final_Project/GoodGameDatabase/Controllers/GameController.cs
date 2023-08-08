@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Library.Controllers;
 using System.Dynamic;
 using PagedList;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GoodGameDatabase.Web.Controllers
 {
@@ -81,10 +80,10 @@ namespace GoodGameDatabase.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> BestFive()
         {
-            ICollection<BestFiveGameViewModel> bestFiveGames;
+            ICollection<BestSixGameViewModel> bestFiveGames;
             try
             {
-                bestFiveGames = await this.gameService.GetBestFiveAsync();
+                bestFiveGames = await this.gameService.GetBestSixGamesAsync();
             }
             catch (Exception)
             {
