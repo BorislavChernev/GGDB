@@ -34,7 +34,8 @@ namespace GoodGameDatabase.Web.Controllers
                 return BadRequest("Something went wrong. Try again later!");
             }
         }
-
+        
+        [HttpGet]
         public IActionResult Index()
         {
             try

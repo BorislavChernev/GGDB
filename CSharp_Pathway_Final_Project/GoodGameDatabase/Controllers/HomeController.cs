@@ -22,6 +22,7 @@ namespace GoodGameDatabase.Controllers
             this.discussionService = discussionService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             try
@@ -50,6 +51,7 @@ namespace GoodGameDatabase.Controllers
             }
         }
 
+        [HttpGet]
         public IActionResult Privacy()
         {
             try

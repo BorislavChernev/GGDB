@@ -35,6 +35,7 @@ namespace GoodGameDatabase.Web.Controllers
             }
         }
 
+        [HttpGet]
         public async Task<IActionResult> Details(int discussionId)
         {
             try

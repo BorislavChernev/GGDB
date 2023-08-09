@@ -209,6 +209,7 @@ namespace GoodGameDatabase.Web.Controllers
             }
         }
 
+        [HttpGet]
         public async Task<IActionResult> Liked()
         {
             try
@@ -229,6 +230,7 @@ namespace GoodGameDatabase.Web.Controllers
             }
         }
 
+        [HttpGet]
         public async Task<IActionResult> Rated()
         {
             try
@@ -248,6 +250,7 @@ namespace GoodGameDatabase.Web.Controllers
             }
         }
 
+        [HttpGet]
         public async Task<IActionResult> Wished()
         {
             try
