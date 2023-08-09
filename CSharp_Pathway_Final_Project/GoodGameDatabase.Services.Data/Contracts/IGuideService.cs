@@ -6,6 +6,8 @@ namespace GoodGameDatabase.Services.Data.Contracts
     public interface IGuideService
     {
         Task<int> CreateNewGuideAsync(Guide guide);
+        Task EditGuideByIdAsync(int id, EditGuideViewModel viewModel);
         Task<ICollection<AllGuideViewModel>> GetAllGuidesAsync();
+        Task<GuideDetailsViewModel> GetGuideDetailsByIdAsync(int id);
     }
 }

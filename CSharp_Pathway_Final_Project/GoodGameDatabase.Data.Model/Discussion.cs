@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static GoodGameDatabase.Common.EntityValidationConstants.Discussion;
 
 namespace GoodGameDatabase.Data.Model
 {
@@ -15,9 +15,11 @@ namespace GoodGameDatabase.Data.Model
         public int Id { get; set; }
 
         [Required]
+        [StringLength(TopicMaxLength, MinimumLength = TopicMinLength, ErrorMessage = TopicErrorMessage)]
         public string Topic { get; set; } = null!;
 
         [Required]
+        [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength, ErrorMessage = DescriptionErrorMessage)]
         public string Description { get; set; } = null!;
 
         [Required]

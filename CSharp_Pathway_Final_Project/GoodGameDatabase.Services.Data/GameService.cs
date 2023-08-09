@@ -24,6 +24,7 @@ namespace GoodGameDatabase.Services.Data
             await dbContext.Games.AddAsync(game);
             await dbContext.SaveChangesAsync();
         }
+
         public async Task EditGameByIdAsync(int id, EditGameViewModel viewModel)
         {
             Game game = await this.dbContext.Games
@@ -40,6 +41,7 @@ namespace GoodGameDatabase.Services.Data
 
             await dbContext.SaveChangesAsync();
         }
+
         public async Task<ICollection<AllGameViewModel>> GetAllGamesAsync()
         {
             return await this.dbContext.Games
@@ -61,6 +63,7 @@ namespace GoodGameDatabase.Services.Data
                 })
                 .ToArrayAsync();
         }
+
         public async Task<GameDetailsViewModel> GetGameDetailsByIdAsync(int id)
         {
             GameDetailsViewModel game = await this.dbContext.Games
@@ -87,6 +90,7 @@ namespace GoodGameDatabase.Services.Data
 
             return game;
         }
+
         public async Task LikeGameByIdAsync(int gameId, Guid userId)
         {
             Game game = await this.dbContext.Games
@@ -109,6 +113,7 @@ namespace GoodGameDatabase.Services.Data
 
             await dbContext.SaveChangesAsync();
         }
+
         public async Task RateGameByIdAsync(int gameId, int points, string userId)
         {
             Game game = await this.dbContext.Games
@@ -132,6 +137,7 @@ namespace GoodGameDatabase.Services.Data
 
             await dbContext.SaveChangesAsync();
         }
+
         public async Task WishGameByIdAsync(int gameId, Guid userId)
         {
             Game game = await this.dbContext.Games
@@ -155,6 +161,7 @@ namespace GoodGameDatabase.Services.Data
 
             await dbContext.SaveChangesAsync();
         }
+
         public async Task<ICollection<AllGameViewModel>> GetAllLikedGamesByUserIdAsync(Guid userId)
         {
             return await this.dbContext.Games
@@ -177,6 +184,7 @@ namespace GoodGameDatabase.Services.Data
                 })
                 .ToArrayAsync();
         }
+
         public async Task<ICollection<AllGameViewModel>> GetAllRatedGamesByUserIdAsync(Guid userId)
         {
             return await this.dbContext.Games
@@ -199,6 +207,7 @@ namespace GoodGameDatabase.Services.Data
                 })
                 .ToArrayAsync();
         }
+
         public async Task<ICollection<AllGameViewModel>> GetAllWishedGamesByUserIdAsync(Guid userId)
         {
             return await this.dbContext.Games
@@ -221,6 +230,7 @@ namespace GoodGameDatabase.Services.Data
                 })
                 .ToArrayAsync();
         }
+
         public async Task<ICollection<BestSixGameViewModel>> GetBestGamesAsync()
         {
             var games = await this.dbContext.Games

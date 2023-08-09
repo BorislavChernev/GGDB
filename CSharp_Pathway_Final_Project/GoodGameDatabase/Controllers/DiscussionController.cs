@@ -9,65 +9,101 @@ namespace GoodGameDatabase.Web.Controllers
 {
     public class DiscussionController : BaseController
     {
+        private readonly ILogger<DiscussionController> logger;
         private readonly IDiscussionService discussionService;
-        public DiscussionController(IDiscussionService discussionService)
+        public DiscussionController(ILogger<DiscussionController> logger, IDiscussionService discussionService)
         {
+            this.logger = logger;
             this.discussionService = discussionService;
         }
 
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            ICollection<AllDiscussionViewModel> allDiscussions;
             try
             {
-                allDiscussions = await discussionService.GetAllAsync();
-            }
-            catch (Exception)
-            {
-                return this.BadRequest("Something went wrong try again later!");
-            }
+                ICollection<AllDiscussionViewModel> allDiscussions = await discussionService.GetAllAsync();
 
-            return View(allDiscussions);
+                return View(allDiscussions);
+
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "An error occurred while fetching all discussions.");
+
+                return BadRequest("Something went wrong. Try again later!");
+            }
         }
 
-        [AllowAnonymous]
         public async Task<IActionResult> Details(int discussionId)
         {
-            DiscussionDetailsViewModel model
-                = await this.discussionService.GetDetailsByIdAsync(discussionId);
+            try
+            {
+                DiscussionDetailsViewModel viewModel
+                    = await this.discussionService.GetDetailsByIdAsync(discussionId);
 
-            return View(model);
+                return View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "An error occurred while fetching discussion details by id.");
+
+                return BadRequest("Something went wrong. Try again later!");
+            }
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> Join(int discussionId)
         {
-            Guid userId = Guid.Parse(this.GetUserId());
+            try
+            {
+                Guid userId = Guid.Parse(this.GetUserId());
 
-            await discussionService.JoinUserByIdAsync(discussionId, userId);
+                await discussionService.JoinUserByIdAsync(discussionId, userId);
 
-            return RedirectToAction("Details", "Discussion", new { discussionId });
+                return RedirectToAction("Details", "Discussion", new { discussionId });
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "An error occurred while joining discussion by id.");
+
+                return BadRequest("Something went wrong. Try again later!");
+            }
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> CreateNew()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "An error occurred while trying to create a discussion.");
+
+                return BadRequest("Something went wrong. Try again later!");
+            }
         }
 
-        [AllowAnonymous]
         public async Task<IActionResult> Create(Discussion discussion)
         {
-            Guid userId = Guid.Parse(this.GetUserId());
+            try
+            {
+                Guid userId = Guid.Parse(this.GetUserId());
 
-            discussion.CreatorId = userId;
+                discussion.CreatorId = userId;
 
-            int discussionId = await this.discussionService.CreateNewAsync(discussion);
+                int discussionId = await this.discussionService.CreateNewAsync(discussion);
 
-            return RedirectToAction("Details", "Discussion", new { discussionId });
+                return RedirectToAction("Details", "Discussion", new { discussionId });
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "An error occurred while creating a discussion.");
+
+                return BadRequest("Something went wrong. Try again later!");
+            }
         }
     }
 }

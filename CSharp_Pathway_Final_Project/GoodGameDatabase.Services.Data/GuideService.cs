@@ -22,6 +22,12 @@ namespace GoodGameDatabase.Services.Data
 
             return guide.Id;
         }
+
+        public Task EditGuideByIdAsync(int id, EditGuideViewModel viewModel)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<ICollection<AllGuideViewModel>> GetAllGuidesAsync()
         {
             var guides = await this.dbContext.Guides.ToArrayAsync();
@@ -35,6 +41,11 @@ namespace GoodGameDatabase.Services.Data
                     Language = g.Language.ToString(),
                     Category = g.Category.ToString()
                 }).ToArrayAsync();
+        }
+
+        public Task<GuideDetailsViewModel> GetGuideDetailsByIdAsync(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

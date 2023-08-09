@@ -15,13 +15,13 @@ namespace GoodGameDatabase.Services.Data
             this.dbContext = dbContext;
         }
 
-        public async Task Create(Review review)
+        public async Task CreateNewReviewAsync(Review review)
         {
             await this.dbContext.Reviews.AddAsync(review);
             await this.dbContext.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteReviewByIdAsync(int id)
         {
             Review review = await this.dbContext.Reviews
                 .FirstOrDefaultAsync(r => r.Id == id);
@@ -30,7 +30,7 @@ namespace GoodGameDatabase.Services.Data
             await this.dbContext.SaveChangesAsync();
         }
 
-        public async Task<ICollection<GameReviewViewModel>> GetAllGameReviews()
+        public async Task<ICollection<GameReviewViewModel>> GetAllGameReviewsAsync()
         {
             return await this.dbContext.Reviews
                 .Select(r => new GameReviewViewModel()
@@ -44,7 +44,7 @@ namespace GoodGameDatabase.Services.Data
                 }).ToArrayAsync();
         }
 
-        public async Task<ICollection<GameReviewViewModel>> GetGameReviews(int gameId)
+        public async Task<ICollection<GameReviewViewModel>> GetAllGameReviewsByIdAsync(int gameId)
         {
             return await this.dbContext.Reviews
                 .Where(r => r.GameId == gameId)

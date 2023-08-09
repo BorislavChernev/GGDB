@@ -50,5 +50,12 @@
             public const int DescriptionMaxLength = 1000;
             public const string DescriptionErrorMessage = $"Description length should be between 30 and 1000 characters";
         }
+
+        public static class Review
+        {
+            public const int DescriptionMinLength = 30;
+            public const int DescriptionMaxLength = 500;
+            public const string DescriptionErrorMessage = $"Description length should be between 30 and 500 characters";
+        }
     }
 }

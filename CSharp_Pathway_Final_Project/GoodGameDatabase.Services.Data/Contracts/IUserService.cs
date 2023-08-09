@@ -2,6 +2,8 @@
 {
     public interface IUserService
     {
+        Task<string> GetUsernameById(Guid id);
+        Task<string> GetUsernameByEmail(Guid id);
 
     }
 }
