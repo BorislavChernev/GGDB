@@ -5,16 +5,16 @@ namespace GoodGameDatabase.Services.Data.Contracts
 {
     public interface IGameService
     {
-        Task<ICollection<AllGameViewModel>> GetAllAsync();
-        Task<GameDetailsViewModel> GetDetailsByIdAsync(int id);
-        Task<ICollection<BestSixGameViewModel>> GetBestSixGamesAsync();
-        Task Edit(int id, EditGameViewModel viewModel);
-        Task Create(Game game);
-        Task Rate(int gameId, int rating, string userId);
-        Task Like(int gameId, Guid userId);
-        Task Wish(int gameId, Guid userId);
+        Task CreateNewGameAsync(Game game);
+        Task EditGameByIdAsync(int id, EditGameViewModel viewModel);
+        Task<ICollection<AllGameViewModel>> GetAllGamesAsync();
+        Task<GameDetailsViewModel> GetGameDetailsByIdAsync(int id);
+        Task LikeGameByIdAsync(int gameId, Guid userId);
+        Task RateGameByIdAsync(int gameId, int rating, string userId);
+        Task WishGameByIdAsync(int gameId, Guid userId);
         Task<ICollection<AllGameViewModel>> GetAllLikedGamesByUserIdAsync(Guid userId);
         Task<ICollection<AllGameViewModel>> GetAllRatedGamesByUserIdAsync(Guid userId);
         Task<ICollection<AllGameViewModel>> GetAllWishedGamesByUserIdAsync(Guid userId);
+        Task<ICollection<BestSixGameViewModel>> GetBestGamesAsync();
     }
 }

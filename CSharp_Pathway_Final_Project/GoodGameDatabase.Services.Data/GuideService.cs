@@ -15,15 +15,14 @@ namespace GoodGameDatabase.Services.Data
             this.dbContext = dbContext;
         }
 
-        public async Task<int> CreateNewAsync(Guide guide)
+        public async Task<int> CreateNewGuideAsync(Guide guide)
         {
             await this.dbContext.Guides.AddAsync(guide);
             await this.dbContext.SaveChangesAsync();
 
             return guide.Id;
         }
-
-        public async Task<ICollection<AllGuideViewModel>> GetAllAsync()
+        public async Task<ICollection<AllGuideViewModel>> GetAllGuidesAsync()
         {
             var guides = await this.dbContext.Guides.ToArrayAsync();
 

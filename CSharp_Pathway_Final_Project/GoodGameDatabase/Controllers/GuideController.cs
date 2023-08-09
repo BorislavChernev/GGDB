@@ -21,7 +21,7 @@ namespace GoodGameDatabase.Web.Controllers
             ICollection<AllGuideViewModel> allGuides;
             try
             {
-                allGuides = await guideService.GetAllAsync();
+                allGuides = await guideService.GetAllGuidesAsync();
             }
             catch (Exception)
             {
@@ -45,7 +45,7 @@ namespace GoodGameDatabase.Web.Controllers
 
             guide.WriterId = userId;
 
-            int guideId = await this.guideService.CreateNewAsync(guide);
+            int guideId = await this.guideService.CreateNewGuideAsync(guide);
 
             return RedirectToAction("All", "Guide");
         }

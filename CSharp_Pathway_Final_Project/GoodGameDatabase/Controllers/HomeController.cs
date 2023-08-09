@@ -36,7 +36,7 @@ namespace GoodGameDatabase.Controllers
             ICollection<AllDiscussionViewModel> bestThreeDiscussions;
             try
             {
-                bestSevenGames = await gameService.GetBestSixGamesAsync();
+                bestSevenGames = await gameService.GetBestGamesAsync();
                 bestThreeDiscussions = await discussionService.GetBestThreeDiscussionsAsync();
             }
             catch (Exception)

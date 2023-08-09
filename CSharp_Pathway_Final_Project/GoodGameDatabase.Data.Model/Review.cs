@@ -1,6 +1,7 @@
 ﻿using GoodGameDatabase.Data.Model.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static GoodGameDatabase.Common.EntityValidationConstants.Review;
 
 namespace GoodGameDatabase.Data.Model
 {
@@ -10,6 +11,7 @@ namespace GoodGameDatabase.Data.Model
         public int Id { get; set; }
 
         [Required]
+        [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength, ErrorMessage = DescriptionErrorMessage)]
         public string Description { get; set; } = null!;
 
         [Required]
@@ -26,8 +28,8 @@ namespace GoodGameDatabase.Data.Model
         [ForeignKey(nameof(AuthorId))]
         public ApplicationUser Author { get; set; } = null!;
 
-        [ForeignKey(nameof(Game))]
         [Required]
+        [ForeignKey(nameof(Game))]
         public int GameId { get; set; }
 
         [Required]
