@@ -1,5 +1,5 @@
 ﻿@using GoodGameDatabase.Web.ViewModels.Discussion;
-@model IEnumerable<AllDiscussionViewModel>
+@model dynamic
 
 @{
     ViewData["Title"] = "All discussions";
@@ -14,19 +14,22 @@
 </head>
 <body>
     <div class="container">
-    @if (Model.Any())
-    {
+        @if (Model.ViewModels.Count > 0)
+        {
+            <div class="flex flex-col-reverse h-full">
+                <partial name="_PaginationPartial" model="@Model.PageViewModel" />
+            </div>
             <div class="grid grid-cols-4 gap-4 ml-6">
-            @foreach (var entity in Model)
-            {
-                <partial name="_DiscussionPartial" model="entity"/>
-            }
-        </div>
-    }
-    else
-    {
-        <p>There are no Discussions available.</p>
-    }
+                @foreach (var viewModel in Model.ViewModels)
+                {
+                    <partial name="_DiscussionPartial" model="viewModel" />
+                }
+            </div>
+        }
+        else
+        {
+            <p>There are no Discussions available.</p>
+        }
     </div>
 </body>
 </html>

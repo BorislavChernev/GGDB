@@ -6,7 +6,58 @@
     ViewData["Title"] = "Log in";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1 class="text-center text-3xl font-semibold mb-6 mt-6">@ViewData["Title"]</h1>
+<div class="flex justify-center">
+
+    <div class="w-full md:w-1/2 lg:w-1/3">
+        <section>
+            <form id="account" method="post" class="bg-white shadow-md rounded-lg p-6">
+                <h2 class="text-xl font-semibold mb-4">Use a local account to log in.</h2>
+                <hr class="mb-4" />
+                <div asp-validation-summary="ModelOnly" class="text-red-500 mb-4"></div>
+                <div class="mb-4">
+                    <label asp-for="Input.Email" class="block text-gray-700 font-semibold mb-2"></label>
+                    <input asp-for="Input.Email" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-600" autocomplete="username" aria-required="true" />
+                    <span asp-validation-for="Input.Email" class="text-red-500"></span>
+                </div>
+                <div class="mb-4">
+                    <label asp-for="Input.Password" class="block text-gray-700 font-semibold mb-2"></label>
+                    <input asp-for="Input.Password" type="password" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-600" autocomplete="current-password" aria-required="true" />
+                    <span asp-validation-for="Input.Password" class="text-red-500"></span>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold">
+                        <input asp-for="Input.RememberMe" class="mr-2" />
+                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    </label>
+                </div>
+                <div class="mb-4">
+                    <button id="login-submit" type="submit" class="w-full bg-pink-600 text-white py-2 rounded-md hover:bg-pink-700 transition duration-300 ease-in-out">Log in</button>
+                </div>
+                <div class="mb-2">
+                    <p class="text-sm">
+                        <a id="forgot-password" asp-page="./ForgotPassword" class="text-pink-600 hover:underline">Forgot your password?</a>
+                    </p>
+                    <p class="text-sm">
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="text-pink-600 hover:underline">Register as a new user</a>
+                    </p>
+                    <p class="text-sm">
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" class="text-pink-600 hover:underline">Resend email confirmation</a>
+                    </p>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+
+@*<h1>@ViewData["Title"]</h1>
 <div class="row">
 
     <div class="col-md-4">
@@ -59,8 +110,10 @@
                 {
                     <div>
                         <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                                article
+                                about setting up this ASP.NET application to support logging in via external services
+                            </a>.
                         </p>
                     </div>
                 }
@@ -80,8 +133,4 @@
             }
         </section>
     </div>
-</div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+</div>*@

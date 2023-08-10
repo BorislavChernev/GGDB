@@ -1,5 +1,5 @@
 ﻿@using GoodGameDatabase.Web.ViewModels.Game;
-@model PagedGameViewModel
+@model dynamic
 
 @{
     ViewData["Title"] = "All games";
@@ -14,16 +14,16 @@
 </head>
 <body>
     <div class="flex flex-col">
-        @if (Model.Games.Any())
+        @if (Model.ViewModels.Count > 0)
         {
-            <div class="grid grid-cols-4 gap-4 ml-6">
-                @foreach (var game in Model.Games)
-                {
-                    <partial name="_GamePartial" model="@game" />
-                }
-            </div>
             <div class="flex flex-col-reverse h-full">
-                <partial name="_PaginationPartial" model="@Model" />
+                <partial name="_PaginationPartial" model="@Model.PageViewModel" />
+            </div>
+            <div class="grid grid-cols-4 gap-4 ml-6">
+                @foreach (var viewModel in Model.ViewModels)
+                {
+                    <partial name="_GamePartial" model="@viewModel" />
+                }
             </div>
         }
         else

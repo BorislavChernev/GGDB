@@ -1,5 +1,5 @@
 ﻿@using GoodGameDatabase.Web.ViewModels.Guide;
-@model IEnumerable<AllGuideViewModel>
+@model dynamic
 
 @{
     ViewData["Title"] = "All guides";
@@ -14,13 +14,18 @@
 </head>
 <body>
     <div class="container">
-        @if (Model.Any())
+        @if (Model.ViewModels.Count > 0)
         {
-            <div class="row">
-                @foreach (var entity in Model)
-                {
-                    <partial name="_GuidePartial" model="entity"/>
-                }
+            <div class="border-5 border-black h-full flex flex-row flex-wrap">
+                <div class="flex flex-col-reverse h-full">
+                    <partial name="_PaginationPartial" model="@Model.PageViewModel" />
+                </div>
+                <div class="border-5 border-blue-500 w-full flex flex-row flex-wrap justify-content-center">
+                    @foreach (var viewModel in Model.ViewModels)
+                    {
+                        <partial name="_GuidePartial" model="viewModel" />
+                    }
+                </div>
             </div>
         }
         else

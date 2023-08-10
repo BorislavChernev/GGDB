@@ -1,6 +1,76 @@
 ﻿@model Guide
 
-<form class="flex flex-col">
+<div class="bg-gray-100">
+    <div class="flex justify-center items-center min-h-screen">
+        <div class="w-full max-w-xl p-4 bg-white rounded-lg shadow-lg">
+            <h1 class="text-xl font-semibold mb-3">Create a Guide</h1>
+            <form class="grid grid-cols-2 gap-3">
+                <div class="col-span-2">
+                    <label class="font-semibold">Title</label>
+                    <input type="text" name="Title" class="w-full p-2 border rounded">
+                </div>
+                <div class="col-span-2">
+                    <label class="font-semibold">Description</label>
+                    <textarea name="Description" class="w-full p-2 border rounded"></textarea>
+                </div>
+                <div>
+                    <label class="font-semibold">Language</label>
+                    <select name="Language" class="w-full p-2 border rounded">
+                        <option value="0">Gameplay Basic</option>
+                        <option value="1">Crafting</option>
+                        <option value="2">Walkthroughs</option>
+                        <option value="3">Secrets</option>
+                        <option value="4">Loot</option>
+                        <option value="5">Multiplayer</option>
+                        <option value="6">Achievements</option>
+                        <option value="7">Maps Or Levels</option>
+                        <option value="8">Modding Or Configuration</option>
+                        <option value="9">Characters</option>
+                        <option value="10">Story Or Lore</option>
+                        <option value="11">Game Modes</option>
+                        <option value="12">Trading</option>
+                        <option value="13">Classes</option>
+                        <option value="14">Workshop</option>
+                        <option value="15">Weapons</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="font-semibold">Category</label>
+                    <select name="Category" class="w-full p-2 border rounded">
+                        <option value="0">Gameplay Basic</option>
+                        <option value="1">Crafting</option>
+                        <option value="2">Walkthroughs</option>
+                        <option value="3">Secrets</option>
+                        <option value="4">Loot</option>
+                        <option value="5">Multiplayer</option>
+                        <option value="6">Achievements</option>
+                        <option value="7">Maps Or Levels</option>
+                        <option value="8">Modding Or Configuration</option>
+                        <option value="9">Characters</option>
+                        <option value="10">Story Or Lore</option>
+                        <option value="11">Game Modes</option>
+                        <option value="12">Trading</option>
+                        <option value="13">Classes</option>
+                        <option value="14">Workshop</option>
+                        <option value="15">Weapons</option>
+                    </select>
+                </div>
+                <div class="col-span-2">
+                    <label class="font-semibold">Game ID</label>
+                    <input type="text" name="GameId" class="w-full p-2 border rounded">
+                </div>
+                <div class="col-span-2">
+                    <button type="submit" class="main-color text-white py-2 px-4 rounded bg-pink-700"
+                    asp-action="Create"
+                    asp-controller="Guide">
+                        Create Guide
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@*<form class="flex flex-col">
     <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
         <div>
             <label for="Title" class="text-gray-700 dark:text-gray-200">Title</label>
@@ -18,7 +88,7 @@
         </div>
 
         <label for="category-select">Select a category:</label>
-        <select id="category-select">
+        <select name="Category" id="category-select">
             <option name="GameplayBasic" value="GameplayBasic">GameplayBasic</option>
             <option name="Crafting" value="Crafting">Crafting</option>
             <option name="Walkthroughs" value="Walkthroughs">Walkthroughs</option>
@@ -38,7 +108,7 @@
         </select>
 
         <label for="language-select">Select a language:</label>
-        <select id="language-select">
+        <select name="Language" id="language-select">
             <option name="English" value="English">English</option>
             <option name="Russian" value="Russian">Russian</option>
             <option name="Bulgarian" value="Bulgarian">Bulgarian</option>
@@ -56,4 +126,4 @@
             Submit
         </button>
     </div>
-</form>
+</form>*@

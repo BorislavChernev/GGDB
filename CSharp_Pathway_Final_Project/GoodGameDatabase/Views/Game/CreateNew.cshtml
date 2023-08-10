@@ -1,65 +1,78 @@
 ﻿@model Game
 
-<form class="flex flex-col">
-    <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-        <div>
-            <label for="Name" class="text-gray-700 dark:text-gray-200">Name</label>
-            <input name="Name" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
-        </div>
-
-        <div>
-            <label for="Description" class="text-gray-700 dark:text-gray-200">Description</label>
-            <input name="Description" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
-        </div>
-
-        <div>
-            <label for="Version" class="text-gray-700 dark:text-gray-200">Version</label>
-            <input name="Version" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
-        </div>
-        
-        <div>
-            <label for="ReleaseDate" class="text-gray-700 dark:text-gray-200">Version</label>
-            <input name="ReleaseDate" type="date" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
-        </div>
-
-        <div>
-            <label for="AgeRestriction" class="text-gray-700 dark:text-gray-200">AgeRestriction</label>
-            <input name="AgeRestriction" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
-        </div>
-        <div>
-            <label for="Status" class="text-gray-700 dark:text-gray-200">Status</label>
-            <input name="Status" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
-        </div>
-
-        <div>
-            <label for="ImageUrl" class="text-gray-700 dark:text-gray-200">Image Url</label>
-            <input name="ImageUrl" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
-        </div>
-
-        <div>
-            <label for="SupportsPC" class="text-gray-700 dark:text-gray-200">
-                Supports PC
-                <input name="SupportsPC" type="checkbox" value="true" />
-            </label>
-
-            <label for="SupportsPS" class="text-gray-700 dark:text-gray-200">
-                Supports PS
-                <input name="SupportsPS" type="checkbox" value="true" />
-            </label>
-            <label for="SupportsXbox" class="text-gray-700 dark:text-gray-200">
-                SupportsMac Xbox
-                <input name="SupportsXbox" type="checkbox" value="true" />
-            </label>
-            <label for="SupportsNintendo" class="text-gray-700 dark:text-gray-200">
-                Supports Nintendo
-                <input name="SupportsNintendo" type="checkbox" value="true" />
-            </label>
+<div class="bg-gray-100 mt--30">
+    <div class="flex justify-center items-center min-h-screen">
+        <div class="w-full max-w-xl p-4 bg-white rounded-lg shadow-lg">
+            <h1 class="text-xl font-semibold mb-3">Create a Game</h1>
+            <form class="grid grid-cols-2 gap-3">
+                <div class="col-span-2">
+                    <label class="font-semibold">Name</label>
+                    <input type="text" name="Name" class="w-full p-2 border rounded">
+                </div>
+                <div class="col-span-2">
+                    <label class="font-semibold">Description</label>
+                    <textarea name="Description" class="w-full p-2 border rounded"></textarea>
+                </div>
+                <div>
+                    <label class="font-semibold">Version:</label>
+                    <input type="text" name="Version" class="w-full p-2 border rounded">
+                </div>
+                <div>
+                    <label class="font-semibold">Release Date:</label>
+                    <input type="date" name="ReleaseDate" class="w-full p-2 border rounded">
+                </div>
+                <div>
+                    <label class="font-semibold">Age Restriction:</label>
+                    <select name="AgeRestriction" class="w-full p-2 border rounded">
+                        <option value="0">PEGI 3</option>
+                        <option value="1">PEGI 7</option>
+                        <option value="2">PEGI 12</option>
+                        <option value="3">PEGI 16</option>
+                        <option value="4">PEGI 18</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="font-semibold">Release Status:</label>
+                    <select name="Status" class="w-full p-2 border rounded">
+                        <option value="0">Unreleased</option>
+                        <option value="1">Alpha</option>
+                        <option value="2">Closed Beta</option>
+                        <option value="3">Open Beta</option>
+                        <option value="4">Early Access</option>
+                        <option value="5">Official Release</option>
+                    </select>
+                </div>
+                <div class="col-span-2">
+                    <label class="font-semibold">Supported Platforms:</label>
+                    <label class="flex items-center">
+                        <input value="true" type="checkbox" name="SupportsPC" class="mr-1">
+                        PC
+                    </label>
+                    <label class="flex items-center">
+                        <input value="true" type="checkbox" name="SupportsPS" class="mr-1">
+                        PlayStation
+                    </label>
+                    <label class="flex items-center">
+                        <input value="true" type="checkbox" name="SupportsXbox" class="mr-1">
+                        Xbox
+                    </label>
+                    <label class="flex items-center">
+                        <input value="true" type="checkbox" name="SupportsNintendo" class="mr-1">
+                        Nintendo
+                    </label>
+                </div>
+                <div class="col-span-2">
+                    <label class="font-semibold">Image URL:</label>
+                    <input type="text" name="ImageUrl" class="w-full p-2 border rounded">
+                </div>
+                <div class="col-span-2">
+                    <button type="submit" class="main-color text-white rounded bg-pink-600 w-32 h-12"
+                            asp-action="Create"
+                            asp-controller="Game">
+                        Create Game
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
-
-    <div class="flex justify-end mt-6">
-        <button type="submit" asp-controller="Game" asp-action="Create" class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-            Submit
-        </button>
-    </div>
-</form>
+</div>

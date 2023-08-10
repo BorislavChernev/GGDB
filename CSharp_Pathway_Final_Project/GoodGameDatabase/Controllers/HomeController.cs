@@ -47,7 +47,7 @@ namespace GoodGameDatabase.Controllers
             {
                 this.logger.LogError(ex, "An error occurred while returning Home/Index view.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
 
@@ -62,7 +62,7 @@ namespace GoodGameDatabase.Controllers
             {
                 this.logger.LogError(ex, "An error occurred while returning privacy view.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
     }

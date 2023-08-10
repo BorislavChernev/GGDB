@@ -3,7 +3,6 @@ using GoodGameDatabase.Services.Data.Contracts;
 using GoodGameDatabase.Web.ViewModels.Game;
 using GoodGameDatabase.Web.ViewModels.Review;
 
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using Library.Controllers;
@@ -32,33 +31,38 @@ namespace GoodGameDatabase.Web.Controllers
 
             try
             {
-                ICollection<AllGameViewModel> allGames = await gameService.GetAllGamesAsync();
+                ICollection<AllGameViewModel> viewModels = await gameService.GetAllGamesAsync();
 
-
-                int totalGames = allGames.Count;
-                int totalPages = (int)Math.Ceiling((double)totalGames / pageSize);
+                int totalViewModels = viewModels.Count;
+                int totalPages = (int)Math.Ceiling((double)totalViewModels / pageSize);
 
                 bool hasPreviousPage = pageNumber > 1;
                 bool hasNextPage = pageNumber < totalPages;
 
-                PagedGameViewModel pagedViewModel = new PagedGameViewModel
+                PagedViewModel pagedViewModel = new PagedViewModel
                 {
-                    Games = allGames.ToPagedList(pageNumber, pageSize).ToList(),
+                    Action = "All",
+                    Controller = "Game",
                     PageNumber = pageNumber,
                     PageSize = pageSize,
-                    TotalGames = totalGames,
+                    TotalViewModels = totalViewModels,
                     TotalPages = totalPages,
                     HasPreviousPage = hasPreviousPage,
                     HasNextPage = hasNextPage
                 };
 
-                return View(pagedViewModel);
+                dynamic dynamicViewModel = new ExpandoObject();
+
+                dynamicViewModel.ViewModels = viewModels.ToPagedList(pageNumber, pageSize).ToList();
+                dynamicViewModel.PageViewModel = pagedViewModel;
+
+                return View(dynamicViewModel);
             }
             catch (Exception ex)
             {
                 this.logger.LogError(ex, "An error occurred while fetching all games.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
 
@@ -85,7 +89,7 @@ namespace GoodGameDatabase.Web.Controllers
             {
                 this.logger.LogError(ex, "An error occurred while fetching all game reviews by given gameId.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
 
@@ -102,7 +106,7 @@ namespace GoodGameDatabase.Web.Controllers
             {
                 this.logger.LogError(ex, "An error occurred while fetching best games.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
 
@@ -118,7 +122,7 @@ namespace GoodGameDatabase.Web.Controllers
             {
                 this.logger.LogError(ex, "An error occurred while editing a game by its id.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
 
@@ -133,7 +137,7 @@ namespace GoodGameDatabase.Web.Controllers
             {
                 this.logger.LogError(ex, "An error occurred while returning Game/CreateNew view.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
 
@@ -149,7 +153,7 @@ namespace GoodGameDatabase.Web.Controllers
             {
                 this.logger.LogError(ex, "An error occurred while creating a game.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
 
@@ -167,7 +171,7 @@ namespace GoodGameDatabase.Web.Controllers
             {
                 this.logger.LogError(ex, "An error occurred while rating a game by it's id.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
 
@@ -186,7 +190,7 @@ namespace GoodGameDatabase.Web.Controllers
             {
                 this.logger.LogError(ex, "An error occurred while liking a game by it's id.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
 
@@ -205,7 +209,7 @@ namespace GoodGameDatabase.Web.Controllers
             {
                 this.logger.LogError(ex, "An error occurred while wishing a game by it's id.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
 
@@ -226,7 +230,7 @@ namespace GoodGameDatabase.Web.Controllers
             {
                 this.logger.LogError(ex, "An error occurred while fetching all liked games by user id.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
 
@@ -246,7 +250,7 @@ namespace GoodGameDatabase.Web.Controllers
             {
                 this.logger.LogError(ex, "An error occurred while fetching all rated games by user id.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
 
@@ -266,7 +270,7 @@ namespace GoodGameDatabase.Web.Controllers
             {
                 this.logger.LogError(ex, "An error occurred while fetching all wished games by user id.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
     }

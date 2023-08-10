@@ -100,7 +100,28 @@
         </aside>
 
         <div class="w-10/12 h-full max-h-full flex flex-col overflox-hidden rounded-lg shadow">
-            <nav class="block bg-white bg-opacity-80 py-2 px-4 text-white shadow-sm">
+            <partial name="_NavbarPartial" />
+
+            <main class="h-full max-h-full flex flex-col w-full overflox-hidden">
+                <div class="h-5/6">
+                    @RenderBody()
+                </div>
+                <div class="h-1/6 flex flex-col-reverse">
+                    <partial name="_FooterPartial" />
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+
+
+                    @*<nav class="block bg-white bg-opacity-80 py-2 px-4 text-white shadow-sm">
                 <div>
                     <div class="container mx-auto flex items-center justify-between text-gray-900">
                         <span class="mr-4 block cursor-pointer py-1.5 font-sans text-sm font-normal leading-normal text-inherit antialiased">GGDB</span>
@@ -179,21 +200,4 @@
                         </div>
                     </div>
                 </div>
-            </nav>
-
-            <main class="h-full max-h-full flex flex-col w-full overflox-hidden">
-                <div class="h-5/6">
-                    @RenderBody()
-                </div>
-                <div class="h-1/6 flex flex-col-reverse">
-                    <partial name="_FooterPartial" />
-                </div>
-            </main>
-        </div>
-    </div>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
+            </nav>*@

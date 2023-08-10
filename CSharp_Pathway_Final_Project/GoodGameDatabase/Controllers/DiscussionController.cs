@@ -2,8 +2,9 @@
 using GoodGameDatabase.Services.Data.Contracts;
 using GoodGameDatabase.Web.ViewModels.Discussion;
 using Library.Controllers;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PagedList;
+using System.Dynamic;
 
 namespace GoodGameDatabase.Web.Controllers
 {
@@ -18,20 +19,46 @@ namespace GoodGameDatabase.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int? page)
         {
+            int pageSize = 12;
+            int pageNumber = page ?? 1;
+
             try
             {
-                ICollection<AllDiscussionViewModel> allDiscussions = await discussionService.GetAllAsync();
+                ICollection<AllDiscussionViewModel> viewModels = await discussionService.GetAllAsync();
 
-                return View(allDiscussions);
+                int totalViewModels = viewModels.Count;
+                int totalPages = (int)Math.Ceiling((double)totalViewModels / pageSize);
+
+                bool hasPreviousPage = pageNumber > 1;
+                bool hasNextPage = pageNumber < totalPages;
+
+                PagedViewModel pagedViewModel = new PagedViewModel
+                {
+                    Action = "All",
+                    Controller = "Discussion",
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    TotalViewModels = totalViewModels,
+                    TotalPages = totalPages,
+                    HasPreviousPage = hasPreviousPage,
+                    HasNextPage = hasNextPage
+                };
+
+                dynamic dynamicViewModel = new ExpandoObject();
+
+                dynamicViewModel.ViewModels = viewModels.ToPagedList(pageNumber, pageSize).ToList();
+                dynamicViewModel.PageViewModel = pagedViewModel;
+
+                return View(dynamicViewModel);
 
             }
             catch (Exception ex)
             {
                 this.logger.LogError(ex, "An error occurred while fetching all discussions.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
 
@@ -49,7 +76,7 @@ namespace GoodGameDatabase.Web.Controllers
             {
                 this.logger.LogError(ex, "An error occurred while fetching discussion details by id.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
 
@@ -68,7 +95,7 @@ namespace GoodGameDatabase.Web.Controllers
             {
                 this.logger.LogError(ex, "An error occurred while joining discussion by id.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
 
@@ -83,7 +110,7 @@ namespace GoodGameDatabase.Web.Controllers
             {
                 this.logger.LogError(ex, "An error occurred while trying to create a discussion.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
 
@@ -103,7 +130,7 @@ namespace GoodGameDatabase.Web.Controllers
             {
                 this.logger.LogError(ex, "An error occurred while creating a discussion.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
     }

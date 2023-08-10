@@ -1,10 +1,12 @@
 ﻿using GoodGameDatabase.Data.Model;
-using GoodGameDatabase.Services.Data;
 using GoodGameDatabase.Services.Data.Contracts;
 using GoodGameDatabase.Web.ViewModels.Guide;
 using Library.Controllers;
-using Microsoft.AspNetCore.Authorization;
+
 using Microsoft.AspNetCore.Mvc;
+
+using System.Dynamic;
+using PagedList;
 
 namespace GoodGameDatabase.Web.Controllers
 {
@@ -19,20 +21,46 @@ namespace GoodGameDatabase.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int? page)
         {
+            int pageSize = 6;
+            int pageNumber = page ?? 1;
+
             try
             {
-                ICollection<AllGuideViewModel> allGuides = await guideService.GetAllGuidesAsync();
+                ICollection<AllGuideViewModel> viewModels = await guideService.GetAllGuidesAsync();
 
-                return View(allGuides);
+                int totalViewModels = viewModels.Count;
+                int totalPages = (int)Math.Ceiling((double)totalViewModels / pageSize);
+
+                bool hasPreviousPage = pageNumber > 1;
+                bool hasNextPage = pageNumber < totalPages;
+
+                PagedViewModel pagedViewModel = new PagedViewModel
+                {
+                    Action = "All",
+                    Controller = "Guide",
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    TotalViewModels = totalViewModels,
+                    TotalPages = totalPages,
+                    HasPreviousPage = hasPreviousPage,
+                    HasNextPage = hasNextPage
+                };
+
+                dynamic dynamicViewModel = new ExpandoObject();
+
+                dynamicViewModel.ViewModels = viewModels.ToPagedList(pageNumber, pageSize).ToList();
+                dynamicViewModel.PageViewModel = pagedViewModel;
+
+                return View(dynamicViewModel);
 
             }
             catch (Exception ex)
             {
                 this.logger.LogError(ex, "An error occurred while fetching all guides.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
 
@@ -48,7 +76,7 @@ namespace GoodGameDatabase.Web.Controllers
             {
                 this.logger.LogError(ex, "An error occurred while returning Guide/CreateNew view.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
 
@@ -68,7 +96,7 @@ namespace GoodGameDatabase.Web.Controllers
             {
                 this.logger.LogError(ex, "An error occurred while creating a guide.");
 
-                return BadRequest("Something went wrong. Try again later!");
+                return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
     }
