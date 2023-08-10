@@ -21,7 +21,7 @@ namespace GoodGameDatabase.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> All(int? page)
         {
-            int pageSize = 12;
+            int pageSize = 6;
             int pageNumber = page ?? 1;
 
             try
@@ -116,6 +116,11 @@ namespace GoodGameDatabase.Web.Controllers
 
         public async Task<IActionResult> Create(Discussion discussion)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("ErrorPage", "Model state is not valid!");
+            }
+
             try
             {
                 Guid userId = Guid.Parse(this.GetUserId());
@@ -129,6 +134,22 @@ namespace GoodGameDatabase.Web.Controllers
             catch (Exception ex)
             {
                 this.logger.LogError(ex, "An error occurred while creating a discussion.");
+
+                return View("ErrorPage", "Something went wrong. Try again later!");
+            }
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await this.discussionService.DeleteDiscussionByIdAsync(id);
+
+                return RedirectToPage("All", "Discussion");
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "An error occurred while trying to delete a discussion by it's id.");
 
                 return View("ErrorPage", "Something went wrong. Try again later!");
             }

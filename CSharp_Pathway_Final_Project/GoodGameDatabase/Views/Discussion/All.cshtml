@@ -19,7 +19,7 @@
             <div class="flex flex-col-reverse h-full">
                 <partial name="_PaginationPartial" model="@Model.PageViewModel" />
             </div>
-            <div class="grid grid-cols-4 gap-4 ml-6">
+            <div class="w-full flex flex-row flex-wrap justify-content-center">
                 @foreach (var viewModel in Model.ViewModels)
                 {
                     <partial name="_DiscussionPartial" model="viewModel" />

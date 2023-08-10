@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Library.Controllers;
 using System.Dynamic;
 using PagedList;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GoodGameDatabase.Web.Controllers
 {
@@ -26,12 +27,13 @@ namespace GoodGameDatabase.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> All(int? page)
         {
-            int pageSize = 4;
+            int pageSize = 3;
             int pageNumber = page ?? 1;
 
             try
             {
-                ICollection<AllGameViewModel> viewModels = await gameService.GetAllGamesAsync();
+                ICollection<AllGameViewModel> viewModels
+                    = await gameService.GetAllGamesAsync();
 
                 int totalViewModels = viewModels.Count;
                 int totalPages = (int)Math.Ceiling((double)totalViewModels / pageSize);
@@ -82,7 +84,7 @@ namespace GoodGameDatabase.Web.Controllers
                 model.Game = game;
                 model.Reviews = reviews;
 
-                return View(model);
+                return View(game);
 
             }
             catch (Exception ex)
@@ -143,6 +145,11 @@ namespace GoodGameDatabase.Web.Controllers
 
         public async Task<IActionResult> Create(Game game)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("ErrorPage", "Model state is not valid!");
+            }
+
             try
             {
                 await this.gameService.CreateNewGameAsync(game);
@@ -183,6 +190,8 @@ namespace GoodGameDatabase.Web.Controllers
 
                 await this.gameService.LikeGameByIdAsync(gameId, userId);
 
+
+
                 return RedirectToAction("Details", new { id = gameId });
 
             }
@@ -214,16 +223,42 @@ namespace GoodGameDatabase.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Liked()
+        public async Task<IActionResult> Liked(int? page)
         {
+            int pageSize = 3;
+            int pageNumber = page ?? 1;
+
             try
             {
                 Guid userId = Guid.Parse(this.GetUserId());
 
-                ICollection<AllGameViewModel> likedGames
+                ICollection<AllGameViewModel> viewModels
                     = await this.gameService.GetAllLikedGamesByUserIdAsync(userId);
 
-                return View(likedGames);
+                int totalViewModels = viewModels.Count;
+                int totalPages = (int)Math.Ceiling((double)totalViewModels / pageSize);
+
+                bool hasPreviousPage = pageNumber > 1;
+                bool hasNextPage = pageNumber < totalPages;
+
+                PagedViewModel pagedViewModel = new PagedViewModel
+                {
+                    Action = "Liked",
+                    Controller = "Game",
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    TotalViewModels = totalViewModels,
+                    TotalPages = totalPages,
+                    HasPreviousPage = hasPreviousPage,
+                    HasNextPage = hasNextPage
+                };
+
+                dynamic dynamicViewModel = new ExpandoObject();
+
+                dynamicViewModel.ViewModels = viewModels.ToPagedList(pageNumber, pageSize).ToList();
+                dynamicViewModel.PageViewModel = pagedViewModel;
+
+                return View(dynamicViewModel);
 
             }
             catch (Exception ex)
@@ -235,16 +270,42 @@ namespace GoodGameDatabase.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Rated()
+        public async Task<IActionResult> Rated(int? page)
         {
+            int pageSize = 3;
+            int pageNumber = page ?? 1;
+
             try
             {
                 Guid userId = Guid.Parse(this.GetUserId());
 
-                ICollection<AllGameViewModel> ratedGames
+                ICollection<AllGameViewModel> viewModels
                     = await this.gameService.GetAllRatedGamesByUserIdAsync(userId);
 
-                return View(ratedGames);
+                int totalViewModels = viewModels.Count;
+                int totalPages = (int)Math.Ceiling((double)totalViewModels / pageSize);
+
+                bool hasPreviousPage = pageNumber > 1;
+                bool hasNextPage = pageNumber < totalPages;
+
+                PagedViewModel pagedViewModel = new PagedViewModel
+                {
+                    Action = "Rated",
+                    Controller = "Game",
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    TotalViewModels = totalViewModels,
+                    TotalPages = totalPages,
+                    HasPreviousPage = hasPreviousPage,
+                    HasNextPage = hasNextPage
+                };
+
+                dynamic dynamicViewModel = new ExpandoObject();
+
+                dynamicViewModel.ViewModels = viewModels.ToPagedList(pageNumber, pageSize).ToList();
+                dynamicViewModel.PageViewModel = pagedViewModel;
+
+                return View(dynamicViewModel);
             }
             catch (Exception ex)
             {
@@ -255,20 +316,62 @@ namespace GoodGameDatabase.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Wished()
+        public async Task<IActionResult> Wished(int? page)
         {
+            int pageSize = 3;
+            int pageNumber = page ?? 1;
+
             try
             {
                 Guid userId = Guid.Parse(this.GetUserId());
 
-                ICollection<AllGameViewModel> wishedGames
+                ICollection<AllGameViewModel> viewModels
                     = await this.gameService.GetAllWishedGamesByUserIdAsync(userId);
 
-                return View(wishedGames);
+                int totalViewModels = viewModels.Count;
+                int totalPages = (int)Math.Ceiling((double)totalViewModels / pageSize);
+
+                bool hasPreviousPage = pageNumber > 1;
+                bool hasNextPage = pageNumber < totalPages;
+
+                PagedViewModel pagedViewModel = new PagedViewModel
+                {
+                    Action = "Wished",
+                    Controller = "Game",
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    TotalViewModels = totalViewModels,
+                    TotalPages = totalPages,
+                    HasPreviousPage = hasPreviousPage,
+                    HasNextPage = hasNextPage
+                };
+
+                dynamic dynamicViewModel = new ExpandoObject();
+
+                dynamicViewModel.ViewModels = viewModels.ToPagedList(pageNumber, pageSize).ToList();
+                dynamicViewModel.PageViewModel = pagedViewModel;
+
+                return View(dynamicViewModel);
             }
             catch (Exception ex)
             {
                 this.logger.LogError(ex, "An error occurred while fetching all wished games by user id.");
+
+                return View("ErrorPage", "Something went wrong. Try again later!");
+            }
+        }
+
+        public async Task<IActionResult> Delete (int id)
+        {
+            try
+            {
+                await this.gameService.DeleteGameByIdAsync(id);
+
+                return RedirectToPage("All", "Game");
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "An error occurred while trying to delete a game by it's id.");
 
                 return View("ErrorPage", "Something went wrong. Try again later!");
             }

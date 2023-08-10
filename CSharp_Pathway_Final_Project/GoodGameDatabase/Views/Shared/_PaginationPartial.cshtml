@@ -1,6 +1,6 @@
 ﻿@model PagedViewModel
 
-<nav class="mb-3">
+<nav class="my-3">
     <ul class="flex justify-center">
         <li>
             <a class="mx-1 flex h-9 w-9 items-center justify-center rounded-full border border-blue-gray-100 bg-transparent p-0 text-sm text-blue-gray-500 transition duration-150 ease-in-out @(Model.HasPreviousPage ? "" : "cursor-not-allowed opacity-50 pointer-events-none")"
@@ -18,9 +18,7 @@
             {
                 <li>
                     <a class="mx-1 flex h-9 w-9 items-center justify-center rounded-full bg-pink-500 p-0 text-sm text-white shadow-md transition duration-150 ease-in-out @(i == Model.PageNumber ? "font-bold" : "")"
-                       asp-route-page="@i"
-                       asp-controller="@Model.Controller"
-                       asp-action="@Model.Action">
+                       asp-action="@Model.Action" asp-controller="@Model.Controller" asp-route-page="@i">
                         @i
                     </a>
                 </li>
@@ -38,5 +36,3 @@
         </li>
     </ul>
 </nav>
-
-

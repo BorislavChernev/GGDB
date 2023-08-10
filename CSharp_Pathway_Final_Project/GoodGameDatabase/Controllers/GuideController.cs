@@ -82,6 +82,11 @@ namespace GoodGameDatabase.Web.Controllers
 
         public async Task<IActionResult> Create(Guide guide)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("ErrorPage", "Model state is not valid!");
+            }
+
             try
             {
                 Guid userId = Guid.Parse(this.GetUserId());
@@ -95,6 +100,38 @@ namespace GoodGameDatabase.Web.Controllers
             catch (Exception ex)
             {
                 this.logger.LogError(ex, "An error occurred while creating a guide.");
+
+                return View("ErrorPage", "Something went wrong. Try again later!");
+            }
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            try
+            {
+                GuideDetailsViewModel viewModel = await guideService.GetGuideDetailsByIdAsync(id);
+
+                return View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "An error occurred while returning discussion details view.");
+
+                return View("ErrorPage", "Something went wrong. Try again later!");
+            }
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await this.guideService.DeleteGuideByIdAsync(id);
+
+                return RedirectToPage("All", "Guide");
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError(ex, "An error occurred while trying to delete a guide by it's id.");
 
                 return View("ErrorPage", "Something went wrong. Try again later!");
             }

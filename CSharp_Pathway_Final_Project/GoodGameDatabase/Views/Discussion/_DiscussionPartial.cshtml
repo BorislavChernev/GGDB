@@ -1,12 +1,12 @@
 ﻿@using GoodGameDatabase.Web.ViewModels.Discussion;
 @model AllDiscussionViewModel
 
-<div class="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+<div class="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md m-4">
     <div class="p-6">
         <h5 class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
             @Model.Topic
         </h5>
-        <p class="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
+        <p class="h-12 block font-sans text-base font-light text-ellipsis overflow-hidden whitespace-normal">
             @Model.Description
         </p>
     </div>
@@ -21,4 +21,7 @@
             Read More
         </button>
     </div>
+    <button asp-action="Delete" asp-controller="Discussion" asp-route-id="@Model.Id" class="bg-pink-600 text-white hover:bg-pink-700 px-3 py-2 rounded">
+        <i class="fa-solid fa-trash"></i>
+    </button>
 </div>

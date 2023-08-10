@@ -37,6 +37,33 @@ namespace GoodGameDatabase.Services.Data
             }
         }
 
+        public async Task DeleteDiscussionByIdAsync(int id)
+        {
+            try
+            {
+                var discussionsToDelete = await dbContext.Discussions.FirstOrDefaultAsync(d => d.Id == id);
+
+                if (discussionsToDelete != null)
+                {
+                    dbContext.Discussions.Remove(discussionsToDelete);
+
+                    var discussionMappingTableRecords = dbContext.DiscussionParticipants.Where(g => g.DiscussionId == id);
+                    dbContext.DiscussionParticipants.RemoveRange(discussionMappingTableRecords);
+
+                    await dbContext.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new InvalidOperationException($"Discussion with ID {id} not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "An error occurred while deleting a guide.");
+                throw;
+            }
+        }
+
         public async Task<ICollection<AllDiscussionViewModel>> GetAllAsync()
         {
             try

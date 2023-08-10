@@ -8,10 +8,12 @@
                 <div class="col-span-2">
                     <label class="font-semibold">Title</label>
                     <input type="text" name="Title" class="w-full p-2 border rounded">
+                    <span asp-validation-for="Title" class="text-red-500">Title length should be between 2 and 100 characters</span>
                 </div>
                 <div class="col-span-2">
                     <label class="font-semibold">Description</label>
                     <textarea name="Description" class="w-full p-2 border rounded"></textarea>
+                    <span asp-validation-for="Description" class="text-red-500">Description length should be between 30 and 1000 characters</span>
                 </div>
                 <div>
                     <label class="font-semibold">Language</label>
@@ -58,6 +60,7 @@
                 <div class="col-span-2">
                     <label class="font-semibold">Game ID</label>
                     <input type="text" name="GameId" class="w-full p-2 border rounded">
+                    <span asp-validation-for="GameId" class="text-red-500">This is a required field.</span>
                 </div>
                 <div class="col-span-2">
                     <button type="submit" class="main-color text-white py-2 px-4 rounded bg-pink-700"
@@ -70,60 +73,3 @@
         </div>
     </div>
 </div>
-@*<form class="flex flex-col">
-    <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-        <div>
-            <label for="Title" class="text-gray-700 dark:text-gray-200">Title</label>
-            <input name="Title" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
-        </div>
-
-        <div>
-            <label for="GameId" class="text-gray-700 dark:text-gray-200">GameId</label>
-            <input name="GameId" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
-        </div>
-
-        <div>
-            <label for="Description" class="text-gray-700 dark:text-gray-200">Description</label>
-            <input name="Description" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
-        </div>
-
-        <label for="category-select">Select a category:</label>
-        <select name="Category" id="category-select">
-            <option name="GameplayBasic" value="GameplayBasic">GameplayBasic</option>
-            <option name="Crafting" value="Crafting">Crafting</option>
-            <option name="Walkthroughs" value="Walkthroughs">Walkthroughs</option>
-            <option name="Secrets" value="Secrets">Secrets</option>
-            <option name="Loot" value="Loot">Loot</option>
-            <option name="Multiplayer" value="Multiplayer">Multiplayer</option>
-            <option name="Achievements" value="Achievements">Achievements</option>
-            <option name="MapsOrLevels" value="MapsOrLevels">MapsOrLevels</option>
-            <option name="ModdingOrConfiguration" value="ModdingOrConfiguration">ModdingOrConfiguration</option>
-            <option name="Characters" value="Characters">Characters</option>
-            <option name="StoryOrLove" value="StoryOrLove">StoryOrLove</option>
-            <option name="GameModes" value="GameModes">GameModes</option>
-            <option name="Trading" value="Trading">Trading</option>
-            <option name="Classes" value="Classes">Classes</option>
-            <option name="Workshop" value="Workshop">Workshop</option>
-            <option name="Weapons" value="Weapons">Weapons</option>
-        </select>
-
-        <label for="language-select">Select a language:</label>
-        <select name="Language" id="language-select">
-            <option name="English" value="English">English</option>
-            <option name="Russian" value="Russian">Russian</option>
-            <option name="Bulgarian" value="Bulgarian">Bulgarian</option>
-            <option name="Italian" value="Italian">Italian</option>
-            <option name="Spanish" value="Spanish">Spanish</option>
-            <option name="French" value="French">French</option>
-            <option name="Japanese" value="Japanese">Japanese</option>
-            <option name="Chinese" value="Chinese">Chinese</option>
-        </select>
-
-    </div>
-
-    <div class="flex justify-end mt-6">
-        <button type="submit" asp-controller="Guide" asp-action="Create" class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-            Submit
-        </button>
-    </div>
-</form>*@

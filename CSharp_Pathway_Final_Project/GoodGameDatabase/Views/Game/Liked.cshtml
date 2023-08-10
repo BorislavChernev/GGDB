@@ -1,5 +1,5 @@
 ﻿@using GoodGameDatabase.Web.ViewModels.Game;
-@model IEnumerable<AllGameViewModel>
+@model dynamic
 
 @{
     ViewData["Title"] = "Liked games";
@@ -14,10 +14,13 @@
 </head>
 <body>
     <div class="container">
-        @if (Model.Any())
+        @if (Model.ViewModels.Count > 0)
         {
-            <div class="grid grid-cols-4 gap-4 ml-6">
-                @foreach (var game in Model)
+            <div class="flex flex-col-reverse h-full">
+                <partial name="_PaginationPartial" model="@Model.PageViewModel" />
+            </div>
+            <div class="w-full flex flex-row flex-wrap justify-content-center">
+                @foreach (var game in Model.ViewModels)
                 {
                     <partial name="_GamePartial" model="@game" />
                 }
@@ -25,7 +28,7 @@
         }
         else
         {
-            <p>There are no books available.</p>
+            <p>There are no games available.</p>
         }
     </div>
 </body>

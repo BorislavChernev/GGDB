@@ -2,34 +2,40 @@
     <div class="container mx-auto px-4">
         <div class="flex justify-between items-center">
             <div class="text-white">
-                <h1 class="text-2xl font-bold">Entity Filtering and Paging</h1>
+                <h1 class="text-2xl font-bold">@ViewData["Title"]</h1>
             </div>
-            <div class="flex items-center space-x-4">
+           @* <div class="flex items-center space-x-4">
                 <!-- Filter Dropdown -->
                 <div class="relative z-20">
                     <button class="bg-white text-pink-600 hover:bg-gray-100 px-4 py-2 rounded" id="filterButton">
                         Filter
                     </button>
-                    <div class="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-lg hidden" id="filterDropdown">
+                    <form class="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-lg hidden" id="filterDropdown">
                         <div class="p-4">
                             <h3 class="text-lg font-semibold mb-2">Filter Games</h3>
                             <!-- Age Restriction Filter -->
                             <div class="mb-3">
                                 <label class="block text-sm font-medium text-gray-700">Age Restriction</label>
-                                <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-pink-600 focus:border-pink-600">
-                                    <option value="">Any Age</option>
-                                    <option value="18">18+</option>
-                                    <option value="16">16+</option>
-                                    <option value="12">12+</option>
+                                <select name="ageRestriction" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-pink-600 focus:border-pink-600">
+                                    <option value="null">Any Age</option>
+                                    <option value="PEGI3">3+</option>
+                                    <option value="PEGI7">7+</option>
+                                    <option value="PEGI12">12+</option>
+                                    <option value="PEGI16">16+</option>
+                                    <option value="PEGI18">18+</option>
                                 </select>
                             </div>
                             <!-- Release Status Filter -->
                             <div class="mb-3">
                                 <label class="block text-sm font-medium text-gray-700">Release Status</label>
-                                <select class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-pink-600 focus:border-pink-600">
-                                    <option value="">Any Status</option>
-                                    <option value="Released">Released</option>
-                                    <option value="Upcoming">Upcoming</option>
+                                <select name="releaseStatus" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-pink-600 focus:border-pink-600">
+                                    <option value="null">Any Status</option>
+                                    <option value="Unreleased">Unreleased</option>
+                                    <option value="Alpha">Alpha</option>
+                                    <option value="ClosedBeta">Closed Beta</option>
+                                    <option value="OpenBeta">Open Beta</option>
+                                    <option value="EarlyAccess">Early Access</option>
+                                    <option value="OfficialRelease">Official Release</option>
                                 </select>
                             </div>
                             <!-- Platform Support Filter -->
@@ -37,29 +43,36 @@
                                 <label class="block text-sm font-medium text-gray-700">Platform Support</label>
                                 <div class="flex flex-col space-y-1">
                                     <label class="flex items-center">
-                                        <input type="checkbox" class="text-pink-600 form-checkbox">
+                                        <input value="true" type="checkbox" class="text-pink-600 form-checkbox">
                                         <span class="ml-2">PC</span>
                                     </label>
                                     <label class="flex items-center">
-                                        <input type="checkbox" class="text-pink-600 form-checkbox">
+                                        <input value="true" type="checkbox" class="text-pink-600 form-checkbox">
                                         <span class="ml-2">PlayStation</span>
                                     </label>
                                     <label class="flex items-center">
-                                        <input type="checkbox" class="text-pink-600 form-checkbox">
+                                        <input value="true" type="checkbox" class="text-pink-600 form-checkbox">
                                         <span class="ml-2">Xbox</span>
                                     </label>
                                     <label class="flex items-center">
-                                        <input type="checkbox" class="text-pink-600 form-checkbox">
+                                        <input value="true" type="checkbox" class="text-pink-600 form-checkbox">
                                         <span class="ml-2">Nintendo</span>
                                     </label>
                                 </div>
                             </div>
                             <!-- Apply Filter Button -->
                             <div class="text-center">
-                                <button class="bg-pink-600 text-white hover:bg-pink-700 px-3 py-1 rounded">Apply Filter</button>
+                                <button
+                                    asp-action="All"
+                                    asp-controller="Game"
+                                    type="submit"
+                                    class="bg-pink-600 text-white hover:bg-pink-700 px-3 py-1 rounded"
+                                >
+                                    Apply Filter
+                                </button>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <!-- Sorting Dropdown -->
                 <div class="relative">
@@ -70,16 +83,16 @@
                         <!-- Sorting options here -->
                     </div>
                 </div>
-            </div>
+            </div>*@
         </div>
     </div>
 </div>
 
-<script>
+@*<script>
     const filterButton = document.getElementById('filterButton');
     const filterDropdown = document.getElementById('filterDropdown');
 
     filterButton.addEventListener('click', () => {
         filterDropdown.classList.toggle('hidden');
     });
-</script>
+</script>*@

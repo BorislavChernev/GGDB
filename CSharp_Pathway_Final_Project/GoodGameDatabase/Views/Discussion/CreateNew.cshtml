@@ -1,4 +1,6 @@
-﻿<div class="bg-gray-100">
+﻿@model Discussion
+
+<div class="bg-gray-100">
     <div class="flex justify-center items-center min-h-screen">
         <div class="w-full max-w-xl p-4 bg-white rounded-lg shadow-lg">
             <h1 class="text-xl font-semibold mb-3">Create a New Discussion</h1>
@@ -6,10 +8,12 @@
                 <div class="col-span-2">
                     <label class="font-semibold">Topic</label>
                     <input type="text" name="Topic" class="w-full p-2 border rounded">
+                    <span asp-validation-for="Topic" class="text-red-500">Topic length should be between 2 and 50 characters</span>
                 </div>
                 <div class="col-span-2">
                     <label class="font-semibold">Description</label>
                     <textarea name="Description" class="w-full p-2 border rounded"></textarea>
+                    <span asp-validation-for="Description" class="text-red-500">Description length should be between 30 and 1000 characters</span>
                 </div>
                 <div class="col-span-2">
                     <button type="submit" class="main-color text-white py-2 px-4 rounded bg-pink-700"

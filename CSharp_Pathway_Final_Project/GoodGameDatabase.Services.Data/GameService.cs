@@ -7,6 +7,7 @@ using GoodGameDatabase.Data.Model.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using GoodGameDatabase.Services.Exceptions;
+using System.Diagnostics;
 
 namespace GoodGameDatabase.Services.Data
 {
@@ -417,6 +418,45 @@ namespace GoodGameDatabase.Services.Data
             {
                 this.logger.LogError(ex, "An error occurred while fetching best games.");
                 throw new ServiceException("An error occurred while fetching best games. Please try again later.");
+            }
+        }
+
+        public async Task DeleteGameByIdAsync(int id)
+        {
+            try
+            {
+                var gameToDelete = await dbContext.Games.FirstOrDefaultAsync(g => g.Id == id);
+
+                if (gameToDelete != null)
+                {
+                    var guidesToDelete = dbContext.Guides.Where(g => g.GameId == id);
+                    dbContext.Guides.RemoveRange(guidesToDelete);
+
+                    var reviewsToDelete = dbContext.Reviews.Where(r => r.GameId == id);
+                    dbContext.Reviews.RemoveRange(reviewsToDelete);
+
+                    var likesToDelete = dbContext.Likes.Where(l => l.GameId == id);
+                    dbContext.Likes.RemoveRange(likesToDelete);
+
+                    var wishesToDelete = dbContext.Wishes.Where(w => w.GameId == id);
+                    dbContext.Wishes.RemoveRange(wishesToDelete);
+
+                    var ratingsToDelete = dbContext.Ratings.Where(r => r.GameId == id);
+                    dbContext.Ratings.RemoveRange(ratingsToDelete);
+
+                    dbContext.Games.Remove(gameToDelete);
+
+                    await dbContext.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new InvalidOperationException($"Game with ID {id} not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "An error occurred while deleting a game.");
+                throw;
             }
         }
     }

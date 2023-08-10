@@ -1,0 +1,30 @@
+﻿@using GoodGameDatabase.Web.ViewModels.Guide;
+@model GuideDetailsViewModel
+
+<div class="bg-pink-600 py-4">
+    <div class="container mx-auto px-4">
+        <div class="text-white">
+            <h1 class="text-2xl font-bold">@Model.Title</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container mx-auto px-4 mt-4">
+    <div class="flex flex-wrap -mx-2">
+        <div class="w-full lg:w-1/2 px-2 mb-4 lg:mb-0">
+            <img src="@Model.ImageUrl" alt="@Model.Title" class="rounded-lg shadow-lg">
+        </div>
+        <div class="w-full lg:w-1/2 px-2">
+            <h2 class="text-lg font-semibold mb-2">Description</h2>
+            <p>@Model.Description</p>
+
+            <h2 class="text-lg font-semibold mt-4">Details</h2>
+            <ul class="list-disc pl-6 mt-2">
+                <li>Language: @Model.Language</li>
+                <li>Category: @Model.Category</li>
+                <li>Game: @Model.Game</li>
+                <li>Writer: @Model.Writer</li>
+            </ul>
+        </div>
+    </div>
+</div>

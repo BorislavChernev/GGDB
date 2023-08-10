@@ -1,4 +1,4 @@
-﻿<div class="relative flex w-full max-w-[26rem] basis-1/3 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg mt-6">
+﻿<div class="relative flex w-full max-w-[26rem] basis-1/3 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg m-4">
     <div class="relative mx-4 mt-4 overflow-hidden rounded-xl bg-pink-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
         <img src="@Model.ImageUrl"
              alt="ui/ux review check" />
@@ -82,4 +82,7 @@
             Details
         </a>
     </div>
+    <button asp-action="Delete" asp-controller="Game" asp-route-id="@Model.Id" class="bg-pink-600 text-white hover:bg-pink-700 px-3 py-2 rounded">
+        <i class="fa-solid fa-trash"></i>
+    </button>
 </div>

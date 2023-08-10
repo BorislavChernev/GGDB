@@ -1,12 +1,96 @@
 ﻿@using GoodGameDatabase.Web.ViewModels.Game;
 @using GoodGameDatabase.Web.ViewModels.Review;
-@model dynamic
+@model GameDetailsViewModel
+@*@model dynamic*@
 @{
     ViewData["Title"] = "All games";
 }
 
-<!DOCTYPE html>
+<div class="bg-pink-600 py-8">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-center items-center relative">
+            <img src="@Model.ImageUrl" alt="@Model.Name" class="max-w-full h-auto rounded-lg shadow-lg">
+            <div class="absolute bottom-0 right-0 mb-4 mr-4 flex space-x-2">
+                <form method="post" asp-controller="Game" asp-action="Like">
+                    <div>
+                        <input type="hidden" name="gameId" value="@Model.Id" />
+                    </div>
+                    <button name="liked" value="true" type="submit"
+                            class="middle none center bg-pink-500 p-2 rounded-full text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-75 focus:shadow-none active:opacity-75 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                            data-ripple-light="true">
+                        <i class="fa-solid fa-heart"></i>
+                    </button>
+                </form>
+                <form method="post" asp-controller="Game" asp-action="Wish">
+                    <div>
+                        <input type="hidden" name="gameId" value="@Model.Id" />
+                    </div>
+                    <button name="wished" value="true" type="submit"
+                            class="middle none center bg-pink-500 p-2 rounded-full text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-75 focus:shadow-none active:opacity-75 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                            data-ripple-light="true">
+                        <i class="fa-solid fa-star"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="container mx-auto px-4 mt-8 grid grid-cols-2 gap-8">
+    <div>
+        <h1 class="text-3xl font-bold text-center mb-4">@Model.Name</h1>
+        <p class="text-gray-600">@Model.Description</p>
+
+        <div class="mt-6">
+            <h2 class="text-xl font-semibold mb-2">Details</h2>
+            <ul class="list-disc pl-6">
+                <li>Release Date: @Model.ReleaseDate</li>
+                <li>Status: @Model.Status</li>
+                <li>
+                    Platform Support:
+                    @if (Model.SupportsPC)
+                    {
+                        <span class="text-green-500">PC</span>
+                    }
+                    @if (Model.SupportsPS)
+                    {
+                        <span class="text-blue-500">PlayStation</span>
+                    }
+                    @if (Model.SupportsXbox)
+                    {
+                        <span class="text-indigo-500">Xbox</span>
+                    }
+                    @if (Model.SupportsNintendo)
+                    {
+                        <span class="text-red-500">Nintendo</span>
+                    }
+                </li>
+                <li>Rating: @Model.Rating</li>
+                <li>Likes: @Model.Likes</li>
+            </ul>
+        </div>
+    </div>
+
+    <div>
+        <div class="mt-6">
+            <h2 class="text-xl font-semibold mb-2">Rate this Game</h2>
+            <form method="post" asp-controller="Game" asp-action="Rate">
+                <div class="mt-2">
+                    <label for="rating" class="block text-sm font-medium text-gray-700">Rating (0-100)</label>
+                    <input name="rating" type="range" min="0" max="100" class="mt-1 block w-full bg-pink-600 rounded-lg">
+                </div>
+                <div>
+                    <input type="hidden" name="gameId" value="@Model.Id" />
+                </div>
+                <button type="submit" class="mt-2 bg-pink-600 text-white hover:bg-pink-700 px-3 py-1 rounded">
+                    Rate this game
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@*
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -105,3 +189,4 @@
     </div>
 </body>
 </html>
+*@

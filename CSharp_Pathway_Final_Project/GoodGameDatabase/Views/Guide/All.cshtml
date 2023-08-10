@@ -16,11 +16,11 @@
     <div class="container">
         @if (Model.ViewModels.Count > 0)
         {
-            <div class="border-5 border-black h-full flex flex-row flex-wrap">
-                <div class="flex flex-col-reverse h-full">
+            <div class="h-full flex flex-row flex-wrap">
+                <div class="flex flex-col-reverse h-full w-full">
                     <partial name="_PaginationPartial" model="@Model.PageViewModel" />
                 </div>
-                <div class="border-5 border-blue-500 w-full flex flex-row flex-wrap justify-content-center">
+                <div class="w-full flex flex-row flex-wrap justify-content-center">
                     @foreach (var viewModel in Model.ViewModels)
                     {
                         <partial name="_GuidePartial" model="viewModel" />

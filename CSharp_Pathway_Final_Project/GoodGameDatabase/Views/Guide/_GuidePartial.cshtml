@@ -1,7 +1,7 @@
 ﻿@using GoodGameDatabase.Web.ViewModels.Guide;
 @model AllGuideViewModel
 
-<div class="mx-6 my-3 border-5 border-green-400 h-64 relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+<div class="mx-6 my-3 h-64 relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
     <div class="p-6 h-full">
         <h5 class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
             @Model.Title
@@ -18,9 +18,8 @@
                 @Model.Language
             </div>
 
-            <div class="flex flex-row-reverse w-full">
-                <a class="!font-medium !text-blue-gray-900 !transition-colors hover:!text-pink-500"
-                   href="#">
+            <div  class="flex flex-row-reverse w-full">
+                <a asp-action="Details" asp-controller="Guide" asp-route-id="@Model.Id" class="!font-medium !text-blue-gray-900 !transition-colors hover:!text-pink-500">
                     <button class="flex select-none items-center gap-2 rounded-lg py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-pink-500 transition-all hover:bg-pink-500/10 active:bg-pink-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                             type="button"
                             data-ripple-dark="true">
@@ -41,4 +40,7 @@
             </div>
         </div>
     </div>
+    <button asp-action="Delete" asp-controller="Guide" asp-route-id="@Model.Id" class="bg-pink-600 text-white hover:bg-pink-700 px-3 py-2 rounded">
+        <i class="fa-solid fa-trash"></i>
+    </button>
 </div>

@@ -35,6 +35,30 @@ namespace GoodGameDatabase.Services.Data
             }
         }
 
+        public async Task DeleteGuideByIdAsync(int id)
+        {
+            try
+            {
+                var guideToDelete = await dbContext.Guides.FirstOrDefaultAsync(g => g.Id == id);
+
+                if (guideToDelete != null)
+                {
+                    dbContext.Guides.Remove(guideToDelete);
+
+                    await dbContext.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new InvalidOperationException($"Guide with ID {id} not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "An error occurred while deleting a guide.");
+                throw;
+            }
+        }
+
         public async Task EditGuideByIdAsync(int id, EditGuideViewModel viewModel)
         {
             try
@@ -84,19 +108,27 @@ namespace GoodGameDatabase.Services.Data
         {
             try
             {
-                Guide guide = await this.dbContext.Guides.FirstOrDefaultAsync(g => g.Id == id);
+                Guide guide = await this.dbContext.Guides
+                    .Include(g => g.Game)
+                    .Include(g => g.Writer)
+                    .FirstOrDefaultAsync(g => g.Id == id);
+
                 if (guide == null)
                 {
                     throw new ArgumentNullException($"Guide with ID {id} not found.");
                 }
-
-                // Create a GuideDetailsViewModel using the guide data
-                // ...
-
-                return new GuideDetailsViewModel()
+                GuideDetailsViewModel detailGuide = new GuideDetailsViewModel
                 {
-
+                    Title = guide.Title,
+                    Description = guide.Description,
+                    ImageUrl = guide.Game.ImageUrl,
+                    Language = guide.Language.ToString(),
+                    Category = guide.Category.ToString(),
+                    Game = guide.Game.Name,
+                    Writer = guide.Writer.Email
                 };
+
+                return detailGuide;
             }
             catch (Exception ex)
             {
