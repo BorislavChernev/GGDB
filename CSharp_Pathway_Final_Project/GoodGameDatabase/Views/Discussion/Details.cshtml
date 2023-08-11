@@ -1,47 +1,80 @@
 ﻿@using GoodGameDatabase.Web.ViewModels.Discussion;
 @model DiscussionDetailsViewModel
 
-@{
-    ViewData["Title"] = "All discussions";
+﻿@{
+    ViewData["Title"] = Model.Topic;
+    var userName = Context.User!.Identity!.Name;
+    var discussionId = Model.Id;
 }
 
-<!DOCTYPE html>
+<div class="bg-gray-100 h-screen flex flex-col">
+    <main class="flex-grow p-4 overflow-y-auto">
+        <ul class="list-unstyled space-y-4" id="messagesList">
+            @foreach (var message in Model.Messages)
+            {
+                <div class="flex space-x-2">
+                    <div class="flex-none">
+                        <span class="font-semibold">@message.SenderUsername</span>
+                        <span class="text-gray-500">@message.Timestamp</span>
+                    </div>
+                    <div class="flex-grow">
+                        <p>@message.Content</p>
+                    </div>
+                </div>
+            }
+        </ul>
+    </main>
+    <footer class="bg-white p-4">
+        <form>
+            <input type="text" id="userInput" value="@userName" disabled class="form-control mb-3" />
+            <input type="text" id="discussionInput" value="@discussionId" disabled class="form-control mb-3" />
+            <input type="text" id="messageInput" class="form-control mb-3 w-full border rounded p-2" placeholder="Type your message..." />
+            <button type="button" class="bg-pink-600 text-white px-4 py-2 rounded" id="sendButton" onclick="logMessage()">Send</button>
+        </form>
+    </footer>
+</div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewData["Title"]</title>
-</head>
-<body>
-    <div class="container">
-        @if (Model != null)
-        {
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card mb-4">
-                        <img src="" class="card-img-top" alt="Book Cover" width="200" height="650">
-                        <div class="card-body">
-                            <h5 class="card-title">@Model.Topic</h5>
 
-                            <p class="card-text">ReleaseDate: @Model.Description</p>
 
-                            <p class="card-text">Rating: @Model.DatePosted</p>
-
-                            <p class="card-text">Average Rating: @Model.pinned</p>
-
-                            <p class="card-text">Average Rating: @Model.ReviewsCount</p>
-
-                            <a asp-controller="Discussion" asp-action="Details" asp-route-id="@Model.Id"
-                               class="btn btn-success">Details</a>
-                        </div>
+    @*<h1>@ViewData["Title"]</h1>
+<section style="background-color: #eee; width: 100%; height:100%;">
+    <div class="container py-5">
+        <div class="row">
+            <div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <input type="text" id="userInput" value="@userName" disabled class="form-control mb-3" />
+                        <input type="text" id="discussionInput" value="@discussionId" disabled class="form-control mb-3" />
+                        <input type="text" id="messageInput" class="form-control mb-3" />
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-info btn-rounded float-lg-start" id="sendButton">Send</button>
                     </div>
                 </div>
             </div>
-        }
-        else
-        {
-            <p>There are no books available.</p>
-        }
+            <div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
+                <h5 class="font-weight-bold mb-3 text-center text-lg-start">Chat</h5>
+                <div class="card" style="width: 48vw; max-width: 850px;">
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0" id="messagesList">
+                            <!-- Messages will be added dynamically here -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+</section>*@
+
+    <script>
+        function logMessage() {
+            console.log('Button clicked!');
+        }
+    </script>
+
+
+    @section Scripts
+    {
+    <script src="~/lib/microsoft//signalr//dist/browser/signalr.js"></script>
+    <script src="~/js/chat.js"></script>
+}

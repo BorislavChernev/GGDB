@@ -1,28 +1,25 @@
-﻿@model Discussion
-
-<div class="bg-gray-100">
-    <div class="flex justify-center items-center min-h-screen">
-        <div class="w-full max-w-xl p-4 bg-white rounded-lg shadow-lg">
-            <h1 class="text-xl font-semibold mb-3">Create a New Discussion</h1>
-            <form asp-action="CreateNew" asp-controller="Discussion" class="grid grid-cols-2 gap-3">
-                <div class="col-span-2">
-                    <label class="font-semibold">Topic</label>
-                    <input type="text" name="Topic" class="w-full p-2 border rounded">
-                    <span asp-validation-for="Topic" class="text-red-500">Topic length should be between 2 and 50 characters</span>
-                </div>
-                <div class="col-span-2">
-                    <label class="font-semibold">Description</label>
-                    <textarea name="Description" class="w-full p-2 border rounded"></textarea>
-                    <span asp-validation-for="Description" class="text-red-500">Description length should be between 30 and 1000 characters</span>
-                </div>
-                <div class="col-span-2">
-                    <button type="submit" class="main-color text-white py-2 px-4 rounded bg-pink-700"
-                        asp-action="Create"
-                        asp-controller="Discussion">
-                        Create Discussion
-                    </button>
-                </div>
-            </form>
-        </div>
+﻿@{
+    ViewData["Title"] = "Home Page";
+} <div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-2">User</div>
+        <div class="col-4"><input type="text" id="userInput" /></div>
+    </div> <div class="row">
+        <div class="col-2">Message</div>
+        <div class="col-4"><input type="text" id="messageInput" /></div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-6"> <input type="button" id="sendButton" value="Send Message" /> </div>
     </div>
 </div>
+<div class="row"> <div class="col-12"> <hr /> </div> </div>
+<div class="row">
+    <div class="col-6">
+        <ul id="messagesList"></ul>
+    </div>
+</div>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script> 

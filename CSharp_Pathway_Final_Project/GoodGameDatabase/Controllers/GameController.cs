@@ -112,6 +112,7 @@ namespace GoodGameDatabase.Web.Controllers
             }
         }
 
+
         public async Task<IActionResult> Edit(int id, EditGameViewModel viewModel)
         {
             try
@@ -143,13 +144,9 @@ namespace GoodGameDatabase.Web.Controllers
             }
         }
 
+
         public async Task<IActionResult> Create(Game game)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("ErrorPage", "Model state is not valid!");
-            }
-
             try
             {
                 await this.gameService.CreateNewGameAsync(game);
@@ -163,6 +160,7 @@ namespace GoodGameDatabase.Web.Controllers
                 return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
+
 
         public async Task<IActionResult> Rate(int gameId, int rating)
         {
@@ -181,6 +179,7 @@ namespace GoodGameDatabase.Web.Controllers
                 return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
+
 
         public async Task<IActionResult> Like(int gameId)
         {
@@ -202,6 +201,7 @@ namespace GoodGameDatabase.Web.Controllers
                 return View("ErrorPage", "Something went wrong. Try again later!");
             }
         }
+
 
         public async Task<IActionResult> Wish(int gameId)
         {
@@ -367,7 +367,7 @@ namespace GoodGameDatabase.Web.Controllers
             {
                 await this.gameService.DeleteGameByIdAsync(id);
 
-                return RedirectToPage("All", "Game");
+                return RedirectToAction("All", "Game");
             }
             catch (Exception ex)
             {

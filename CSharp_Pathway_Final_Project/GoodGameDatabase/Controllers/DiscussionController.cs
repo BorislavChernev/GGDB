@@ -63,12 +63,12 @@ namespace GoodGameDatabase.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(int discussionId)
+        public async Task<IActionResult> Details(int id)
         {
             try
             {
                 DiscussionDetailsViewModel viewModel
-                    = await this.discussionService.GetDetailsByIdAsync(discussionId);
+                    = await this.discussionService.GetDetailsByIdAsync(id);
 
                 return View(viewModel);
             }
@@ -116,11 +116,6 @@ namespace GoodGameDatabase.Web.Controllers
 
         public async Task<IActionResult> Create(Discussion discussion)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("ErrorPage", "Model state is not valid!");
-            }
-
             try
             {
                 Guid userId = Guid.Parse(this.GetUserId());
@@ -145,7 +140,7 @@ namespace GoodGameDatabase.Web.Controllers
             {
                 await this.discussionService.DeleteDiscussionByIdAsync(id);
 
-                return RedirectToPage("All", "Discussion");
+                return RedirectToAction("All", "Discussion");
             }
             catch (Exception ex)
             {

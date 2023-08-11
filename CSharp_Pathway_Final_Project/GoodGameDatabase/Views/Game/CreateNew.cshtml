@@ -68,8 +68,8 @@
                     <input type="text" name="ImageUrl" class="w-full p-2 border rounded">
                     <span asp-validation-for="ImageUrl" class="text-red-500">This is a required field</span>
                 </div>
-                <div class="col-span-2">
-                    <button type="submit" class="main-color text-white rounded bg-pink-600 w-32 h-12">
+                <div class="col-span-2 z-50">
+                    <button type="submit" asp-action="Create" asp-controller="Game" class="main-color text-white rounded bg-pink-600 w-32 h-12">
                         Create Game
                     </button>
                 </div>

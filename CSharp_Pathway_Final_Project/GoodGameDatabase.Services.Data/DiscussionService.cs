@@ -3,6 +3,7 @@ using GoodGameDatabase.Data.Model;
 using GoodGameDatabase.Services.Data.Contracts;
 using GoodGameDatabase.Services.Exceptions;
 using GoodGameDatabase.Web.ViewModels.Discussion;
+using GoodGameDatabase.Web.ViewModels.Message;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -117,13 +118,36 @@ namespace GoodGameDatabase.Services.Data
             try
             {
                 Discussion discussion = await this.dbContext.Discussions
+                    .Include(d => d.Messages)
+                    .ThenInclude(d => d.Sender)
+                    .Include(d => d.Creator)
                     .FirstOrDefaultAsync(d => d.Id == id);
+
+                if (discussion == null)
+                {
+                    throw new ArgumentException($"Discussion with ID {id} not found");
+                }
 
                 return new DiscussionDetailsViewModel()
                 {
                     Id = discussion.Id,
                     Topic = discussion.Topic,
                     Description = discussion.Description,
+                    DateCreated = discussion.DatePosted.ToString("yyyy-MM-dd HH:mm:ss"),
+                    Pinned = discussion.pinned,
+                    CreatorId = discussion.CreatorId.ToString(),
+                    CreatorUsername = discussion.Creator.UserName,
+                    ParticipantCount = discussion.Participants.Count,
+                    MessageCount = discussion.Messages.Count,
+                    Messages = discussion.Messages.Select(m => new MessageViewModel
+                    {
+                        Id = m.Id,
+                        DiscussionId = m.DiscussionId,
+                        SenderId = m.SenderId.ToString(),
+                        SenderUsername = m.Sender.UserName,
+                        Content = m.Content,
+                        Timestamp = m.Timestamp.ToString("yyyy-MM-dd HH:mm:ss")
+                    }).ToList()
                 };
             }
             catch (Exception ex)

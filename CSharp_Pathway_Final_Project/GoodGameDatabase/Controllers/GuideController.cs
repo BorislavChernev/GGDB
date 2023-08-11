@@ -82,11 +82,6 @@ namespace GoodGameDatabase.Web.Controllers
 
         public async Task<IActionResult> Create(Guide guide)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("ErrorPage", "Model state is not valid!");
-            }
-
             try
             {
                 Guid userId = Guid.Parse(this.GetUserId());
@@ -127,7 +122,7 @@ namespace GoodGameDatabase.Web.Controllers
             {
                 await this.guideService.DeleteGuideByIdAsync(id);
 
-                return RedirectToPage("All", "Guide");
+                return RedirectToAction("All", "Guide");
             }
             catch (Exception ex)
             {

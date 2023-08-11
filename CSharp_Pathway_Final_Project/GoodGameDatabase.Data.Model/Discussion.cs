@@ -9,6 +9,7 @@ namespace GoodGameDatabase.Data.Model
         public Discussion()
         {
             this.Participants = new HashSet<DiscussionParticipant>();
+            this.Messages = new List<Message>();   
         }
 
         [Key]
@@ -36,5 +37,6 @@ namespace GoodGameDatabase.Data.Model
         public ApplicationUser Creator { get; set; }
 
         public ICollection<DiscussionParticipant> Participants { get; set; }
+        public ICollection<Message> Messages { get; set; }
     }
 }

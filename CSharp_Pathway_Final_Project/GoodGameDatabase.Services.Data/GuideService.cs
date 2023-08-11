@@ -26,6 +26,8 @@ namespace GoodGameDatabase.Services.Data
                 await this.dbContext.Guides.AddAsync(guide);
                 await this.dbContext.SaveChangesAsync();
 
+                var currGuide = this.dbContext.Guides.FirstOrDefault(g => g.Id ==  guide.Id);
+
                 return guide.Id;
             }
             catch (Exception ex)

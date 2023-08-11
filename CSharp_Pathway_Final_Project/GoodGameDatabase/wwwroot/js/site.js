@@ -10,5 +10,4 @@ module.exports = withMT({
 
 <script src="node_modules/@material-tailwind/html@latest/scripts/ripple.js"></script>
  
-<!--from cdn-- >
-    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
+<script src="https://unpkg.com/@material-tailwind/html@latest/scripts/ripple.js"></script>
