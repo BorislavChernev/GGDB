@@ -1,6 +1,11 @@
 ﻿@using GoodGameDatabase.Web.ViewModels.Discussion;
 @model AllDiscussionViewModel
 
+@{
+    var isAdmin = User.IsInRole("Admin");
+}
+
+
 <div class="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md m-4">
     <div class="p-6">
         <h5 class="h-14 mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
@@ -12,15 +17,17 @@
     </div>
     <div class="p-6 pt-0">
         <a class="select-none rounded-lg bg-pink-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                data-ripple-light="true"
-                asp-controller="Discussion"
-                asp-action="Details"
-                asp-route-id="@Model.Id"
-                >
+           data-ripple-light="true"
+           asp-controller="Discussion"
+           asp-action="Details"
+           asp-route-id="@Model.Id">
             Read More
         </a>
     </div>
-    <a asp-action="Delete" asp-controller="Discussion" asp-route-id="@Model.Id" class="bg-pink-600 text-white hover:bg-pink-700 px-3 py-2 rounded">
-        <i class="fa-solid fa-trash"></i>
-    </a>
+    @if (isAdmin)
+    {
+        <a href="/Admin/Discussion/Delete/@Model.Id" class="bg-pink-600 text-white hover:bg-pink-700 px-3 py-2 rounded">
+            <i class="fa-solid fa-trash"></i>
+        </a>
+    }
 </div>

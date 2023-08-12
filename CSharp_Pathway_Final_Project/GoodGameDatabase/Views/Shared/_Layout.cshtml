@@ -20,25 +20,15 @@
                    asp-controller="Home"
                    asp-action="Index">
                     <i class="fa-solid fa-house"></i>
-
-                    <span class="mx-4 font-medium">Home</span>
+                    <span class="hidden sm:inline-block mx-4 font-medium">Home</span>
                 </a>
 
                 <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
                    asp-controller="Game"
                    asp-action="All">
                     <i class="fa-solid fa-gamepad"></i>
-
-                    <span class="mx-4 font-medium">Games</span>
+                    <span class="hidden sm:inline-block mx-4 font-medium">Games</span>
                 </a>
-
-@*                <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                   asp-controller="Category"
-                   asp-action="All">
-                    <i class="fa-solid fa-rectangle-list"></i>
-
-                    <span class="mx-4 font-medium">Categories</span>
-                </a>*@
 
                 <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
                    asp-controller="Discussion"
@@ -55,14 +45,6 @@
 
                     <span class="mx-4 font-medium">Guides</span>
                 </a>
-
-@*                <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                   asp-controller="New"
-                   asp-action="All">
-                    <i class="fa-solid fa-newspaper"></i>
-
-                    <span class="mx-4 font-medium">News</span>
-                </a>*@
 
                 <hr class="my-6 border-gray-200 dark:border-gray-600" />
 
@@ -97,6 +79,7 @@
                 </a>
 
                 <partial name="_LoginPartial" />
+              
             </nav>
         </aside>
 
@@ -120,34 +103,3 @@
 </body>
 </html>
 
-@*<script>
-    // Get the current URL pathname
-    const currentUrl = window.location.pathname;
-
-    // Array of URLs where footer should be hidden
-    const urlsToHideFooter = [
-        '/guide/createNew',
-        '/game/createnew',
-        '/game/wished',
-        '/game/liked',
-        '/game/rated',
-    ];
-
-    // Extract the discussion ID from the URL's pathname
-    const urlParts = currentUrl.split('/');
-    const discussionId = urlParts[urlParts.length - 1];
-
-    // Construct the discussion URL with the extracted ID
-    debugger;
-    const discussionUrl = `/discussion/details/${discussionId}`;
-
-    // Add the constructed URL to the array of URLs to hide footer
-    urlsToHideFooter.push(discussionUrl);
-
-    // Hide footer if the current URL matches any in the array
-    if (urlsToHideFooter.some(url => currentUrl.toLowerCase().includes(url.toLowerCase()))) {
-        const footer = document.getElementById('footer');
-        footer.style.display = 'none';
-    }
-</script>
-*@

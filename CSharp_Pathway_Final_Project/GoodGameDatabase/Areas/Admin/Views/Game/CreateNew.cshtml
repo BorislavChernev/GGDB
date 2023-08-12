@@ -1,10 +1,16 @@
-﻿@model Game
+﻿@using GoodGameDatabase.Data.Model;
+@model Game
+
+@{
+    ViewData["Title"] = "Create a new game";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
 
 <div class="bg-gray-100 mt--30">
     <div class="flex justify-center items-center min-h-screen">
         <div class="w-full max-w-xl p-4 bg-white rounded-lg shadow-lg">
             <h1 class="text-xl font-semibold mb-3 text-center">Create a Game</h1>
-            <form class="grid grid-cols-2 gap-3" asp-controller="Game" asp-action="Create" method="post">
+            <form class="grid grid-cols-2 gap-3" action="/Admin/Game/Create" method="post">
                 <div class="col-span-2">
                     <label class="font-semibold">Name</label>
                     <input type="text" name="Name" class="w-full p-2 border rounded">
@@ -66,15 +72,14 @@
                 <div class="col-span-2">
                     <label class="font-semibold">Image URL:</label>
                     <input type="text" name="ImageUrl" class="w-full p-2 border rounded">
-                    <span asp-validation-for="ImageUrl" class="text-red-500">This is a required field</span>
+                    <span asp-validation-for="ImageUrl" class="text-red-500">Please use a steam game image link with 616x353 resolution</span>
                 </div>
                 <div class="col-span-2 z-50">
-                    <button type="submit" asp-action="Create" asp-controller="Game" class="main-color text-white rounded bg-pink-600 w-32 h-12">
+                    <button type="submit" class="main-color text-white rounded bg-pink-600 w-32 h-12">
                         Create Game
                     </button>
                 </div>
                 <div class="col-span-2">
-                    <partial name="_ValidationScriptsPartial" />
                 </div>
             </form>
         </div>

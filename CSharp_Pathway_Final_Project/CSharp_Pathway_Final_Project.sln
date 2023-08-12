@@ -3,25 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodGameDatabase.Web", "GoodGameDatabase\GoodGameDatabase.Web.csproj", "{1CDC9D2D-A134-4222-9306-03D89059B994}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodGameDatabase.Web", "GoodGameDatabase\GoodGameDatabase.Web.csproj", "{1CDC9D2D-A134-4222-9306-03D89059B994}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{39170844-19EA-4B28-843D-58F6F68A3A29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodGameDatabase.Data", "GoodGameDatabase.Data\GoodGameDatabase.Data.csproj", "{6F0E3818-ABA5-439E-B7FA-27B473BE11C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodGameDatabase.Data", "GoodGameDatabase.Data\GoodGameDatabase.Data.csproj", "{6F0E3818-ABA5-439E-B7FA-27B473BE11C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodGameDatabase.Data.Model", "GoodGameDatabase.Data.Model\GoodGameDatabase.Data.Model.csproj", "{1DA5F3B5-DCFD-4A82-8372-228DB8750AC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodGameDatabase.Data.Model", "GoodGameDatabase.Data.Model\GoodGameDatabase.Data.Model.csproj", "{1DA5F3B5-DCFD-4A82-8372-228DB8750AC4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{5D39C720-B20B-43F2-B90B-B1E423EF2F5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodGameDatabase.Services.Data", "GoodGameDatabase.Services.Data\GoodGameDatabase.Services.Data.csproj", "{BE5BFE47-88F8-4264-82FD-EA6A81B1C1AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodGameDatabase.Services.Data", "GoodGameDatabase.Services.Data\GoodGameDatabase.Services.Data.csproj", "{BE5BFE47-88F8-4264-82FD-EA6A81B1C1AC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{B9AAC529-CA7F-4A30-A750-969FC1F990DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodGameDatabase.Web.Infrastructure", "GoodGameDatabase.Web.Infrastructure\GoodGameDatabase.Web.Infrastructure.csproj", "{89A6991F-3155-4922-8DA7-7E1D4B9813A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodGameDatabase.Web.Infrastructure", "GoodGameDatabase.Web.Infrastructure\GoodGameDatabase.Web.Infrastructure.csproj", "{89A6991F-3155-4922-8DA7-7E1D4B9813A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodGameDatabase.Web.ViewModels", "GoodGameDatabase.Web.ViewModels\GoodGameDatabase.Web.ViewModels.csproj", "{2068DF6C-8F07-496A-A4B4-5699C1F25EFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodGameDatabase.Web.ViewModels", "GoodGameDatabase.Web.ViewModels\GoodGameDatabase.Web.ViewModels.csproj", "{2068DF6C-8F07-496A-A4B4-5699C1F25EFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodGameDatabase.Common", "GoodGameDatabase.Common\GoodGameDatabase.Common.csproj", "{A4638AAB-B64D-465B-9B0A-28E461012CB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodGameDatabase.Common", "GoodGameDatabase.Common\GoodGameDatabase.Common.csproj", "{A4638AAB-B64D-465B-9B0A-28E461012CB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodGameDatabase.UnitTests", "GoodGameDatabase.UnitTests\GoodGameDatabase.UnitTests.csproj", "{D4F9F6BF-5EEB-45C7-B995-8D9465E86E0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{A4638AAB-B64D-465B-9B0A-28E461012CB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4638AAB-B64D-465B-9B0A-28E461012CB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4638AAB-B64D-465B-9B0A-28E461012CB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4F9F6BF-5EEB-45C7-B995-8D9465E86E0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4F9F6BF-5EEB-45C7-B995-8D9465E86E0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4F9F6BF-5EEB-45C7-B995-8D9465E86E0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4F9F6BF-5EEB-45C7-B995-8D9465E86E0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

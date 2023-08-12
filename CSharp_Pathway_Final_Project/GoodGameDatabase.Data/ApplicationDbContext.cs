@@ -20,13 +20,11 @@ namespace GoodGameDatabase.Data
         public DbSet<Discussion> Discussions { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<Guide> Guides { get; set; }
-        //public DbSet<New> News { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<Wish> Wishes { get; set; }
         public DbSet<IdentityUserGame> IdentityUserGames { get; set; }
-        //public DbSet<IdentityUserGuide> IdentityUserGuides { get; set; }
         public DbSet<DiscussionParticipant> DiscussionParticipants { get; set; }
         public DbSet<Message> Messages { get; set; }
 
@@ -41,16 +39,11 @@ namespace GoodGameDatabase.Data
             builder.Entity<IdentityUserGame>()
                 .HasKey(ug => new { ug.UserId, ug.GameId });
 
-            //builder.Entity<IdentityUserGuide>()
-            //    .HasKey(ug => new { ug.UserId, ug.GuideId });
-
             builder.Entity<DiscussionParticipant>()
                 .HasKey(ug => new { ug.UserId, ug.DiscussionId });
 
             builder.ApplyConfiguration(new GameEntityConfiguration());
             builder.ApplyConfiguration(new CreatorEntityConfiguration());
-            //builder.ApplyConfiguration(new DiscussionEntityConfiguration());
-            //builder.ApplyConfiguration(new GuideEntityConfiguration());
 
             base.OnModelCreating(builder);
         }

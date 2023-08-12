@@ -5,8 +5,8 @@ using static GoodGameDatabase.Web.Areas.Admin.AdminConstants;
 
 namespace GoodGameDatabase.Web.Areas.Admin.Controllers
 {
-    [Area(AreaName)]
-    [Authorize(Roles = AdminRoleName)]
+    [Area(AdminAreaName)]
+    [Authorize(Policy = AdminPolicyName)]
     public class AdminController : Controller
     {
         public IActionResult Index()

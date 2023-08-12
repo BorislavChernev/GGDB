@@ -2,6 +2,7 @@
 using GoodGameDatabase.Services.Data.Contracts;
 using GoodGameDatabase.Web.ViewModels.Discussion;
 using Library.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PagedList;
 using System.Dynamic;
@@ -124,27 +125,11 @@ namespace GoodGameDatabase.Web.Controllers
 
                 int discussionId = await this.discussionService.CreateNewAsync(discussion);
 
-                return RedirectToAction("Details", "Discussion", new { discussionId });
-            }
-            catch (Exception ex)
-            {
-                this.logger.LogError(ex, "An error occurred while creating a discussion.");
-
-                return View("ErrorPage", "Something went wrong. Try again later!");
-            }
-        }
-
-        public async Task<IActionResult> Delete(int id)
-        {
-            try
-            {
-                await this.discussionService.DeleteDiscussionByIdAsync(id);
-
                 return RedirectToAction("All", "Discussion");
             }
             catch (Exception ex)
             {
-                this.logger.LogError(ex, "An error occurred while trying to delete a discussion by it's id.");
+                this.logger.LogError(ex, "An error occurred while creating a discussion.");
 
                 return View("ErrorPage", "Something went wrong. Try again later!");
             }

@@ -116,6 +116,56 @@ namespace GoodGameDatabase.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("2eea732f-0d67-4a0e-a462-19b311cfb353"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "64591496-6319-40a4-a4bf-7c50acc4c24b",
+                            Email = "admin@mail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@MAIL.COM",
+                            NormalizedUserName = "ADMIN@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAELKOjvNdo+XXEzZR5bTuItshEgHgCd2WkzLRayeMAnpJOR7xpTu0uE7vybtQjgy5dA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@mail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("cc0c5b30-afc5-4cd6-9ed9-b64e584afc89"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "bf18bec2-a402-4bb1-a49c-ca98c6df6d64",
+                            Email = "user1@mail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER1@MAIL.COM",
+                            NormalizedUserName = "USER1@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC4rEKXePbgLg7rmtRLx58pIK+2od8oh6q0QHIjFE1yP5gEzITJGoKVv4bTKh+dSlw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "user1@mail.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("5924c262-0a23-4d4b-9101-fcf7a1ad0f6b"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "2e01b192-32b0-480c-882d-ea36b38ee14f",
+                            Email = "user2@mail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER2@MAIL.COM",
+                            NormalizedUserName = "USER2@MAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGGyJ1QN9PRvZoyAH1BVrNxHU6WLJ2diTLFgIYtE7WnqneEIX8WWrEKCxHicOetoBQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "user2@mail.com"
+                        });
                 });
 
             modelBuilder.Entity("GoodGameDatabase.Data.Model.Creator", b =>

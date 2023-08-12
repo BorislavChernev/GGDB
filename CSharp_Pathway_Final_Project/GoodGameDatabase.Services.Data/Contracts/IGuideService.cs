@@ -10,5 +10,6 @@ namespace GoodGameDatabase.Services.Data.Contracts
         Task<ICollection<AllGuideViewModel>> GetAllGuidesAsync();
         Task<GuideDetailsViewModel> GetGuideDetailsByIdAsync(int id);
         Task DeleteGuideByIdAsync(int id);
+        Task<int> GetTotalGuidesCount();
     }
 }

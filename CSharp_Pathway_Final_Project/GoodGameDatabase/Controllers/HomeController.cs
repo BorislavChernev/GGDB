@@ -1,5 +1,4 @@
-﻿using GoodGameDatabase.Services.Data;
-using GoodGameDatabase.Services.Data.Contracts;
+﻿using GoodGameDatabase.Services.Data.Contracts;
 using GoodGameDatabase.Web.ViewModels.Discussion;
 using GoodGameDatabase.Web.ViewModels.Game;
 using Library.Controllers;
@@ -27,6 +26,11 @@ namespace GoodGameDatabase.Controllers
         {
             try
             {
+                if (User.IsInRole(AdminRoleName))
+                {
+                    return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+                }
+
                 dynamic model = new ExpandoObject();
 
                 if (this.User.IsInRole(AdminRoleName))

@@ -116,20 +116,5 @@ namespace GoodGameDatabase.Web.Controllers
             }
         }
 
-        public async Task<IActionResult> Delete(int id)
-        {
-            try
-            {
-                await this.guideService.DeleteGuideByIdAsync(id);
-
-                return RedirectToAction("All", "Guide");
-            }
-            catch (Exception ex)
-            {
-                this.logger.LogError(ex, "An error occurred while trying to delete a guide by it's id.");
-
-                return View("ErrorPage", "Something went wrong. Try again later!");
-            }
-        }
     }
 }

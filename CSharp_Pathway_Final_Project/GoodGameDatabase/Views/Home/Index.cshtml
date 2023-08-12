@@ -8,8 +8,8 @@
 
 <div class="flex flex-row space-x-4 h-full max-h-full w-full max-w-full overflox-hidden">
     @*left side*@
-    <div class="border-5 border-black w-8/12 h-full max-h-full flex flex-col space-y-6 overflox-hidden">
-        <div class="border-5 border-green-500 h-4/6 max-x-4/6 w-full max-w-full flex flex-col overflox-hidden">
+    <div class="w-8/12 h-full max-h-full flex flex-col space-y-6 overflox-hidden">
+        <div class="h-4/6 max-x-4/6 w-full max-w-full flex flex-col overflox-hidden">
             <img class="h-full max-h-full w-full max-w-full object-fill object-center" src="@Model.BestGame.ImageUrl"/>
         </div>
 
@@ -23,8 +23,8 @@
     </div>
 
     @*right side*@
-    <div class="border-5 border-black w-4/12 h-full max-h-full flex flex-col space-y-6 overflox-hidden">
-        <div class="border-5 border-green-500 h-full max-h-full w-full max-w-full flex flex-col space-y-6 overflox-hidden">
+    <div class="w-4/12 h-full max-h-full flex flex-col space-y-6 overflox-hidden">
+        <div class="h-full max-h-full w-full max-w-full flex flex-col space-y-6 overflox-hidden">
 
             @foreach (BestSixGameViewModel game in Model.BestSixGames)
             {

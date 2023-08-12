@@ -3,6 +3,7 @@ using GoodGameDatabase.Data.Model;
 using GoodGameDatabase.Services.Data;
 using GoodGameDatabase.Services.Data.Contracts;
 using GoodGameDatabase.Web.Hubs;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace GoodGameDatabase
@@ -13,7 +14,6 @@ namespace GoodGameDatabase
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
             var connectionString =
                 builder.Configuration.GetConnectionString("DefaultConnection")
                 ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -30,6 +30,7 @@ namespace GoodGameDatabase
                 options.SignIn.RequireConfirmedEmail = false;
                 options.SignIn.RequireConfirmedAccount = false;
             })
+                .AddRoles<IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             builder.Services.AddScoped<IHomeService, HomeService>();
@@ -40,22 +41,20 @@ namespace GoodGameDatabase
 
             builder.Services.AddControllersWithViews();
 
-            //builder.Services.AddCors(options =>
-            //{
-            //    options.AddPolicy("MyCorsPolicy", builder =>
-            //    {
-            //        builder.WithOrigins("https://localhost:7190")
-            //               .AllowAnyHeader()
-            //               .AllowAnyMethod()
-            //               .AllowCredentials();
-            //    });
-            //});
-
             builder.Services.AddSignalR();
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminPolicy", policy =>
+                {
+                    policy.RequireRole("Admin");
+                });
+            });
 
             var app = builder.Build();
 
             app.MapHub<ChatHub>("/chatHub");
+            
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

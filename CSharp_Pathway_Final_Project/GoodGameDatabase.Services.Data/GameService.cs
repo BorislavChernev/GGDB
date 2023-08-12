@@ -459,5 +459,10 @@ namespace GoodGameDatabase.Services.Data
                 throw;
             }
         }
+
+        public async Task<int> GetTotalGamesCount()
+        {
+            return await this.dbContext.Games.CountAsync();
+        }
     }
 }

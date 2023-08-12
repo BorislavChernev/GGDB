@@ -17,5 +17,6 @@ namespace GoodGameDatabase.Services.Data.Contracts
         Task<ICollection<AllGameViewModel>> GetAllWishedGamesByUserIdAsync(Guid userId);
         Task<ICollection<BestSixGameViewModel>> GetBestGamesAsync();
         Task DeleteGameByIdAsync(int id);
+        Task<int> GetTotalGamesCount();
     }
 }

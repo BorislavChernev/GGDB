@@ -138,5 +138,10 @@ namespace GoodGameDatabase.Services.Data
                 throw new ServiceException("An error occurred while fetching guide details. Please try again later.");
             }
         }
+
+        public async Task<int> GetTotalGuidesCount()
+        {
+            return await this.dbContext.Guides.CountAsync();
+        }
     }
 }

@@ -1,14 +1,15 @@
-﻿using GoodGameDatabase.Data.Model;
-using GoodGameDatabase.Services.Data.Contracts;
+﻿using GoodGameDatabase.Services.Data.Contracts;
 using GoodGameDatabase.Web.ViewModels.Game;
 using GoodGameDatabase.Web.ViewModels.Review;
+using static GoodGameDatabase.Web.Areas.Admin.AdminConstants;
 
 using Microsoft.AspNetCore.Mvc;
 
 using Library.Controllers;
 using System.Dynamic;
 using PagedList;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace GoodGameDatabase.Web.Controllers
 {
@@ -107,55 +108,6 @@ namespace GoodGameDatabase.Web.Controllers
             catch (Exception ex)
             {
                 this.logger.LogError(ex, "An error occurred while fetching best games.");
-
-                return View("ErrorPage", "Something went wrong. Try again later!");
-            }
-        }
-
-
-        public async Task<IActionResult> Edit(int id, EditGameViewModel viewModel)
-        {
-            try
-            {
-                await this.gameService.EditGameByIdAsync(id, viewModel);
-
-                return RedirectToAction("Details", new { id });
-            }
-            catch (Exception ex)
-            {
-                this.logger.LogError(ex, "An error occurred while editing a game by its id.");
-
-                return View("ErrorPage", "Something went wrong. Try again later!");
-            }
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> CreateNew()
-        {
-            try
-            {
-                return View();
-            }
-            catch (Exception ex)
-            {
-                this.logger.LogError(ex, "An error occurred while returning Game/CreateNew view.");
-
-                return View("ErrorPage", "Something went wrong. Try again later!");
-            }
-        }
-
-
-        public async Task<IActionResult> Create(Game game)
-        {
-            try
-            {
-                await this.gameService.CreateNewGameAsync(game);
-
-                return RedirectToAction("Details", new { id = game.Id });
-            }
-            catch (Exception ex)
-            {
-                this.logger.LogError(ex, "An error occurred while creating a game.");
 
                 return View("ErrorPage", "Something went wrong. Try again later!");
             }
@@ -361,17 +313,18 @@ namespace GoodGameDatabase.Web.Controllers
             }
         }
 
-        public async Task<IActionResult> Delete (int id)
+        [Authorize(Policy = AdminPolicyName)]
+        public async Task<IActionResult> Edit(int id, EditGameViewModel viewModel)
         {
             try
             {
-                await this.gameService.DeleteGameByIdAsync(id);
+                await this.gameService.EditGameByIdAsync(id, viewModel);
 
-                return RedirectToAction("All", "Game");
+                return RedirectToAction("Details", new { id });
             }
             catch (Exception ex)
             {
-                this.logger.LogError(ex, "An error occurred while trying to delete a game by it's id.");
+                this.logger.LogError(ex, "An error occurred while editing a game by its id.");
 
                 return View("ErrorPage", "Something went wrong. Try again later!");
             }

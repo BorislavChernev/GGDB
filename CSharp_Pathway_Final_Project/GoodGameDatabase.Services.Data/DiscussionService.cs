@@ -176,5 +176,10 @@ namespace GoodGameDatabase.Services.Data
                 throw new ServiceException("An error occurred while joining the user to the discussion. Please try again later.");
             }
         }
+
+        public async Task<int> GetTotalDiscussionsCount()
+        {
+            return await this.dbContext.Discussions.CountAsync();
+        }
     }
 }

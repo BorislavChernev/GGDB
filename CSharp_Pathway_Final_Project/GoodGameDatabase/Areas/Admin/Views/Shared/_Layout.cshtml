@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GoodGameDatabase</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/GoodGameDatabase.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.6/signalr.min.js" integrity="sha512-HM++nJVnWSOnmz1BKgJYt2Oapdxzdy2pIGaLOtPbdx3FUR+rVOvkESeJg957aXETUxjqrsBIghsdY+NAwuz0ug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>*@
+</head>
+<body>
+
+    <div class="h-screen flex flex-row w-full space-x-6">
+        <aside class="w-2/12 z-10 h-full max-h-full flex flex-col h-screen overflow-y-auto overflow-x-hidden rounded-lg shadow">
+            <nav class="flex flex-col justify-between flex-1 mx-4 mt-4 z-10">
+                <a class="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-md dark:bg-gray-800 dark:text-gray-200"
+                   asp-controller="Home"
+                   asp-action="Index">
+                    <i class="fa-solid fa-house"></i>
+
+                    <span class="mx-4 font-medium">Home</span>
+                </a>
+
+                <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                   asp-controller="Game"
+                   asp-action="All">
+                    <i class="fa-solid fa-gamepad"></i>
+
+                    <span class="mx-4 font-medium">Games</span>
+                </a>
+
+@*                <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                   asp-controller="Category"
+                   asp-action="All">
+                    <i class="fa-solid fa-rectangle-list"></i>
+
+                    <span class="mx-4 font-medium">Categories</span>
+                </a>*@
+
+                <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                   asp-controller="Discussion"
+                   asp-action="All">
+                    <i class="fa-solid fa-comments"></i>
+
+                    <span class="mx-4 font-medium">Discussions</span>
+                </a>
+
+                <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                   asp-controller="Guide"
+                   asp-action="All">
+                    <i class="fa-solid fa-circle-question"></i>
+
+                    <span class="mx-4 font-medium">Guides</span>
+                </a>
+
+@*                <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                   asp-controller="New"
+                   asp-action="All">
+                    <i class="fa-solid fa-newspaper"></i>
+
+                    <span class="mx-4 font-medium">News</span>
+                </a>*@
+
+                <hr class="my-6 border-gray-200 dark:border-gray-600" />
+
+                <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                   asp-controller="Game"
+                   asp-action="Wished">
+                    <i class="fa-solid fa-star"></i>
+
+                    <span class="mx-4 font-medium">Wishlist</span>
+                </a>
+
+                <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                   asp-controller="Game"
+                   asp-action="Liked">
+                    <i class="fa-solid fa-heart"></i>
+
+                    <span class="mx-4 font-medium">Liked Games</span>
+                </a>
+
+                <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
+                   asp-controller="Game"
+                   asp-action="Rated">
+                    <i class="fa-solid fa-face-smile"></i>
+
+                    <span class="mx-4 font-medium">Rated Games</span>
+                </a>
+
+                <a class="flex items-center px-4 py-2 mt-4 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                    <i class="fa-solid fa-gear"></i>
+
+                    <span class="mx-4 font-medium">Settings</span>
+                </a>
+
+                <partial name="_LoginPartial" />
+            </nav>
+        </aside>
+
+        <div class="w-10/12 h-full max-h-full flex flex-col overflox-hidden rounded-lg shadow">
+            <partial name="_NavbarPartial" />
+
+            <main class="h-full max-h-full flex flex-col w-full overflox-hidden">
+                <div class="h-5/6">
+                    @RenderBody()
+                </div>
+@*                <div class="h-1/6 flex flex-col-reverse">
+                    <partial name="_FooterPartial" />
+                </div>*@
+            </main>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+@*<script>
+    // Get the current URL pathname
+    const currentUrl = window.location.pathname;
+
+    // Array of URLs where footer should be hidden
+    const urlsToHideFooter = [
+        '/guide/createNew',
+        '/game/createnew',
+        '/game/wished',
+        '/game/liked',
+        '/game/rated',
+    ];
+
+    // Extract the discussion ID from the URL's pathname
+    const urlParts = currentUrl.split('/');
+    const discussionId = urlParts[urlParts.length - 1];
+
+    // Construct the discussion URL with the extracted ID
+    debugger;
+    const discussionUrl = `/discussion/details/${discussionId}`;
+
+    // Add the constructed URL to the array of URLs to hide footer
+    urlsToHideFooter.push(discussionUrl);
+
+    // Hide footer if the current URL matches any in the array
+    if (urlsToHideFooter.some(url => currentUrl.toLowerCase().includes(url.toLowerCase()))) {
+        const footer = document.getElementById('footer');
+        footer.style.display = 'none';
+    }
+</script>
+*@

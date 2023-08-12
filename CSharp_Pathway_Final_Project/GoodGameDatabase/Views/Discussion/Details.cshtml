@@ -26,6 +26,7 @@
     </main>
     <footer class="bg-white p-4">
         <form>
+            @Html.AntiForgeryToken()
             <input type="text" id="userInput" value="@userName" disabled class="form-control mb-3" />
             <input type="text" id="discussionInput" value="@discussionId" disabled class="form-control mb-3" />
             <input type="text" id="messageInput" class="form-control mb-3 w-full border rounded p-2" placeholder="Type your message..." />
@@ -34,46 +35,14 @@
     </footer>
 </div>
 
+<script>
+    function logMessage() {
+        console.log('Button clicked!');
+    }
+</script>
 
 
-    @*<h1>@ViewData["Title"]</h1>
-<section style="background-color: #eee; width: 100%; height:100%;">
-    <div class="container py-5">
-        <div class="row">
-            <div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <input type="text" id="userInput" value="@userName" disabled class="form-control mb-3" />
-                        <input type="text" id="discussionInput" value="@discussionId" disabled class="form-control mb-3" />
-                        <input type="text" id="messageInput" class="form-control mb-3" />
-                    </div>
-                    <div class="col-md-4">
-                        <button type="button" class="btn btn-info btn-rounded float-lg-start" id="sendButton">Send</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
-                <h5 class="font-weight-bold mb-3 text-center text-lg-start">Chat</h5>
-                <div class="card" style="width: 48vw; max-width: 850px;">
-                    <div class="card-body">
-                        <ul class="list-unstyled mb-0" id="messagesList">
-                            <!-- Messages will be added dynamically here -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>*@
-
-    <script>
-        function logMessage() {
-            console.log('Button clicked!');
-        }
-    </script>
-
-
-    @section Scripts
+@section Scripts
     {
     <script src="~/lib/microsoft//signalr//dist/browser/signalr.js"></script>
     <script src="~/js/chat.js"></script>

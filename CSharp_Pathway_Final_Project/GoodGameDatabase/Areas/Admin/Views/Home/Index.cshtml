@@ -1,3 +1,34 @@
-﻿@{
-    ViewData["Title"] = "Admin Home Page";
+﻿@using GoodGameDatabase.Web.Areas.Admin.ViewModels;
+@model AdminStatisticsViewModel
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
+<div class="bg-gray-100">
+    <header class="bg-pink-600 text-white py-4">
+        <h1 class="text-2xl text-center">Admin Dashboard</h1>
+    </header>
+    <main class="container mx-auto px-4 py-8">
+        <section id="statistics" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white p-4 rounded shadow-md">
+                <h2 class="text-lg font-semibold mb-2">Total Games</h2>
+                <p class="text-2xl font-bold text-pink-600">@Model.TotalGames</p>
+            </div>
+            <div class="bg-white p-4 rounded shadow-md">
+                <h2 class="text-lg font-semibold mb-2">Total Discussions</h2>
+                <p class="text-2xl font-bold text-pink-600">@Model.TotalDiscussions</p>
+            </div>
+            <div class="bg-white p-4 rounded shadow-md">
+                <h2 class="text-lg font-semibold mb-2">Total Guides</h2>
+                <p class="text-2xl font-bold text-pink-600">@Model.TotalGuides</p>
+            </div>
+            <div class="bg-white p-4 rounded shadow-md">
+                <a href="/Admin/Game/CreateNew" class="block text-center text-white bg-pink-600 hover:bg-pink-700 py-2 px-4 rounded-md">
+                    Create New Game
+                </a>
+            </div>
+        </section>
+    </main>
+</div>

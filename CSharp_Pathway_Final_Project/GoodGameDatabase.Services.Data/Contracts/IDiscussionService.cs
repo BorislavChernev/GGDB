@@ -11,5 +11,6 @@ namespace GoodGameDatabase.Services.Data.Contracts
         Task<DiscussionDetailsViewModel> GetDetailsByIdAsync(int id);
         Task<ICollection<AllDiscussionViewModel>> GetBestThreeDiscussionsAsync();
         Task DeleteDiscussionByIdAsync(int id);
+        Task<int> GetTotalDiscussionsCount();
     }
 }
