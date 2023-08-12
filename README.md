@@ -32,4 +32,3 @@ This project is licensed under the [MIT License](LICENSE).
 ## Acknowledgements
 
 - Special thanks to [Tailwind CSS](https://tailwindcss.com/) for the styling framework.
-- Thanks to the contributors and developers who have made this project possible.
